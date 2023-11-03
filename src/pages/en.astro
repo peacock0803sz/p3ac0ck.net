@@ -1,0 +1,34 @@
+---
+import Hero from "../components/Hero.astro";
+import Base from "../layouts/Base.astro";
+---
+
+<Base title="Introduction (English)" slug="/en" lang="en">
+  <Hero txt="日本語の自己紹介は" href="/" aTxt="こちら" />
+  <div>
+    <p>
+      Working at <a href="https://www.topgate.co.jp">TOPGATE, Inc.</a>, pushes
+      for IaC and DevOps with Google Cloud and develops Golang Web APIs.
+    </p>
+    <p>
+      Started serving as a volunteer staff member of the <a
+        href="https://pycon.jp">PyCon JP</a
+      > in 2020. Since 2022, I've been the vice-chair.<br /> And, also part of
+      the <a
+        href="https://www.pycon.jp/committee/members.html#yoichi-takai-a-k-a-peacock"
+        >PyCon JP Association's Operating Member</a
+      >, as a director of the <a href="https://tv.pycon.jp">PyCon JP TV</a>.
+    </p>
+    <p>
+      Loves classical music (both listening and playing). Bartok is my favorite.<br
+      />Other things: skiing, cameras, beer and whiskey.
+    </p>
+  </div>
+
+  <style>
+    p {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+  </style>
+</Base>

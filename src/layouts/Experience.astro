@@ -6,7 +6,7 @@ const { frontmatter } = Astro.props;
 ---
 
 <Base title={frontmatter.title}>
-  <h1 class="text-5xl pb-10">{frontmatter.title}</h1>
+  <h1 class="text-5xl font-bold pb-10">{frontmatter.title}</h1>
   <article class="markdown-body">
     <slot />
   </article>

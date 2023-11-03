@@ -1,63 +1,34 @@
 ---
+import Hero from "../components/Hero.astro";
 import Base from "../layouts/Base.astro";
 ---
 
 <Base title="Welcome" slug="/">
-  <h1>👋 I'm Yoichi Takai (a.k.a. Peacock) 👋</h1>
+  <Hero txt="English introduction is " href="/en" aTxt="here" />
   <div>
     <p>
-      Working at <a href="https://www.topgate.co.jp">TOPGATE, Inc.</a>, pushes
-      for IaC and DevOps with Google Cloud and develops Golang Web APIs.
+      <a href="https://www.topgate.co.jp">株式会社トップゲート</a>にてGoogle
+      Cloudを使用したDevOpsやIaC(Infrastructure as
+      Code)の普及に貢献すべく、開発エンジニアとして勤務。
     </p>
     <p>
-      Started serving as a volunteer staff member of the <a
+      その傍ら、2020年よりPythonの国際カンファレンスである<a
         href="https://pycon.jp">PyCon JP</a
-      > in 2020. Since 2022, I've been the vice-chair.<br /> And, also part of
-      the <a
-        href="https://www.pycon.jp/committee/members.html#yoichi-takai-a-k-a-peacock"
-        >PyCon JP Association's Operating Member</a
-      >, as a director of the <a href="https://tv.pycon.jp">PyCon JP TV</a>.
+      >のスタッフとして運営に携わる。<br />2022, 2023(PyCon APAC
+      2023として開催)年は副座長も務めた。<br />また、<a
+        href="https://tv.pycon.jp">PyCon JP TV</a
+      >のディレクターとして一般社団法人PyCon JP
+      Associationに運営メンバーとして参加もしている。
     </p>
     <p>
-      Loves classical music (both listening and playing). Bartok is my favorite.<br
-      />Other things: skiing, cameras, beer and whiskey.
+      好きなことはクラシック音楽(B.
+      Bartokがお気に入りの作曲家)で、他にもスキー・ミラーレスカメラ・ビールやウイスキーなど。
     </p>
-    <h2>Contacts</h2>
-    <p>
-      <ul class="list-disc ml-5">
-        <li>
-          Email: <a href="mailto:me@p3ac0ck.net">me@p3ac0ck.net</a>
-        </li>
-        <li>
-          Twitter: <a
-            href="
-        https:
-        twitter.com
-        peacock0803sz"
-            >peacock0803sz</a
-          >
-        </li>
-        <li>
-          GitHub: <a href="https://github.com/peacock0803sz">peacock0803sz</a>
-        </li>
-        <li>
-          Facebook: <a href="https://www.facebook.com/peacock0803sz"
-            >peacock0803sz</a
-          >
-        </li>
-      </ul>
-    </p>
-
-    <style>
-      h2 {
-        font-size: 2rem;
-        font-weight: 700;
-        margin-bottom: 1rem;
-      }
-      p {
-        font-size: 1rem;
-        margin-bottom: 1rem;
-      }
-    </style>
   </div>
 </Base>
+
+<style>
+  p {
+    @apply my-5;
+  }
+</style>

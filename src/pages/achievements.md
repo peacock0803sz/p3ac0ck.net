@@ -19,7 +19,7 @@ title: 業務以外の活動・登壇など
     - [PyCon JP TV](https://tv.pycon.jp): ディレクター
         - [一般社団法人PyCon JP Association運営メンバー](https://www.pycon.jp/committee/members.html#yoichi-takai-a-k-a-peacock)として2021年2月より、月に1度のYouTube生放送を実施
 - [DjangoCongress JP 2022](https://django.connpass.com/event/259310/), [DjangoCongress JP 2023](https://django.connpass.com/event/295303/) 一般社団法人PyCon JP Associationとの連絡役、当日カメラマン
-- OSC(オープンソースカンファレンス)関連
+- OSC(オープンソースカンファレンス)関連の活動
     - [Open Source Conference](https://event.ospn.jp/eventlist)2020年のオンライン開催において、オンライン配信スタッフ
     - [Open Source Conference 2023 Tokyo/Spring](https://event.ospn.jp/osc2023-spring/) 当日カメラマン
     - [Open Developers Conference 2023](https://event.ospn.jp/odc2023/) 当日カメラマン
@@ -28,7 +28,6 @@ title: 業務以外の活動・登壇など
 - Plone User's Group JapanとしてWorld Plone Day 2021 TokyoでのYouTube Live(ディレクター)
 - Plone User's Group JapanとしてPlone本体の翻訳(共同) <https://github.com/collective/plone.app.locales>
     - <https://github.com/collective/plone.app.locales/commit/0d74afd7361e17ebf9d7bd87299702baec286004>
-- Open Source Conference, 
 
 # 登壇実績
 
