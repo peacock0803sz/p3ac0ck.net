@@ -1,0 +1,19 @@
+---
+import "github-markdown-css/github-markdown.css";
+
+import Base from "./Base.astro";
+const { frontmatter } = Astro.props;
+---
+
+<Base title={frontmatter.title}>
+  <h1 class="text-5xl pb-10">{frontmatter.title}</h1>
+  <article class="markdown-body">
+    <slot />
+  </article>
+</Base>
+
+<style is:global>
+  .markdown-body ul {
+    list-style-type: disc;
+  }
+</style>

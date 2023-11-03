@@ -1,0 +1,25 @@
+---
+export const SiteName = "Peacock (Yoichi Takai)'s Homepage";
+---
+
+<div class="header flex-col">
+  <h1 class="text-2xl"><a href="/">{SiteName}</a></h1>
+  <div class="text-xl text-right">
+    <span><a href="/blog">Blog</a></span>
+    <span><a href="/achievements">活動実績</a></span>
+    <span><a href="/resume">職務経歴書</a></span>
+  </div>
+</div>
+
+<style>
+  .header a {
+    color: #333;
+    text-decoration: none;
+  }
+  .header a:hover {
+    text-decoration: underline;
+  }
+  .header span {
+    @apply mx-1;
+  }
+</style>

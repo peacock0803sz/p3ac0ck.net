@@ -1,16 +1,63 @@
 ---
-
+import Base from "../layouts/Base.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Base title="Welcome" slug="/">
+  <h1>👋 I'm Yoichi Takai (a.k.a. Peacock) 👋</h1>
+  <div>
+    <p>
+      Working at <a href="https://www.topgate.co.jp">TOPGATE, Inc.</a>, pushes
+      for IaC and DevOps with Google Cloud and develops Golang Web APIs.
+    </p>
+    <p>
+      Started serving as a volunteer staff member of the <a
+        href="https://pycon.jp">PyCon JP</a
+      > in 2020. Since 2022, I've been the vice-chair.<br /> And, also part of
+      the <a
+        href="https://www.pycon.jp/committee/members.html#yoichi-takai-a-k-a-peacock"
+        >PyCon JP Association's Operating Member</a
+      >, as a director of the <a href="https://tv.pycon.jp">PyCon JP TV</a>.
+    </p>
+    <p>
+      Loves classical music (both listening and playing). Bartok is my favorite.<br
+      />Other things: skiing, cameras, beer and whiskey.
+    </p>
+    <h2>Contacts</h2>
+    <p>
+      <ul class="list-disc ml-5">
+        <li>
+          Email: <a href="mailto:me@p3ac0ck.net">me@p3ac0ck.net</a>
+        </li>
+        <li>
+          Twitter: <a
+            href="
+        https:
+        twitter.com
+        peacock0803sz"
+            >peacock0803sz</a
+          >
+        </li>
+        <li>
+          GitHub: <a href="https://github.com/peacock0803sz">peacock0803sz</a>
+        </li>
+        <li>
+          Facebook: <a href="https://www.facebook.com/peacock0803sz"
+            >peacock0803sz</a
+          >
+        </li>
+      </ul>
+    </p>
+
+    <style>
+      h2 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+      }
+      p {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+      }
+    </style>
+  </div>
+</Base>
