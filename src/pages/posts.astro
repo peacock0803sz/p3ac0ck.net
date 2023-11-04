@@ -1,0 +1,19 @@
+---
+import Base from "../layouts/Base.astro";
+
+const title = "記事一覧";
+const posts = await Astro.glob("./posts/**/*.mdx");
+---
+
+<Base title={title} head="Peacock's Blog">
+  <h1 class="text-4xl font-bold pb-10">{title}</h1>
+  <div>
+    {
+      posts.map((p) => (
+        <p>
+          <span class="font-mono">{p.frontmatter.published}</span>: <a href={p.url}>{p.frontmatter.title}</a>
+        </p>
+      ))
+    }
+  </div>
+</Base>

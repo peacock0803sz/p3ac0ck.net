@@ -1,9 +1,11 @@
 ---
+import "@fontsource/ibm-plex-sans-jp";
+
 import Header from "../components/Header.astro";
 import { SiteName } from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
-const { title, lang } = Astro.props;
+const { title, head, lang } = Astro.props;
 ---
 
 <html lang={lang || "ja"}>
@@ -12,20 +14,27 @@ const { title, lang } = Astro.props;
     <link rel="icon" type="image" href="/favicon.jpg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={Astro.props.description || ""} />
     <title>{title} - {SiteName}</title>
   </head>
   <body>
     <main class="max-w-8xl px-10">
-      <Header />
-      <div class="py-10">
+      <Header name={head || SiteName} />
+      <div class="mt-5 mb-10">
         <slot />
-        <Footer />
       </div>
+      <Footer />
     </main>
   </body>
 </html>
 
 <style is:global>
+  @font-face {
+    font-family: "IBM Plex Sans JP", sans-serif;
+  }
+  :root {
+    @apply bg-slate-100;
+  }
   a {
     @apply underline;
     color: #44e;

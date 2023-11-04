@@ -2,13 +2,12 @@
 
 ---
 
-<div class="pt-10 inset-x-0 bottom-5">
-  <h2 class="text-2xl">連絡先 / Contacts</h2>
-  <p>
-    <ul class="grid grid-cols-4">
+<div class="pt-3 mb-5 border-black border-solid border-t-2">
+  <p class="text-2xl font-semibold">連絡先 / Contacts</p>
+  <div>
+    <ul class="grid text-base grid-rows-2 min-[550px]:grid-cols-2 md:grid-cols-4">
       <li>
-        Email: <a href="mailto:me@p3ac0ck.net">me@p3ac0ck.net</a
-        >
+        Email: <a href="mailto:me@p3ac0ck.net">me@p3ac0ck.net</a>
       </li>
       <li>
         Twitter: <a
@@ -29,7 +28,7 @@
         >
       </li>
     </ul>
-  </p>
+  </div>
 </div>
 
 <style>
@@ -44,5 +43,8 @@
   }
   a:hover {
     text-decoration: underline;
+  }
+  li {
+    @apply mx-3 my-1;
   }
 </style>
