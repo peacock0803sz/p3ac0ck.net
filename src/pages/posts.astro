@@ -1,8 +1,9 @@
 ---
 import Base from "../layouts/Base.astro";
+import type { Post } from "../types.ts";
 
 const title = "記事一覧";
-const posts = await Astro.glob("./posts/*.mdx");
+const posts: Post[] = await Astro.glob("./posts/*.mdx");
 ---
 
 <Base title={title} head="Peacock's Blog">
@@ -11,7 +12,10 @@ const posts = await Astro.glob("./posts/*.mdx");
     {
       posts.map((p) => (
         <p>
-          <span class="font-mono">{p.frontmatter.published}</span>: <a href={p.url}>{p.frontmatter.title}</a>
+          <span class="font-mono">{p.frontmatter.published}</span>:
+          <a href={p.url}>
+            {p.frontmatter.emoji} {p.frontmatter.title}
+          </a>
         </p>
       ))
     }

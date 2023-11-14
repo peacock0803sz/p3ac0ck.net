@@ -1,11 +1,20 @@
 ---
 import "../styles/markdown.css";
 import Base from "./Base.astro";
-const { frontmatter } = Astro.props;
+import type { PostsFrontMatter } from "../types.ts";
+
+const frontmatter: PostsFrontMatter = Astro.props.frontmatter;
 ---
 
-<Base title={frontmatter.title} head="Peacock's Blog">
-  <h1 class="text-5xl font-bold pb-10">{frontmatter.title}</h1>
+<Base
+  title={frontmatter.title}
+  head="Peacock's Blog"
+  description={frontmatter.description}
+>
+  <h1 class="text-4xl font-bold pb-10">
+    {frontmatter.emoji}
+    {frontmatter.title}
+  </h1>
   <p class="text-right">公開日: {frontmatter.published}</p>
   <article class="markdown-body">
     <slot />
