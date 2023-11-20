@@ -5,7 +5,7 @@ export interface PostsFrontMatter {
   title: string;
   lang: "en" | "ja";
   emoji: string;
-  published: string;
+  pubDate: string;
   description: string | null;
 }
 
