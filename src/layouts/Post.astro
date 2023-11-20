@@ -15,7 +15,7 @@ const frontmatter: PostsFrontMatter = Astro.props.frontmatter;
     {frontmatter.emoji}
     {frontmatter.title}
   </h1>
-  <p class="text-right">公開日: {frontmatter.published}</p>
+  <p class="text-right">公開日: {frontmatter.pubDate}</p>
   <article class="markdown-body">
     <slot />
   </article>

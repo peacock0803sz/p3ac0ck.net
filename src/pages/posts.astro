@@ -12,7 +12,7 @@ const posts: Post[] = await Astro.glob("./posts/*.mdx");
     {
       posts.map((p) => (
         <p>
-          <span class="font-mono">{p.frontmatter.published}</span>:
+          <span class="font-mono">{p.frontmatter.pubDate}</span>:
           <a href={p.url}>
             {p.frontmatter.emoji} {p.frontmatter.title}
           </a>
