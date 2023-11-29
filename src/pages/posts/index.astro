@@ -1,9 +1,9 @@
 ---
-import Base from "../layouts/Base.astro";
-import type { Post } from "../types.ts";
+import Base from "../../layouts/Base.astro";
+import type { Post } from "../../types.ts";
 
 const title = "記事一覧";
-const posts: Post[] = await Astro.glob("./posts/*.mdx");
+const posts: Post[] = await Astro.glob("./*.mdx");
 ---
 
 <Base title={title} head="Peacock's Blog">
