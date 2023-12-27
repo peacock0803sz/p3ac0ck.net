@@ -39,17 +39,17 @@ title: "職務経歴書"
     - Kubernetes
         - 大規模サービスを運用したことがないので、経験してみたい
 - 保有資格
-    - [Google Cloud Certified - Cloud Digital Leader](https://www.credential.net/003b470a-2ea4-4ca3-9520-1866f91fa41d) (2023年4月取得)
-    - [Google Cloud Certified - Associate Cloud Engineer](https://google.accredible.com/b3674100-cfc6-469a-8484-7f281b49e8c2) (2023年8月取得)
+    - [Google Cloud Certified - Cloud Digital Leader](https://www.credential.net/003b470a-2ea4-4ca3-9520-1866f91fa41d) (2023-04取得)
+    - [Google Cloud Certified - Associate Cloud Engineer](https://google.accredible.com/b3674100-cfc6-469a-8484-7f281b49e8c2) (2023-08取得)
 - 使用しているツール・OSなど
     - Git / GitHub, Bitbucket
-    - Linux(開発用OSとして、2014-2020年頃まで)
+    - Linux(開発用OSとして、2014 ~ 2020年頃まで)
     - macOS (2020年以降)
     - Neovim, zsh
 
 # 職務経歴
 
-## 2022年12月1日 ~ 現在: [株式会社トップゲート](https://topgate.co.jp)
+## 2022-12-01 ~ 現在: [株式会社トップゲート](https://topgate.co.jp)
 
 Google Cloud 認定プレミアムパートナー。開発部エンジニアリング室所属
 
@@ -60,48 +60,48 @@ Google Cloud 認定プレミアムパートナー。開発部エンジニアリ�
     - Terraformを使用したクラウドインフラ構築
     - GitHub Actions, Cloud Buildを用いたCI/CDの構築
 
-## 2019年9月25日 ~ 2022年11月31日: [株式会社CMSコミュニケーションズ](https://cmscom.jp)
+## 2019-09-25 ~ 2022-11-31: [株式会社CMSコミュニケーションズ](https://cmscom.jp)
 
-Pythonと教育をテーマに受託開発を行っている。社員6名(2022年11月末退職時点)
+Pythonと教育をテーマに受託開発を行っている。社員6名(2022-11-31 退職時点)
 
 - 雇用形態
-    - 2019年9月よりアルバイトとして、2020年6月より社員として勤務。
-    - 2021年5月より規定6.4時間の時短勤務で正社員。
+    - 2019-09よりアルバイトとして、2020-06より社員として勤務。
+    - 2021-05より規定6.4時間の時短勤務で正社員。
 
 ### 参画したプロジェクト
 
-- DuckDBでのログ分析基盤構築 (2022年6月~2022年7月)
+- DuckDBでのログ分析基盤構築 (2022-06 ~ 2022-07)
     - 使用技術: DuckDB, SQLAlchemy 1.14, pandas
-- 問い合わせ機能付きランディングページサイト開発(2022年4月~2022年6月)
+- 問い合わせ機能付きランディングページサイト開発(2022-04 ~ 2022-06)
     - 使用技術: Flask 2.x, Terraform 1.x, AWS Lambda, API Gateway, S3, CloudFront
     - 苦労したこと・できなかったこと
         - AWSのリージョンを跨いだTerraformでの構成管理
-- Open edX導入支援 (2022年2月頃~2022年7月)
+- Open edX導入支援 (2022-02 ~ 2022-07)
     - 使用技術: Open edX (version Maple), AWS RDS(MySQL), Docker, click
-- PyramidでのAPIサーバー開発 (2021年8月頃~2022年1月頃)
+- PyramidでのAPIサーバー開発 (2021-08 ~ 2022-01)
     - 使用技術: Pyramid 2.x, PostgreSQL 12, SQLAlchemy 1.14, Redis 6.x, Ansible 2.11
-- Flask + ReactでのWebサービス開発 (2021年3月頃~7月頃)
+- Flask + ReactでのWebサービス開発 (2021-03 ~ 2021-07)
     - 使用技術: Flask 1.x, Numpy, React + d3.js, AWS Lambda & DynamoDB
-- Pyramid製システムのPython2.7 -> Python3.8アップグレード (2021年初頭)
+- Pyramid製システムのPython2.7 -> Python3.8アップグレード (2021-01 ~ 2021-03)
     - 概要: アップグレードのインフラ担当、アプリケーションコードの修正
         - Legacy EC2をAWS ECS(Fargate)へ移行
         - 2009年ごろのPyramid製サービスをPython3.8へアップグレード
     - 使用技術: Terraform, Bitbucket Piplines, AWS ECS (Fargate)
-- Ploneでの大学向け学習支援システム(LMS)開発 (2020年4月~9月頃)
+- Ploneでの大学向け学習支援システム(LMS)開発 (2020-4 ~ 2020-09)
     - 使用技術: Plone 5.2, PostgreSQL 12, SQLAlchemy 1.3
-- FlaskでのAPIサーバー開発 (2019年12月~2020年3月頃、2021年3月)
+- FlaskでのAPIサーバー開発 (2019-12 ~ 2020-03, 2021-03)
     - 使用技術: Python 3.8, Flask 1.0, Vue.js 2.x, AWS Lambda, DynamoDB
-- Plone 4 -> Plone 5 & Volto 移行用コンテンツ整形スクリプトの開発(2019年11月~2020年3月頃)
+- Plone 4 -> Plone 5 & Volto 移行用コンテンツ整形スクリプトの開発(2019-11 ~ 2020-03)
     - 使用技術: Python3.7, OpenPyXL, BeautifulSoup4, draft-js
-- AWS Lambda上でのスクレイピングシステム (2019年9月~2021年4月)
+- AWS Lambda上でのスクレイピングシステム (2019-09 ~ 2021-04)
     - 使用技術: Python 3.6 - 3.8(BeautifulSoup4), AWS Lambda & S3
 
 ### プロジェクト外での実績
 
-- 社内勉強会の立ち上げ(2021年4月頃)、登壇(2021/05, 2022/01)
+- 社内勉強会の立ち上げ(2021-04)、登壇(2021-05, 2022-01)
 - パスワード管理ツール(1password)の提案、導入
 
-## 2019年4月8日 ~ 2019年7月31日: 東京電機大学 未来科学部 情報メディア学科 学生職員
+## 2019-04-08 ~ 2019-07-31: 東京電機大学 未来科学部 情報メディア学科 学生職員
 
 - 事務雑用(学科内郵便や授業教室の清掃等)
 - 授業で使用するPC環境・サーバー(CentOS)の保守
