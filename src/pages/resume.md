@@ -4,7 +4,7 @@ title: "職務経歴書"
 ---
 # 目次
 
-最終更新: 2023年11月
+最終更新: 2023-12-28
 
 業務以外の活動については[こちら](/achievements)を参照
 
@@ -53,12 +53,30 @@ title: "職務経歴書"
 
 Google Cloud 認定プレミアムパートナー。開発部エンジニアリング室所属
 
-### 業務内容
+- 雇用形態
+    - 2022-12より正社員として勤務。
+    - 2023-12より週4日勤務での契約社員。
 
-- Google Cloudを用いたシステム開発
-    - 特にCloud Runを主軸としたサーバーレスアーキテクチャでの開発
-    - Terraformを使用したクラウドインフラ構築
-    - GitHub Actions, Cloud Buildを用いたCI/CDの構築
+### 参画したプロジェクト
+
+- Terraformを用いた他社からGoogle Cloud Compute Engineへの移行構築 (2023-08月 ~ 2023-12)
+     - 役割・やったこと: Terraform開発・運用主担当としてTerraformコード全般の開発
+- Terrform, Terratestをテストに使用したGoogle Cloudインフラ構築 (2023-03 ~ 2023-06)
+     - 役割・やったこと: Terraformを用いたGoogle Cloudインフラ構築、Terratestを用いたTerraform環境へのテストコードの作成
+- Go (echo) での大規模Webサービス、インフラ開発(2023-01 ~ 2023-02)
+    - 役割・やったこと: Terraformを用いたGoogle Cloudインフラ構築、プロジェクトの進行補佐
+- Nuxt.js + Go (echo) でのAPI開発(2022-12)
+    - 役割・やったこと: 中途参画メンバーとして、フロントエンド、バックエンドの保守・改修
+
+### プロジェクト外での実績
+
+- 検証用のAWSアカウント環境の整備提案(2023-12)
+    - AWS Organizationsでの複数アカウント管理
+- 社内勉強会の立ち上げ(2023-09)、登壇(2023-09, 2024-01)
+- 社内向け技術ドキュメント執筆推進 (Notion) (2023-06 ~)
+- 技術ブログ執筆
+    - AlloyDB連載 (2023-04 ~ 2023-09): [Vol.1](https://www.topgate.co.jp/blog/techblog/29096), [Vol.2](https://www.topgate.co.jp/blog/techblog/29265), [Vol.3](https://www.topgate.co.jp/blog/techblog/29608), [Vol.4](https://www.topgate.co.jp/blog/techblog/29727), [Vol.5](https://www.topgate.co.jp/blog/techblog/30340), [Vol.6](https://www.topgate.co.jp/blog/techblog/30648)
+    - [Google Cloud SQL Enterprise Plus 紹介記事](https://www.topgate.co.jp/blog/techblog/30092) (2023-07-28)
 
 ## 2019-09-25 ~ 2022-11-31: [株式会社CMSコミュニケーションズ](https://cmscom.jp)
 
