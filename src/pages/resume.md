@@ -72,62 +72,34 @@ Pythonと教育をテーマに受託開発を行っている。社員6名(2022�
 
 - DuckDBでのログ分析基盤構築 (2022年6月~2022年7月)
     - 使用技術: DuckDB, SQLAlchemy 1.14, pandas
-    - 学んだこと:
-        - データベーストランザクション(完璧ではない)
-        - Jupyter notebook上でpandasのDataFrame操作
 - 問い合わせ機能付きランディングページサイト開発(2022年4月~2022年6月)
     - 使用技術: Flask 2.x, Terraform 1.x, AWS Lambda, API Gateway, S3, CloudFront
-    - 学んだこと:
-        - Terraformを用いてのサービス量産
-        - Pythonの `importlib` を工夫しての設定読み込み
     - 苦労したこと・できなかったこと
         - AWSのリージョンを跨いだTerraformでの構成管理
 - Open edX導入支援 (2022年2月頃~2022年7月)
     - 使用技術: Open edX (version Maple), AWS RDS(MySQL), Docker, click
-    - 学んだこと:
-        - Django Admin画面での操作
-        - Docker(on AWS EC2)ベースでのシステム導入
 - PyramidでのAPIサーバー開発 (2021年8月頃~2022年1月頃)
     - 使用技術: Pyramid 2.x, PostgreSQL 12, SQLAlchemy 1.14, Redis 6.x, Ansible 2.11
-    - 学んだこと:
-        - Session, Cookie管理
-        - CORSとPreflight requestについて <https://zenn.dev/peacock0803sz/articles/fe331e04183257>
-        - Zope interfaceを使用した開発
-        - Ansibleでの構成管理
 - Flask + ReactでのWebサービス開発 (2021年3月頃~7月頃)
     - 使用技術: Flask 1.x, Numpy, React + d3.js, AWS Lambda & DynamoDB
-    - 学んだこと:
-        - OpenAPI Specification (v3.0)
-        - toCサービスの開発
-        - MVCモデルアーキテクチャでの設計
-        - Reactでのコンポーネント開発
-        - AWSにてServerless Serviceの立ち上げ
 - Pyramid製システムのPython2.7 -> Python3.8アップグレード (2021年初頭)
     - 概要: アップグレードのインフラ担当、アプリケーションコードの修正
         - Legacy EC2をAWS ECS(Fargate)へ移行
         - 2009年ごろのPyramid製サービスをPython3.8へアップグレード
     - 使用技術: Terraform, Bitbucket Piplines, AWS ECS (Fargate)
-    - 学んだこと:
-        - Terraformを用いたインフラ構築
-        - AWS ECS (Fargate)の構築、運用
 - Ploneでの大学向け学習支援システム(LMS)開発 (2020年4月~9月頃)
     - 使用技術: Plone 5.2, PostgreSQL 12, SQLAlchemy 1.3
-    - 学んだこと:
-        - オブジェクト指向プログラミング(クラス継承)での設計
-        - Plone PAS(Pluggable Authentication Service)を使った機能の開発
 - FlaskでのAPIサーバー開発 (2019年12月~2020年3月頃、2021年3月)
     - 使用技術: Python 3.8, Flask 1.0, Vue.js 2.x, AWS Lambda, DynamoDB
-    - 学んだこと:
-        - Unit-level test (Pytest)
 - Plone 4 -> Plone 5 & Volto 移行用コンテンツ整形スクリプトの開発(2019年11月~2020年3月頃)
     - 使用技術: Python3.7, OpenPyXL, BeautifulSoup4, draft-js
-    - 学んだこと:
-        - コマンドライン引数解析
-        - フルスクラッチでの設計、開発
 - AWS Lambda上でのスクレイピングシステム (2019年9月~2021年4月)
     - 使用技術: Python 3.6 - 3.8(BeautifulSoup4), AWS Lambda & S3
-    - 学んだこと:
-        - ライブラリ(boto3)経由でのAWS S3操作
+
+### プロジェクト外での実績
+
+- 社内勉強会の立ち上げ(2021年4月頃)、登壇(2021/05, 2022/01)
+- パスワード管理ツール(1password)の提案、導入
 
 ## 2019年4月8日 ~ 2019年7月31日: 東京電機大学 未来科学部 情報メディア学科 学生職員
 
