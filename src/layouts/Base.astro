@@ -39,4 +39,13 @@ const { title, head, lang } = Astro.props;
     @apply underline;
     color: #44e;
   }
+  @media print {
+    :root {
+      @apply bg-white;
+    }
+    div.header,
+    div.footer {
+      display: none;
+    }
+  }
 </style>
