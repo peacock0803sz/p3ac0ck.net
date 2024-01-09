@@ -41,6 +41,7 @@ title: "職務経歴書"
 - 保有資格
     - [Google Cloud Certified - Cloud Digital Leader](https://www.credential.net/003b470a-2ea4-4ca3-9520-1866f91fa41d) (2023-04取得)
     - [Google Cloud Certified - Associate Cloud Engineer](https://google.accredible.com/b3674100-cfc6-469a-8484-7f281b49e8c2) (2023-08取得)
+    - [Google Cloud Certified - Professional Cloud Architect](https://google.accredible.com/63ef83e0-c975-45bc-b701-361b8e4ea214) (2023-12取得)
 - 使用しているツール・OSなど
     - Git / GitHub, Bitbucket
     - Linux(開発用OSとして、2014 ~ 2020年頃まで)
