@@ -18,7 +18,7 @@
     "@fontsource/carter-one": "^5.0.5",
     "@fontsource/ibm-plex-sans-jp": "^5.0.12",
     "@astrojs/sitemap": "^3.1.1",
-    "astro": "^4.5.5",
+    "astro": "^4.6.3",
     "github-markdown-css": "^5.4.0",
     "rehype-accessible-emojis": "^0.3.2",
     "remark-toc": "^9.0.0",
