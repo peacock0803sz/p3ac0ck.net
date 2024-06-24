@@ -4,8 +4,6 @@ title: 業務以外の活動・登壇など
 ---
 # 目次
 
----
-
 最終更新: 2023年11月
 
 業務での実績については[こちら](/resume)を参照
@@ -13,12 +11,14 @@ title: 業務以外の活動・登壇など
 # イベントスタッフなどの活動
 
 - PyCon JP関連の活動
+    - [PyCon JP 2024](https://2024.pycon.jp): 会計リーダー
     - [PyCon JP 2022](https://2022.pycon.jp), [PyCon APAC 2023](https://2023-apac.pycon.jp): 副座長
     - [PyCon JP 2021](https://2021.pycon.jp): スタッフ(会場、スポンサー、デザイン)
     - [PyCon JP 2020](https://pycon.jp/2020): Goods & Web Designチームリーダー
     - [PyCon JP TV](https://tv.pycon.jp): ディレクター
         - [一般社団法人PyCon JP Association運営メンバー](https://www.pycon.jp/committee/members.html#yoichi-takai-a-k-a-peacock)として2021年2月より、月に1度のYouTube生放送を実施
 - [DjangoCongress JP 2022](https://django.connpass.com/event/259310/), [DjangoCongress JP 2023](https://django.connpass.com/event/295303/) 一般社団法人PyCon JP Associationとの連絡役、当日カメラマン
+- [Go Conference 2024](https://gocon.jp/2024/): スポンサーチーム・当日カメラマン
 - OSC(オープンソースカンファレンス)関連の活動
     - [Open Source Conference](https://event.ospn.jp/eventlist)2020年のオンライン開催において、オンライン配信スタッフ
     - [Open Source Conference 2023 Tokyo/Spring](https://event.ospn.jp/osc2023-spring/) 当日カメラマン
@@ -34,7 +34,7 @@ title: 業務以外の活動・登壇など
 - Comparison of Packaging Tools in 2023
     - 2023-10-28: [PyCon APAC 2023](https://2023-apac.pycon.jp/timetable?id=XEGZUD)
         - Slides: <https://slides.p3ac0ck.net/pyconapac2023/index.html>
-        - Video: WIP
+        - Video: <https://www.youtube.com/watch?v=909hErbppUo>
     - 2023-09-02: [PyCon TW 2023](https://tw.pycon.org/2023/en-us/conference/talk/274)
         - Slides: <https://slides.p3ac0ck.net/pycontw2023/index.html>
 - Getting Started with Statically Typed Programming in Python 3.10
