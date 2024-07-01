@@ -13,7 +13,7 @@
   "dependencies": {
     "@astrojs/check": "^0.7.0",
     "@astrojs/mdx": "^3.0.1",
-    "@astrojs/rss": "^4.0.6",
+    "@astrojs/rss": "^4.0.7",
     "@astrojs/tailwind": "^5.0.2",
     "@fontsource/carter-one": "^5.0.12",
     "@fontsource/ibm-plex-sans-jp": "^5.0.13",
