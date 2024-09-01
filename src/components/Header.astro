@@ -1,37 +1,29 @@
 ---
-import "@fontsource/carter-one";
-
-import { SiteName } from "../constants.ts";
+import siteConfig from "../data/site-config";
 ---
 
-<div class="header bg-slate-100 pt-5 pb-2 sticky top-0">
-  <div class="pb-2 grid grid-cols-4 border-black border-solid border-b-2">
-    <p class="siteTitle col-span-3">
-      <a href="/">{Astro.props.name || SiteName}</a>
-    </p>
-    <div class="text-right">
-      <ul class="text-xl grid grid-rows-3">
-        <li><a href="/posts">Blog</a></li>
-        <li>
-          <a href="/achievements/">活動実績</a>
-        </li>
-        <li><a href="/resume/">職務経歴</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-<style>
-  a {
-    color: black;
-    text-decoration: none;
+<header class="w-full max-w-3xl mx-auto mb-12 sm:mb-16">
+  {
+    siteConfig.logo && siteConfig.logo?.src ? (
+      <a href="/">
+        <img
+          src={siteConfig.logo.src}
+          alt={siteConfig.logo.alt || ""}
+          class="max-h-12"
+        />
+      </a>
+    ) : (
+      <a
+        class="font-serif text-2xl leading-tight font-medium text-theme-foreground sm:text-4xl"
+        href="/"
+      >
+        {siteConfig.title}
+      </a>
+    )
   }
-  a:hover {
-    text-decoration: underline;
+  {
+    siteConfig.subtitle && (
+      <p class="text-sm leading-tight mt-1">{siteConfig.subtitle}</p>
+    )
   }
-  p.siteTitle {
-    font-size: 2rem;
-    line-height: 2.25rem;
-    font-family: "Carter One", sans-serif;
-  }
-</style>
+</header>

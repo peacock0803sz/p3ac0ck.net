@@ -1,60 +1,46 @@
 ---
+import siteConfig from '../data/site-config';
 
+const socialLinks = siteConfig.socialLinks || [];
+const navLinks = siteConfig.footerNavLinks || [];
 ---
 
-<div class="footer pt-3 mb-5 border-black border-solid border-t-2">
-  <p class="pb-3 text-2xl font-semibold">連絡先 / Contacts</p>
-  <div>
-    <ul
-      class="grid text-base grid-cols-1 min-[550px]:grid-cols-2 lg:grid-cols-3"
+<footer class="w-full max-w-3xl mx-auto pt-12 pb-10 sm:pt-24 sm:pb-14">
+    {
+        navLinks.length > 0 && (
+            <div class="mb-4 flex flex-wrap gap-x-6 gap-y-1">
+                {navLinks.map((link) => (
+                    <a class="font-serif hover:underline hover:underline-offset-2" href={link.href}>
+                        {link.text}
+                    </a>
+                ))}
+            </div>
+        )
+    }
+    <div
+        class:list={[
+            'pt-6 flex flex-col gap-4 border-t border-dashed border-main',
+            { 'sm:flex-row-reverse sm:justify-between sm:items-center': socialLinks.length > 0 }
+        ]}
     >
-      <li>
-        Email: <a href="mailto:me@p3ac0ck.net">me@p3ac0ck.net</a>
-      </li>
-      <li>
-        Twitter: <a
-          target="_blank"
-          href="
-          https://twitter.com/peacock0803sz">peacock0803sz</a
-        >
-      </li>
-      <li>
-        GitHub: <a target="_blank" href="https://github.com/peacock0803sz"
-          >peacock0803sz</a
-        >
-      </li>
-      <li>
-        Facebook: <a
-          target="_blank"
-          href="https://www.facebook.com/peacock0803sz">peacock0803sz</a
-        >
-      </li>
-      <li>
-        Instagram: <a href="https://www.instagram.com/peacock0803sz"
-          >peacock0803sz</a>
-      </li>
-      <li>
-        Mastodon: <a rel="me" href="https://mtd.pythonasia.org/@peacock"
-          >@peacock@mtd.pythonasia.org</a>
-      </li>
-    </ul>
-  </div>
-</div>
-
-<style>
-  h2 {
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-  }
-  a {
-    color: #333;
-    text-decoration: none;
-  }
-  a:hover {
-    text-decoration: underline;
-  }
-  li {
-    @apply mx-3 my-1;
-  }
-</style>
+        {
+            socialLinks.length > 0 && (
+                <div class="flex flex-wrap gap-x-4 gap-y-1">
+                    {socialLinks.map((link) => (
+                        <a
+                            class="inline-flex items-center justify-center text-sm hover:underline hover:underline-offset-2"
+                            href={link.href}
+                            target="_blank"
+                            rel="noopener noreferer"
+                        >
+                            {link.text}
+                        </a>
+                    ))}
+                </div>
+            )
+        }
+        <p class="text-sm">
+            &copy; {new Date().getFullYear()}&nbsp;<a class="hover:underline hover:underline-offset-2" href="/">{siteConfig.title}</a>. All rights reserved.
+        </p>
+    </div>
+</footer>

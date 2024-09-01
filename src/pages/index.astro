@@ -1,34 +1,31 @@
 ---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Button from "../components/Button.astro";
 import Hero from "../components/Hero.astro";
-import Base from "../layouts/Base.astro";
+import PostPreview from "../components/PostPreview.astro";
+import siteConfig from "../data/site-config";
+import { sortItemsByDateDesc } from "../utils/data-utils";
+
+const posts = (await getCollection("blog")).sort(sortItemsByDateDesc);
+const featuredPosts = posts.filter(({ data }) => data.isFeatured);
 ---
 
-<Base title="Welcome" slug="/">
-  <Hero txt="English introduction is " href="/en" aTxt="here" />
-  <div>
-    <p>
-      <a href="https://www.topgate.co.jp">株式会社トップゲート</a>にてGoogle
-      Cloudを使用したDevOpsやIaC(Infrastructure as
-      Code)の普及に貢献すべく、開発エンジニアとして勤務。
-    </p>
-    <p>
-      その傍ら、2020年よりPythonの国際カンファレンスである<a
-        href="https://pycon.jp">PyCon JP</a
-      >のスタッフとして運営に携わる。<br />2022, 2023(PyCon APAC
-      2023として開催)年は副座長も務めた。<br />また、<a
-        href="https://tv.pycon.jp">PyCon JP TV</a
-      >のディレクターとして一般社団法人PyCon JP
-      Associationに運営メンバーとして参加もしている。
-    </p>
-    <p>
-      好きなことはクラシック音楽(B.
-      Bartokがお気に入りの作曲家)で、他にもスキー・ミラーレスカメラ・ビールやウイスキーなど。
-    </p>
-  </div>
-</Base>
-
-<style>
-  div > p {
-    @apply my-5;
+<BaseLayout description={siteConfig.description} image={siteConfig.image}>
+  <Hero />
+  {
+    featuredPosts?.length > 0 && (
+      <div class="mb-16 sm:mb-24">
+        <h2 class="mb-12 text-xl font-serif italic sm:mb-16 sm:text-2xl">
+          Writing
+        </h2>
+        {featuredPosts.map((post) => (
+          <PostPreview post={post} class="mb-10 sm:mb-12" headingLevel="h3" />
+        ))}
+        <div class="mt-12 sm:mt-16">
+          <Button href="/blog">View All Posts</Button>
+        </div>
+      </div>
+    )
   }
-</style>
+</BaseLayout>
