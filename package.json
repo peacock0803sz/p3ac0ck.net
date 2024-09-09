@@ -17,7 +17,7 @@
     "@astrojs/sitemap": "^3.1.5",
     "@astrojs/tailwind": "^5.0.2",
     "@fontsource/carter-one": "^5.0.14",
-    "@fontsource/ibm-plex-sans-jp": "^5.0.14",
+    "@fontsource/ibm-plex-sans-jp": "^5.0.15",
     "@vercel/og": "^0.6.2",
     "astro": "^4.15.4",
     "github-markdown-css": "^5.4.0",
