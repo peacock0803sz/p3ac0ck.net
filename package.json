@@ -19,7 +19,7 @@
     "@fontsource/carter-one": "^5.1.0",
     "@fontsource/ibm-plex-sans-jp": "^5.1.0",
     "@vercel/og": "^0.6.3",
-    "astro": "^4.15.8",
+    "astro": "^4.15.9",
     "github-markdown-css": "^5.4.0",
     "rehype-accessible-emojis": "^0.3.2",
     "remark-toc": "^9.0.0",
