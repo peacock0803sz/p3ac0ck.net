@@ -10,7 +10,6 @@ const frontmatter: PostsFrontMatter = Astro.props.frontmatter;
   title={frontmatter.title}
   head="Peacock's Blog"
   description={frontmatter.description}
-  ogImage={`${import.meta.env.BASE_URL}/posts/${frontmatter.slug}/og.png`}
 >
   <h1 class="text-4xl font-bold pb-10">
     {frontmatter.emoji}
