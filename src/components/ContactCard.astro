@@ -1,0 +1,20 @@
+---
+const { name, id, url } = Astro.props;
+---
+
+<div>
+  <p>
+    <a
+      href={url}
+      class="flex items-center p-3 text-sm font-bold text-slate-900 rounded-lg bg-slate-50 group hover:shadow"
+    >
+      <span class="flex-1 ms-3 whitespace-nowrap">{name}: {id}</span>
+    </a>
+  </p>
+</div>
+
+<style>
+  a {
+    text-decoration-line: none;
+  }
+</style>
