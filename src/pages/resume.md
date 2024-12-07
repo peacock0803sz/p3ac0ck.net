@@ -38,11 +38,13 @@ title: "職務経歴書"
         - Haskellを少し触ったことがあり、関数型的指向に興味がある
     - Kubernetes
         - 大規模サービスを運用したことがないので、経験してみたい
-- 保有資格
-    - [Google Cloud Certified - Cloud Digital Leader](https://www.credential.net/003b470a-2ea4-4ca3-9520-1866f91fa41d) (2023-04取得)
-    - [Google Cloud Certified - Associate Cloud Engineer](https://google.accredible.com/b3674100-cfc6-469a-8484-7f281b49e8c2) (2023-08取得)
-    - [Google Cloud Certified - Professional Cloud Architect](https://google.accredible.com/63ef83e0-c975-45bc-b701-361b8e4ea214) (2023-12取得)
-    - [Google Cloud Certified - Professional Cloud Developer](https://google.accredible.com/3e8749af-30b7-49ad-82c3-675547f0df6e) (2024-01取得)
+- 保有資格・受賞歴
+    - 資格: [Google Cloud Certified - Cloud Digital Leader](https://www.credential.net/003b470a-2ea4-4ca3-9520-1866f91fa41d) (2023-04取得)
+    - 資格: [Google Cloud Certified - Associate Cloud Engineer](https://google.accredible.com/b3674100-cfc6-469a-8484-7f281b49e8c2) (2023-08取得)
+    - 資格: [Google Cloud Certified - Professional Cloud Architect](https://google.accredible.com/63ef83e0-c975-45bc-b701-361b8e4ea214) (2023-12取得)
+    - 資格: [Google Cloud Certified - Professional Cloud Developer](https://google.accredible.com/3e8749af-30b7-49ad-82c3-675547f0df6e) (2024-01取得)
+    - 受賞: [Google Cloud Partner Tech Blog Challenge (技術テーマ： Databases)](https://cloud.google.com/blog/ja/topics/partners/google-cloud-partner-tech-blog-challenge-2023-winners?hl=ja#:~:text=%E3%81%A6%E3%81%BF%E3%81%9F-,%E6%8A%80%E8%A1%93%E3%83%86%E3%83%BC%E3%83%9E%EF%BC%9A%20Databases,-%5B%E6%8A%95%E7%A8%BF%E8%80%85%5D%20%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE)(2024-02受賞)
+    - 受賞: [Google Cloud Partner Top Engineer 2025 (Serverless App Development)](https://cloud.google.com/blog/ja/topics/partners/google-cloud-partner-tech-blog-challenge-2023-winners?hl=ja#:~:text=%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE%E3%83%88%E3%83%83%E3%83%97%E3%82%B2%E3%83%BC%E3%83%88-,%E9%AB%98%E4%BA%95%20%E9%99%BD%E4%B8%80,-%E3%81%95%E3%82%93%0A%5B%E3%83%96%E3%83%AD%E3%82%B0%E3%82%BF%E3%82%A4%E3%83%88%E3%83%AB%5D) (2024-11受賞)
 - 使用しているツール・OSなど
     - Git / GitHub, Bitbucket
     - Linux(開発用OSとして、2014 ~ 2020年頃まで)
