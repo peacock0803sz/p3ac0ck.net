@@ -5,12 +5,13 @@ import Base from "../layouts/Base.astro";
 
 <Base title="Welcome" slug="/">
   <Hero txt="English introduction is " href="/en" aTxt="here" />
-  <div>
+  <div class="text-center">
     <p>
       <a href="https://g-gen.co.jp">株式会社G-gen</a>にてGoogle
       Cloudを使用したDevOpsやIaC(Infrastructure as
       Code)の普及に貢献すべく、開発エンジニアとして勤務。
     </p>
+    <br />
     <p>
       その傍ら、2020年よりPythonの国際カンファレンスである<a
         href="https://pycon.jp">PyCon JP</a
@@ -20,15 +21,10 @@ import Base from "../layouts/Base.astro";
       >のディレクターとして一般社団法人PyCon JP
       Associationに運営メンバーとして参加もしている。
     </p>
+    <br />
     <p>
       好きなことはクラシック音楽(B.
       Bartokがお気に入りの作曲家)で、他にもスキー・ミラーレスカメラ・ビールやウイスキーなど。
     </p>
   </div>
 </Base>
-
-<style>
-  div > p {
-    @apply my-5;
-  }
-</style>
