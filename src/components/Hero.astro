@@ -5,23 +5,24 @@ import profileImg from "../../public/profile.jpg";
 const { txt, href, aTxt } = Astro.props;
 ---
 
-<div class="grid sm:grid-cols-10 pb-10">
-  <div class="grid sm:col-span-7 md:col-span-8">
-    <h1
-      class="font-semibold text-3xl min-[400px]:text-4xl sm:text-3xl lg:text-6xl xl:text-7xl"
-    >
-      👋 I'm Yoichi Takai, <br /> a.k.a. "Peacock"
-    </h1>
-    <p class="font-bold text-xl min-[400px]:text-2xl lg:text-3xl">
-      {txt}<a href={href}>{aTxt}</a>
-    </p>
-  </div>
-  <div
-    class="mr-1 w-full pt-5 -mb-5 sm:py-0 sm:pl-5 sm:col-span-3 md:col-span-2"
-  >
-    <Image src={profileImg} alt="Profile" />
-    <p class="text-right text-base sm:text-xs lg:text-base">
+<div class="mb-5 grid justify-items-center text-center">
+  <h1 class="font-semibold text-6xl">
+    Peacock
+  </h1>
+  <p class="text-3xl">(Yoichi Takai)</p>
+  <div class="my-3">
+    <Image class="profile w-60 h-60" src={profileImg} alt="Profile" />
+    <p class="mt-2 text-base">
       Photo by Yuichiro Nota<br /> at PyCon APAC 2023
     </p>
   </div>
+  <p class="text-2xl">
+    {txt}<a href={href}>{aTxt}</a>
+  </p>
 </div>
+
+<style>
+  img.profile {
+    border-radius: 25%;
+  }
+</style>
