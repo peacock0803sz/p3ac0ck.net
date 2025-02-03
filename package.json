@@ -18,7 +18,7 @@
     "@astrojs/tailwind": "^5.1.5",
     "@fontsource/carter-one": "^5.1.1",
     "@fontsource/ibm-plex-sans-jp": "^5.1.1",
-    "astro": "^5.1.9",
+    "astro": "^5.2.3",
     "github-markdown-css": "^5.8.1",
     "rehype-accessible-emojis": "^0.3.2",
     "remark-toc": "^9.0.0",
