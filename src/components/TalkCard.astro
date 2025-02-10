@@ -1,0 +1,29 @@
+---
+const { title, date, event, slug, video } = Astro.props;
+
+const url = `https://slides.p3ac0ck.net/${slug}`;
+const image = `${url}/cover.png`;
+---
+
+<div class="border-slate-50" id={slug}>
+  <h2 class="text-2xl font-bold">{title}</h2>
+  <div class="text-xl">
+    {date}, at {event}
+    {
+      video && (
+        <p>
+          Video: <a href={video}>{video}</a>
+        </p>
+      )
+    }
+  </div>
+  <a href={url}>
+    <img class="w-64 h-36" src={image} />
+  </a>
+</div>
+
+<style>
+  a {
+    text-decoration-line: none;
+  }
+</style>

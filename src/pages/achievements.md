@@ -6,7 +6,7 @@ title: 業務以外の活動・登壇など
 
 最終更新: 2023年11月
 
-業務での実績については[こちら](/resume)を参照
+業務での実績については[こちら](/resume)を、登壇などは[こちら](/talks)を参照
 
 # イベントスタッフなどの活動
 
@@ -29,31 +29,9 @@ title: 業務以外の活動・登壇など
 - Plone User's Group JapanとしてPlone本体の翻訳(共同) <https://github.com/collective/plone.app.locales>
     - <https://github.com/collective/plone.app.locales/commit/0d74afd7361e17ebf9d7bd87299702baec286004>
 
-# 登壇実績
-
-- Comparison of Packaging Tools in 2023
-    - 2023-10-28: [PyCon APAC 2023](https://2023-apac.pycon.jp/timetable?id=XEGZUD)
-        - Slides: <https://slides.p3ac0ck.net/pyconapac2023/index.html>
-        - Video: <https://www.youtube.com/watch?v=909hErbppUo>
-    - 2023-09-02: [PyCon TW 2023](https://tw.pycon.org/2023/en-us/conference/talk/274)
-        - Slides: <https://slides.p3ac0ck.net/pycontw2023/index.html>
-- Getting Started with Statically Typed Programming in Python 3.10
-    - 2022-05-01: [PyCon US 2022](https://pycon-archive.python.org/2022/schedule/presentation/23/index.html)
-        - Slides: <https://slides.p3ac0ck.net/pyconus2022/index.html>
-        - Video: <https://youtu.be/ZUIK9hxyi7Y>
-    - 2021-10-20: PyCon APAC 2021 (Online)
-        - Slides: <https://speakerdeck.com/peacock0803sz/pycon-apac-2021>
-    - 2021-07-29: [EuroPython 2021 (Online)](https://ep2021.europython.eu/talks/ASCmqFk-getting-started-with-statically-typed-programming-in-python-310/)
-        - <https://slides.p3ac0ck.net/europython2021/euro.html>
-        - <https://www.youtube.com/watch?v=8HEYko-o63I>
-    - 2021-06-21: Open Source Conference 2021 Hokkaido (邦版: Pythonではじめる今風な型プログラミング)
-        - <https://slides.p3ac0ck.net/osc21do/osc21do.html>
-        - <https://youtu.be/2sZ9U1iIscQ>
-- その他、5分程度のLT多数
-
 # その他作品・OSS活動
 
-- My Website(This repo): [peacock0803sz](https://github.com/peacock0803sz/peacock0803sz)
+- My Website(This repo): [p3ac0ck.net/peacock0803sz](https://github.com/peacock0803sz/p3ac0ck.net)
 - [mr.s3](https://github.com/peacock0803sz/mr.s3)
     - PloneのデータベースをAWS S3と同期するためのスクリプト
 - [HTTP/3 explained](https://daniel.haxx.se/http3-explained/)の日本語訳

@@ -10,8 +10,9 @@ import { SiteName } from "../constants.ts";
       <a href="/">{Astro.props.name || SiteName}</a>
     </p>
     <div class="text-right">
-      <ul class="text-xl grid grid-rows-3">
+      <ul class="text-xl grid grid-rows-4">
         <li><a href="/posts">Blog</a></li>
+        <li><a href="/talks">Talks</a></li>
         <li>
           <a href="/achievements/">活動実績</a>
         </li>
@@ -30,8 +31,8 @@ import { SiteName } from "../constants.ts";
     text-decoration: underline;
   }
   p.siteTitle {
-    font-size: 2rem;
-    line-height: 2.25rem;
+    font-size: 3rem;
+    line-height: 3rem;
     font-family: "Carter One", sans-serif;
   }
 </style>
