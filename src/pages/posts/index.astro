@@ -1,20 +1,24 @@
 ---
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+
+import { format, compareAsc } from "date-fns";
+
 import Base from "../../layouts/Base.astro";
-import type { Post } from "../../types.ts";
 
 const title = "記事一覧";
-const posts: Post[] = await Astro.glob("./*.mdx");
+const posts: CollectionEntry<"posts">[] = await getCollection("posts");
 ---
 
 <Base title={title} head="Peacock's Blog">
   <h1 class="text-4xl font-bold pb-10">{title}</h1>
   <div>
     {
-      posts.map((p) => (
+    posts.sort((a, b)=> compareAsc(a.data.pubDate, b.data.pubDate)).map((p) => (
         <p>
-          <span class="font-mono">{p.frontmatter.pubDate}</span>:
-          <a href={p.url}>
-            {p.frontmatter.emoji} {p.frontmatter.title}
+        <span class="font-mono">{format(p.data.pubDate, "yyyy-MM-dd")}</span>:
+          <a href=`posts/${p.id}`>
+            {p.data.emoji} {p.data.title}
           </a>
         </p>
       ))
