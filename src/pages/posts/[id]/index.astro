@@ -3,8 +3,8 @@ import { getCollection, render } from "astro:content";
 
 import { format } from "date-fns";
 
-import "../../styles/markdown.css";
-import Base from "../../layouts/Base.astro";
+import "../../../styles/markdown.css";
+import Base from "../../../layouts/Base.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
@@ -19,9 +19,11 @@ const { Content } = await render(post);
 ---
 
 <Base
+  slug=`posts/${post.id}`
   title={post.data.title}
   head="Peacock's Blog"
   description={post.data.description}
+  ogImage=`${Astro.site}posts/${post.id}/og.png`
 >
   <h1 class="text-4xl font-bold pb-10">
     {post.data.emoji}
