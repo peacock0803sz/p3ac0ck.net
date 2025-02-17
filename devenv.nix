@@ -14,7 +14,8 @@
   languages.javascript = {
     enable = true;
     corepack.enable = true;
-    package = pkgs.nodejs_20;
+    npm.enable = true;
+    package = pkgs.nodejs_22;
   };
 
   # https://devenv.sh/processes/
