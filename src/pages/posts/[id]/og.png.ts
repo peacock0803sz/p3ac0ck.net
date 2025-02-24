@@ -14,7 +14,8 @@ interface Props {
 }
 
 const { twj } = tailwindToCSS({
-  config: (await import("../../../../tailwind.config.mjs")).default as TailwindConfig,
+  config: (await import("../../../../tailwind.config.mjs"))
+    .default as TailwindConfig,
 });
 
 // ref: https://skyfall.dev/posts/satori-with-tailwind-config
@@ -26,10 +27,16 @@ function inlineTailwind(el: react.JSX.Element): react.JSX.Element {
   const mergedStyle = { ...originalStyle, ...twStyle };
   // Recursively process children
   const processedChildren = react.Children.map(children, (child) =>
-    react.isValidElement(child) ? inlineTailwind(child as react.JSX.Element) : child,
+    react.isValidElement(child)
+      ? inlineTailwind(child as react.JSX.Element)
+      : child,
   );
   // Return cloned element with updated props
-  return react.cloneElement(el, { ...props, style: mergedStyle }, processedChildren);
+  return react.cloneElement(
+    el,
+    { ...props, style: mergedStyle },
+    processedChildren,
+  );
 }
 
 export async function SVG(component: any) {
@@ -39,32 +46,44 @@ export async function SVG(component: any) {
     fonts: [
       {
         name: "IBMPlexSansJP",
-        data: await fs.readFile("./public/fonts/IBM_Plex_Sans_JP/IBMPlexSansJP-Thin.ttf"),
+        data: await fs.readFile(
+          "./public/fonts/IBM_Plex_Sans_JP/IBMPlexSansJP-Thin.ttf",
+        ),
         weight: 200,
       },
       {
         name: "IBMPlexSansJP",
-        data: await fs.readFile("./public/fonts/IBM_Plex_Sans_JP/IBMPlexSansJP-Light.ttf"),
+        data: await fs.readFile(
+          "./public/fonts/IBM_Plex_Sans_JP/IBMPlexSansJP-Light.ttf",
+        ),
         weight: 300,
       },
       {
         name: "IBMPlexSansJP",
-        data: await fs.readFile("./public/fonts/IBM_Plex_Sans_JP/IBMPlexSansJP-Regular.ttf"),
+        data: await fs.readFile(
+          "./public/fonts/IBM_Plex_Sans_JP/IBMPlexSansJP-Regular.ttf",
+        ),
         weight: 400,
       },
       {
         name: "IBMPlexSansJP",
-        data: await fs.readFile("./public/fonts/IBM_Plex_Sans_JP/IBMPlexSansJP-Medium.ttf"),
+        data: await fs.readFile(
+          "./public/fonts/IBM_Plex_Sans_JP/IBMPlexSansJP-Medium.ttf",
+        ),
         weight: 500,
       },
       {
         name: "IBMPlexSansJP",
-        data: await fs.readFile("./public/fonts/IBM_Plex_Sans_JP/IBMPlexSansJP-SemiBold.ttf"),
+        data: await fs.readFile(
+          "./public/fonts/IBM_Plex_Sans_JP/IBMPlexSansJP-SemiBold.ttf",
+        ),
         weight: 600,
       },
       {
         name: "IBMPlexSansJP",
-        data: await fs.readFile("./public/fonts/IBM_Plex_Sans_JP/IBMPlexSansJP-Bold.ttf"),
+        data: await fs.readFile(
+          "./public/fonts/IBM_Plex_Sans_JP/IBMPlexSansJP-Bold.ttf",
+        ),
         weight: 700,
       },
     ],

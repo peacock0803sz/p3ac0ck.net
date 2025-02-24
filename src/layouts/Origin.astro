@@ -4,7 +4,11 @@ import Base from "./Base.astro";
 const { frontmatter } = Astro.props;
 ---
 
-<Base title={frontmatter.title} lang={frontmatter.lang} ogImage="https://p3ac0ck.net/og-images/origin.png">
+<Base
+  title={frontmatter.title}
+  lang={frontmatter.lang}
+  ogImage="https://p3ac0ck.net/og-images/origin.png"
+>
   <h1 class="text-4xl font-bold pb-10">{frontmatter.title}</h1>
   <article class="markdown-body">
     <slot />

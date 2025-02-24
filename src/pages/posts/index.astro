@@ -14,14 +14,19 @@ const posts: CollectionEntry<"posts">[] = await getCollection("posts");
   <h1 class="text-4xl font-bold pb-10">{title}</h1>
   <div>
     {
-    posts.sort((a, b)=> compareAsc(a.data.pubDate, b.data.pubDate)).map((p) => (
-        <p>
-        <span class="font-mono">{format(p.data.pubDate, "yyyy-MM-dd")}</span>:
-          <a href=`${p.id}`>
-            {p.data.emoji} {p.data.title}
-          </a>
-        </p>
-      ))
+      posts
+        .sort((a, b) => compareAsc(a.data.pubDate, b.data.pubDate))
+        .map((p) => (
+          <p>
+            <span class="font-mono">
+              {format(p.data.pubDate, "yyyy-MM-dd")}
+            </span>
+            :
+            <a href={p.id}>
+              {p.data.emoji} {p.data.title}
+            </a>
+          </p>
+        ))
     }
   </div>
 </Base>

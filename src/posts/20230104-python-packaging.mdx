@@ -15,8 +15,11 @@ import Note from "../components/Note.astro";
 各所(主にPython界隈の外)で「Pythonパッケージ管理どうするのが正解なの?」とよく耳にするので2023年初頭時点での私の見解を書きます。
 
 <Note>
-この記事はvenv + pip以外のツール(特に[`poetry`](https://python-poetry.org/), [`pipenv`](https://github.com/pypa/pipenv), [`pip-tools`](https://github.com/jazzband/pip-tools)へのアンチテーゼ要素を多分に含みます。
-私はいわゆる「venvでよくないですか? おじさん」をよくやるのでそれのまとめだと思って頂ければと思います。
+  この記事はvenv + pip以外のツール(特に[`poetry`](https://python-poetry.org/),
+  [`pipenv`](https://github.com/pypa/pipenv),
+  [`pip-tools`](https://github.com/jazzband/pip-tools)へのアンチテーゼ要素を多分に含みます。
+  私はいわゆる「venvでよくないですか?
+  おじさん」をよくやるのでそれのまとめだと思って頂ければと思います。
 </Note>
 
 # tl;dr
@@ -27,7 +30,6 @@ import Note from "../components/Note.astro";
 
 タイトルに`venv`とついていますが、以降venv(virtualenv)については言及しません。仮想環境内で作業している前提で話を進めます。
 この記事では基本的に`setup.py` / `setup.cfg`ではなく`pyproject.toml`でのパッケージ定義方法を採用します。これは[PEP 621](https://peps.python.org/pep-0621/)がここ最近で採択・実装されたためです。
-
 
 なお、想定しているPythonや各ツールのバージョンは以下の通りです。
 
@@ -41,8 +43,8 @@ import Note from "../components/Note.astro";
 - [Setuptools](https://setuptools.pypa.io/en/latest/index.html): pip(インストーラー)がバックエンドとして使えるパッケージャライブラリの1つ
 
 <details>
-<summary>誤記を修正</summary>
-https://twitter.com/aodag/status/1610607294643073024
+  <summary>誤記を修正</summary>
+  https://twitter.com/aodag/status/1610607294643073024
 </details>
 
 - Absolute Import: 絶対インポートとも言われ、パッケージ名からの絶対パスでインポートする書き方
@@ -192,6 +194,7 @@ pip installの`-c`オプションと合わせて使うと便利です。[^3]
 test = ["pytest"]  # 他テストに必要なもの(freezegunとか)など
 dev = ["black", "flake8", "mypy"]
 ```
+
 名前(キー)に使える文字は[PEP 685](https://peps.python.org/pep-0685/)を参照してください。
 
 ## タスクランナー(npm scripts)的なもの
@@ -220,13 +223,16 @@ dev_cmd = "some_package.module:dev_func [dev]"  # extrasを指定する場合
 全て英語ですが、執筆にあたり参照した記事やページを列挙しておきます。
 
 - [Package Discovery and Namespace Packages](https://setuptools.pypa.io/en/latest/userguide/package_discovery.html)
-   - Setuptools公式ドキュメント内のパッケージ検索と名前空間についてのユーザーガイド
+  - Setuptools公式ドキュメント内のパッケージ検索と名前空間についてのユーザーガイド
 - [Declaring project metadata - Python Packaging User Guide](https://packaging.python.org/en/latest/specifications/declaring-project-metadata/)
-   - PEP 621の採択・実装をうけて書かれたユーザー向けガイド
+  - PEP 621の採択・実装をうけて書かれたユーザー向けガイド
 - [peacock0803sz/python-template](https://github.com/peacock0803sz/python-template)
-   - 拙作のPythonパッケージ用テンプレートリポジトリ(パッケージ本体は書いていない)
+  - 拙作のPythonパッケージ用テンプレートリポジトリ(パッケージ本体は書いていない)
 
 [^1]: 残念ながらLSP(pyright / pylance)の読み込み可能モジュールには出てこないようです。もっと良い方法があったらコメント等で教えてください。
+
 [^2]: https://setuptools.pypa.io/en/latest/userguide/package_discovery.html#legacy-namespace-packages
+
 [^3]: https://zenn.dev/peacock0803sz/articles/acd723d5a5fa0b(拙作参考記事)
+
 [^4]: https://packaging.python.org/en/latest/specifications/declaring-project-metadata/#entry-points

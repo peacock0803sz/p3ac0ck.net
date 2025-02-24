@@ -3,7 +3,7 @@ import { format } from "date-fns";
 
 import { SiteName } from "../constants";
 
-export default function(props) {
+export default function (props) {
   return (
     <div tw="flex flex-col font-[IBMPlexSansJP] w-full h-full px-12 py-12 items-left text-left justify-left text-gray-950 bg-gray-50">
       <div tw="flex font-bold text-7xl mb-3">{props.data.title}</div>

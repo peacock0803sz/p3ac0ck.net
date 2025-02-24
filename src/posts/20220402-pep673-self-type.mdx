@@ -1,6 +1,6 @@
 ---
 slug: 20220402-pep673-self-type
-title: "Python 3.11の型ヒントに導入される\"PEP 673 – Self Type\"を訳してみた"
+title: 'Python 3.11の型ヒントに導入される"PEP 673 – Self Type"を訳してみた'
 lang: ja
 emoji: "🏷️"
 pubDate: 2022-04-02
@@ -19,9 +19,9 @@ Python 3.11の型ヒント関連の新機能として、[PEP 673 – Self Type](
 
 - 冗長だった型表現が簡潔に書けてよさそう
 - Adaptor / Factoryパターンの設計をする時に型がつけられそう
-    - Pyramid, Zope / Ploneの型付けに期待...?
+  - Pyramid, Zope / Ploneの型付けに期待...?
 - まだ抽象クラス・メタクラスを使う時はしばしば冗長
-    - これは意図して冗長にしている認識。簡潔に書こうとすると混乱が始まる
+  - これは意図して冗長にしている認識。簡潔に書こうとすると混乱が始まる
 
 以下拙訳を掲載。訳の下に個人的所感を書いています
 
@@ -50,7 +50,6 @@ Shape().set_scale(0.5)  # => Shapeに推論される
 ```
 
 まぁこれは普通に推論される。これだけだと利点がわからないので続きに
-
 
 ```python
 class Shape:
@@ -118,7 +117,7 @@ class Shape:
     def set_scale(self, scale: float) -> Self:
         self.scale = scale
         return self
-	
+
 
 class Circle(Shape):
     def set_radius(self, radius: float) -> Self:
@@ -131,7 +130,9 @@ Circle().set_scale(0.5)  # => Circleに推論される!
 
 # その他の仕様
 
-<Alert>ここから細かい話なので折りたたんであります。適宜読み飛ばしてください</Alert>
+<Alert>
+  ここから細かい話なので折りたたんであります。適宜読み飛ばしてください
+</Alert>
 
 <details>
 <summary>classmethodでは...</summary>
@@ -144,7 +145,7 @@ class Shape:
 
     @classmethod
     def from_config(cls, config: dict[str, float]) -> Shape:
-        return cls(config["scale"])	
+        return cls(config["scale"])
 ```
 
 ただしこれは継承先のメソッドを呼んでも全部`Shape`に推論されてしまうので、問題がある
@@ -220,7 +221,6 @@ class Shape:
 スッキリ書けるようになる。もちろん`self`は`Self`型、つまり`Shape`を指す
 言うまでもなく、selfを明示的に書くことも可能
 
-
 ```python
 class Shape:
     def difference(self: Self, other: Self) -> float: ...
@@ -272,6 +272,7 @@ LinkedList[int](value=1, next=LinkedList[str](value="hello"))
 ```
 
 そこで、`next: Self | None`(訳注: typing.Optionalを用いても良さそう)を使うと、このように表現できる
+
 ```python
 from typing import Self
 
@@ -603,6 +604,7 @@ class MyMetaclass(type):
 
 class Foo(metaclass=MyMetaclass): ...
 ```
+
 </details>
 
 # 実装上の振る舞い

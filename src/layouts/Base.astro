@@ -12,7 +12,20 @@ const { title, head, lang } = Astro.props;
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image" href="/favicon.jpg" />
-    <script is:inline type="text/partytown" src="https://www.googletagmanager.com/gtag/js?id=G-258HNLC5SL" />
+    <script
+      is:inline
+      async
+      type="text/partytown"
+      src="https://www.googletagmanager.com/gtag/js?id=G-258HNLC5SL"></script>
+    <script is:inline type="text/partytown">
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-258HNLC5SL");
+    </script>
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={Astro.props.description || ""} />
@@ -23,9 +36,15 @@ const { title, head, lang } = Astro.props;
     <meta property="og:image" content="" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta property="twitter:domain" content={Astro.site} />
-    <meta property="twitter:url" content=`${Astro.site}${Astro.props.slug || ""}` />
+    <meta
+      property="twitter:url"
+      content=`${Astro.site}${Astro.props.slug || ""}`
+    />
     <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content={Astro.props.description || ""} />
+    <meta
+      property="twitter:description"
+      content={Astro.props.description || ""}
+    />
     <meta property="twitter:image" content={Astro.props.ogImage || ""} />
     <title>{title} - {SiteName}</title>
   </head>
