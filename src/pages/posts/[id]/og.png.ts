@@ -14,7 +14,7 @@ interface Props {
 }
 
 const { twj } = tailwindToCSS({
-  config: (await import("../../../../uno.config.ts"))
+  config: (await import("../../../../tailwind.config.mjs"))
     .default as TailwindConfig,
 });
 
