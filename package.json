@@ -13,14 +13,12 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
+    "@astrojs/markdown-remark": "^6.3.1",
     "@astrojs/mdx": "^4.2.1",
     "@astrojs/partytown": "^2.1.4",
     "@astrojs/react": "^4.2.1",
     "@astrojs/rss": "^4.0.11",
     "@astrojs/sitemap": "^3.3.0",
-    "@astrojs/tailwind": "^6.0.1",
-    "@fontsource/carter-one": "^5.2.5",
-    "@fontsource/ibm-plex-sans-jp": "^5.2.5",
     "@types/react": "^19.0.12",
     "@types/react-dom": "^19.0.4",
     "astro": "^5.5.4",
@@ -32,15 +30,20 @@
     "remark-toc": "^9.0.0",
     "satori": "^0.12.1",
     "sharp": "^0.33.5",
-    "tailwindcss": "^3.4.17",
-    "tw-to-css": "^0.0.12",
-    "typescript": "^5.8.2"
+    "tw-to-css": "0.0.12",
+    "typescript": "^5.8.2",
+    "unocss": "^66.1.0-beta.7"
   },
   "devDependencies": {
     "@typescript-eslint/parser": "^8.27.0",
+    "@unocss/preset-attributify": "^66.1.0-beta.7",
+    "@unocss/preset-typography": "^66.1.0-beta.7",
+    "@unocss/preset-web-fonts": "^66.1.0-beta.7",
+    "@unocss/preset-wind4": "^66.1.0-beta.7",
     "eslint": "^9.23.0",
     "eslint-plugin-astro": "^1.3.1",
     "prettier": "^3.5.3",
-    "prettier-plugin-astro": "^0.14.1"
+    "prettier-plugin-astro": "^0.14.1",
+    "unocss-language-server": "^0.1.7"
   }
 }
