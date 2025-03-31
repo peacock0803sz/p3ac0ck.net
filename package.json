@@ -28,7 +28,7 @@
     "react-dom": "^19.0.0",
     "rehype-accessible-emojis": "^0.3.2",
     "remark-toc": "^9.0.0",
-    "satori": "^0.12.1",
+    "satori": "^0.12.2",
     "sharp": "^0.33.5",
     "tw-to-css": "0.0.12",
     "typescript": "^5.8.2",
