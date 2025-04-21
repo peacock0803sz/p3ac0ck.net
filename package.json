@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "@typescript-eslint/parser": "^8.29.1",
-    "@unocss/preset-attributify": "^66.1.0-beta.7",
+    "@unocss/preset-attributify": "^66.1.0-beta.12",
     "@unocss/preset-typography": "^66.1.0-beta.7",
     "@unocss/preset-web-fonts": "^66.1.0-beta.11",
     "@unocss/preset-wind4": "^66.1.0-beta.11",
