@@ -17,12 +17,11 @@ title: "職務経歴書"
         - OpenPyXL, BeautifulSoup4
         - argparse, clickでのコマンドライン引数解析
         - mypy, pytest, black & flake8環境での開発
-        - 2024年ころからblack, flake8はruffにリプレースした
+            - 2024年ころからblack, flake8はruffにリプレース
     - Go (1.18以降)
         - echo
         - Terratest
     - Docker, docker-compose
-    - Nginx
     - PostgreSQL
     - AWS (Lambda, S3, DynamoDB, RDS, SES, ECS, CloudWatch)
     - Google Cloud (Cloud Run, Cloud Storage, Cloud Functions, Cloud Build, Compute Engine, Cloud SQL)
