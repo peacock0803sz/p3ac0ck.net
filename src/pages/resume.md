@@ -9,6 +9,11 @@ title: "職務経歴書"
 
 業務以外の活動については[こちら](/achievements)を参照
 
+# 経歴要約
+
+PythonによるWebアプリケーション開発と、Google Cloudを中心としたクラウドインフラ構築の双方に5年以上の経験があります。特にTerraformを用いたIaCによるインフラ設計・構築・運用に強みを持ち、現職のGoogle Cloudパートナー企業では100台以上のサーバー移行プロジェクトで実装リーダーを担当しました。  
+開発においてはREST APIの設計・実装を得意とし、CI/CD環境の構築や自動化による業務改善も主体的に推進してきました。これらの実績が評価され「Google Cloud Partner Top Engineer 2025」を受賞し、複数のProfessional資格も取得しました。
+
 # 得意分野
 
 - Pythonを用いたREST APIの設計開発
