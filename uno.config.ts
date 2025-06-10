@@ -1,8 +1,10 @@
-import presetAttributify from "@unocss/preset-attributify";
-import presetTypography from "@unocss/preset-typography";
-import presetWebFonts from "@unocss/preset-web-fonts";
-import presetWind4 from "@unocss/preset-wind4";
-import { defineConfig } from "unocss";
+import {
+  defineConfig,
+  presetAttributify,
+  presetTypography,
+  presetWebFonts,
+  presetWind4,
+} from "unocss";
 
 export default defineConfig({
   presets: [
