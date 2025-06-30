@@ -39,7 +39,7 @@
     "@unocss/preset-attributify": "^66.2.3",
     "@unocss/preset-typography": "^66.2.3",
     "@unocss/preset-web-fonts": "^66.2.3",
-    "@unocss/preset-wind4": "^66.2.1",
+    "@unocss/preset-wind4": "^66.3.2",
     "eslint": "^9.29.0",
     "eslint-plugin-astro": "^1.3.1",
     "prettier": "^3.6.0",
