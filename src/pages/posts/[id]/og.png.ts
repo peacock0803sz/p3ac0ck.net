@@ -101,7 +101,7 @@ export async function GET({ props }: Props) {
   const element = OGImage(post);
 
   const png = await PNG(inlineTailwind(element));
-  return new Response(png, {
+  return new Response(new Uint8Array(png), {
     headers: { "Content-Type": "image/png" },
   });
 }
