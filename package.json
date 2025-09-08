@@ -37,7 +37,7 @@
   "devDependencies": {
     "@typescript-eslint/parser": "^8.42.0",
     "@unocss/preset-attributify": "^66.4.1",
-    "@unocss/preset-typography": "^66.4.1",
+    "@unocss/preset-typography": "^66.5.1",
     "@unocss/preset-web-fonts": "^66.4.1",
     "@unocss/preset-wind4": "^66.4.1",
     "eslint": "^9.34.0",
