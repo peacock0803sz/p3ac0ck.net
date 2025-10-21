@@ -2,13 +2,13 @@
 import { SiteName } from "../constants.ts";
 ---
 
-<div class="header pt-5 pb-2 sticky top-0 bg-gray-50">
-  <div class="pb-2 grid grid-cols-4 border-black border-solid border-b-2">
-    <p class="siteTitle col-span-3">
+<div class="header sticky" pt-5 pb-2 top-0 bg-white>
+  <div class="grid" pb-2 grid-cols-4 border-black border-solid border-b-2>
+    <p class="siteTitle" col-span-3>
       <a href="/">{Astro.props.name || SiteName}</a>
     </p>
-    <div class="text-right">
-      <ul class="text-xl grid grid-rows-4">
+    <div text-right>
+      <ul class="grid" text-xl grid-rows-4>
         <li><a href="/posts">Blog</a></li>
         <li><a href="/talks">Talks</a></li>
         <li>
@@ -31,6 +31,6 @@ import { SiteName } from "../constants.ts";
   p.siteTitle {
     font-size: 3rem;
     line-height: 3rem;
-    font-family: "Carter One", sans-serif;
+    font-weight: 600;
   }
 </style>

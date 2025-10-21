@@ -1,0 +1,19 @@
+---
+import Base from "./Base.astro";
+import Header from "../components/Header.astro";
+
+import { SiteName } from "../constants";
+import Footer from "../components/Footer.astro";
+
+const { title, head, lang } = Astro.props;
+---
+
+<Base title={title} lang={lang}>
+  <div px-10 text-gray-950>
+    <Header name={head || SiteName} />
+    <div class="mt-5 mb-10">
+      <slot />
+    </div>
+    <Footer />
+  </div>
+</Base>

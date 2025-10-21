@@ -1,12 +1,12 @@
 ---
 import "../styles/markdown.css";
-import Base from "./Base.astro";
+import Default from "./Default.astro";
 const { frontmatter } = Astro.props;
 ---
 
-<Base title={frontmatter.title}>
+<Default title={frontmatter.title} lang="ja">
   <h1 class="text-5xl font-bold pb-10">{frontmatter.title}</h1>
   <article class="markdown-body">
     <slot />
   </article>
-</Base>
+</Default>

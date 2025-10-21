@@ -1,10 +1,10 @@
 ---
 import "../styles/markdown.css";
-import Base from "./Base.astro";
+import Default from "./default.astro";
 const { frontmatter } = Astro.props;
 ---
 
-<Base
+<Default
   title={frontmatter.title}
   lang={frontmatter.lang}
   ogImage="https://p3ac0ck.net/og-images/origin.png"
@@ -13,4 +13,4 @@ const { frontmatter } = Astro.props;
   <article class="markdown-body">
     <slot />
   </article>
-</Base>
+</Default>

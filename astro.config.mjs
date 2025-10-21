@@ -1,4 +1,4 @@
-import { defineConfig } from "astro/config";
+import { defineConfig, fontProviders } from "astro/config";
 
 import mdx from "@astrojs/mdx";
 import react from "@astrojs/react";
@@ -17,5 +17,20 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [[remarkToc, { heading: "目次" }]],
     rehypePlugins: [rehypeHeadingIds, rehypeAccessibleEmojis],
+  },
+  experimental: {
+    fonts: [
+      {
+        name: "Jost",
+        cssVariable: "--font-jost",
+        weights: [300, 400, 500, 600, 700, 800, 900],
+        provider: fontProviders.google({}),
+      },
+      {
+        name: "Noto Sans JP",
+        cssVariable: "--font-noto-sans-jp",
+        provider: fontProviders.google(),
+      },
+    ],
   },
 });

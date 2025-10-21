@@ -1,9 +1,8 @@
 ---
-import Header from "../components/Header.astro";
+import { Font } from "astro:assets";
 import { SiteName } from "../constants";
-import Footer from "../components/Footer.astro";
 
-const { title, head, lang } = Astro.props;
+const { title, lang } = Astro.props;
 ---
 
 <html lang={lang || "ja"}>
@@ -44,22 +43,24 @@ const { title, head, lang } = Astro.props;
       content={Astro.props.description || ""}
     />
     <meta property="twitter:image" content={Astro.props.ogImage || ""} />
+    <Font cssVariable="--font-jost" />
+    <Font cssVariable="--font-noto-sans-jp" />
     <title>{title} - {SiteName}</title>
   </head>
   <body>
-    <main class="max-w-full px-10 text-gray-950 bg-gray-50">
-      <Header name={head || SiteName} />
-      <div class="mt-5 mb-10">
-        <slot />
+    <main>
+      <div class="flex" justify-center>
+        <div class="flex" max-w-full text-gray-900>
+          <slot />
+        </div>
       </div>
-      <Footer />
     </main>
   </body>
 </html>
 
 <style is:global>
   @font-face {
-    font-family: "IBM Plex Sans JP", sans-serif;
+    font-family: var(--font-noto-sans-jp), sans-serif;
   }
   a {
     color: #44e;

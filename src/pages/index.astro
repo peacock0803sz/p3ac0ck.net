@@ -1,30 +1,61 @@
 ---
-import Hero from "../components/Hero.astro";
+import { Picture } from "astro:assets";
+
+import cover from "../../public/cover.jpg";
 import Base from "../layouts/Base.astro";
+import License from "../components/License.astro";
 ---
 
 <Base title="Welcome" slug="/">
-  <Hero txt="English introduction is " href="/en" aTxt="here" />
-  <div class="text-center">
-    <p>
-      <a href="https://g-gen.co.jp">株式会社G-gen</a>にてGoogle
-      Cloudを使用したDevOpsやIaC(Infrastructure as
-      Code)の普及に貢献すべく、開発エンジニアとして勤務。
-    </p>
-    <br />
-    <p>
-      その傍ら、2020年よりPythonの国際カンファレンスである<a
-        href="https://pycon.jp">PyCon JP</a
-      >のスタッフとして運営に携わる。<br />2022, 2023(PyCon APAC
-      2023として開催)年は副座長も務めた。<br />また、<a
-        href="https://tv.pycon.jp">PyCon JP TV</a
-      >のディレクターとして一般社団法人PyCon JP
-      Associationに運営メンバーとして参加もしている。
-    </p>
-    <br />
-    <p>
-      好きなことはクラシック音楽(B.
-      Bartokがお気に入りの作曲家)で、他にもスキー・ミラーレスカメラ・ビールやウイスキーなど。
-    </p>
+  <div max-w-2xl>
+    <h1 py-4 text-center>
+      <span font-medium text-6xl>Peacock</span>
+      <br /><span font-thin text-4xl>Yoichi Takai</span>
+    </h1>
+    <div class="flex" flex-row border-y-4 border-gray-900>
+      <div basis-256>
+        <Picture formats={["webp"]} src={cover} alt="At PyCon Taiwan 2023" />
+      </div>
+      <div basis-64 border-l-4 border-gray-900 px-6 text-2xl>
+        <ul class="flex" my-2 flex-col gap-2>
+          <li><a href="talks/">Talks</a></li>
+          <li><a href="posts/">Blog</a></li>
+          <li><a href="activities/">Activities</a></li>
+          <li><a href="resume/">Resume</a></li>
+          <li><a href="contacts/">Contacts</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="flex" flex-row>
+      <h2 class="text-vertical" text-right my-4 mx-4 text-4xl basis-16>
+        About
+      </h2>
+      <div basis-144 border-l-4 border-gray-900 py-4 px-4 text-lg>
+        Cloud Engineer at GROOVE X, Inc. and Vice Chair of PyCon JP (2022, 2023,
+        2025)<br />
+        Promoting Go and IaC (with Google Cloud) and Contributing Python communites.<br
+        />
+        Loves classical music (both listening and playing). Bartok is his favorite.<br
+        />Other favorites: skiing, cameras, beer and whiskey.
+      </div>
+    </div>
+    <div px-2 py-4 border-y-4 border-gray-900>
+      A Poem of my name origin "The Peacock": <a
+        class="text-gray-800 after:content-['_↗']"
+        href="origin.en/"></a>
+    </div>
+  </div>
+  <div text-sm mx-2>
+    <License />
   </div>
 </Base>
+
+<style>
+  :root {
+    font-family: var(--font-jost), sans-serif;
+  }
+  h2.text-vertical {
+    writing-mode: sideways-lr;
+    text-orientation: sideways;
+  }
+</style>
