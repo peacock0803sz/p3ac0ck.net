@@ -4,7 +4,7 @@ import { getCollection, render } from "astro:content";
 import { format } from "date-fns";
 
 import "../../../styles/markdown.css";
-import Default from "../../../layouts/default.astro";
+import Default from "../../../layouts/Default.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
