@@ -10,7 +10,7 @@ const title = "記事一覧";
 const posts: CollectionEntry<"posts">[] = await getCollection("posts");
 ---
 
-<Default title={title} head="Peacock's Blog">
+<Default slug="posts/" title={title} head="Peacock's Blog">
   <h1 class="text-4xl font-bold pb-10">{title}</h1>
   <div>
     {

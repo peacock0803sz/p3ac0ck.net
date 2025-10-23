@@ -30,7 +30,7 @@ const { title, lang } = Astro.props;
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={Astro.props.description || ""} />
-    <meta property="og:image" content="" />
+    <meta property="og:image" content={Astro.props.ogImage || ""} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta property="twitter:domain" content={Astro.site} />
     <meta

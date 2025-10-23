@@ -4,13 +4,17 @@ import Header from "../components/Header.astro";
 
 import { SiteName } from "../constants";
 import Footer from "../components/Footer.astro";
-
-const { title, head, lang } = Astro.props;
 ---
 
-<Base title={title} lang={lang}>
+<Base
+  slug={Astro.props.slug}
+  title={Astro.props.title}
+  lang={Astro.props.lang}
+  description={Astro.props.description}
+  ogImage={Astro.props.ogImage}
+>
   <div px-10 text-gray-950>
-    <Header name={head || SiteName} />
+    <Header name={Astro.props.head || SiteName} />
     <div class="mt-5 mb-10">
       <slot />
     </div>
