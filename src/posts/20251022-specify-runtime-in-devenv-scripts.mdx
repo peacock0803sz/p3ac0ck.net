@@ -1,0 +1,65 @@
+---
+slug: 20251022-specify-runtime-in-devenv-scripts
+title: devenvのscriptsで任意の言語スクリプトを実行する方法
+lang: ja
+emoji: "❄"
+pubDate: 2025-10-22
+---
+
+devenvのscripts機能で特定の言語で書いたスクリプトを実行したい場合の手順が分かりづらかったので、忘備録的なメモ
+
+## 背景
+
+* [devenv](https://devenv.sh) (+ direnv連携)でプロジェクトの実行環境などを管理している
+* devenv [scripts](https://devenv.sh/scripts/)の実行ファイルとして、特定の言語ランタイムで実行するファイルを指定したい
+    * 例: [uv (Python)](https://docs.astral.sh/uv/guides/scripts/)
+* かつ、スクリプト内部でコマンドライン引数の解析なども実施したい
+
+## 方法
+
+TL;DR -> `devenv.nix` で以下を指定すると `awesome-script` という名前で実行できる
+
+* `scripts.*.package`: 実行に必要なNixパッケージ
+    * 複数あれば `scripts.*.packages` に配列で記載する
+* `scripts.*.exec`: 実行したいスクリプトへの **パス (文字列ではなく、相対パスをそのまま)**
+* `scripts.*.binary`: `uv run` などスクリプトを渡すコマンド名(文字列)
+
+### `devenv.nix`
+
+```nix
+{ pkgs, lib, config, inputs, ... }: {
+  # ... env/languagesなど
+
+  scripts.awesome-script = {
+    exec = ./scripts/awesome-script/main.py;
+    binary = "uv run";
+    package = pkgs.uv;
+  };
+}
+```
+
+### 例: `scripts/awesome-script/main.py`
+
+```python
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.13"
+# dependencies = [
+#     "typer",
+# ]
+# ///
+import sys
+
+import typer
+
+app = typer.Typer()
+
+
+@app.command()
+def main():
+    print(f"Hello: {sys.argv=}")
+
+
+if __name__ == "__main__":
+    app()
+```
