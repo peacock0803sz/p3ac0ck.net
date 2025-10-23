@@ -22,7 +22,7 @@ const posts: CollectionEntry<"posts">[] = await getCollection("posts");
               {format(p.data.pubDate, "yyyy-MM-dd")}
             </span>
             :
-            <a href=`posts/${p.id}`>
+            <a href=`./${p.id}`>
               {p.data.emoji} {p.data.title}
             </a>
           </p>
