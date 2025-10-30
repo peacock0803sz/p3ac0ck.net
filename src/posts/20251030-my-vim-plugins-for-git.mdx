@@ -1,0 +1,159 @@
+---
+slug: 20251029-my-vim-plugins-for-git
+title: Gitを快適にVim/Neovimから操作するためのプラグイン(と設定)
+lang: ja
+emoji: "🛠"
+pubDate: 2025-10-30
+---
+
+## 対象読者・モチベーション
+
+* 普段Vim/Neovim (以下、単にVimと表記)を使っている
+* Denopsプラグインをインストールして使うことに抵抗がない
+* VimからGitを快適に操作したい
+    * git status / git add / git commit / git log
+
+## おことわり
+
+設定ファイル例を簡略にするため、以下のような形で設定ファイル例や手順の例示を記載しています。必要に応じて読み替えてください。
+
+* プラグインマネージャーとして [`tani/vim-jetpack`](https://github.com/tani/vim-jetpack) を使用
+* 設定はVim9 script / Luaを使用せず、単純に1枚の `.vimrc` に収まるような記述
+
+## デモ (完成図)
+
+<video controls muted autoplay transition:persist>
+  <source src="https://media.cleanshot.cloud/media/16481/bbI5cvwqQtUvDl87NtmdwjJOVmPp6EtXKumsrHVO.mp4?Expires=1761816486&Signature=oyCv-1Lm0sh4CCSeLDAygWi1eHyplw2Zh2JTJc6ZR9BxnO802Qdt935amKHYq1LMt1yPZAtgHtuFemnE~7f9Wl3wzUtmcUaGDso6pqlD6-K~jODnutNlHMZwB3Bwe-COZxFLWobIXVu-Vr2TYb3KZrXjW-omEAO4O3NoZtstsOxmV3gtPwKi1uY4-K8bGK-qRR6KsBO43a0CDU8I44SZAgSIwEzTpgSAkBYJFRWzS7tTVOPvMXzRd5Av0NawlG90Fic4wiLNxXX1wo7vQWabnE~qsDuQDkUOnZZD10OxOSu1vuy66RWCGWOncj7exX4q74-ebr93sM0pGeY4QX8TsQ__&Key-Pair-Id=K269JMAT9ZF4GZ" type="video/mp4" />
+</video>
+
+## 設定ファイルの全体
+
+```vim
+set nocompatible
+
+" Plugin List {{{
+packadd vim-jetpack
+call jetpack#begin()
+Jetpack 'https://github.com/tani/vim-jetpack'
+Jetpack 'https://github.com/vim-denops/denops.vim'
+Jetpack 'https://github.com/Shougo/ddu.vim'
+Jetpack 'https://github.com/Shougo/ddu-ui-ff'
+Jetpack 'https://github.com/Shougo/ddu-filter-matcher_substring'
+Jetpack 'https://github.com/kuuote/ddu-source-git_status'
+Jetpack 'https://github.com/kyoh86/ddu-source-git_log'
+Jetpack 'https://github.com/lambdalisue/vim-gin'
+Jetpack 'https://github.com/lambdalisue/vim-guise'
+Jetpack 'https://github.com/rhysd/committia.vim'
+call jetpack#end()
+" }}}
+
+" ddu.vim Global Configration {{{
+call ddu#custom#patch_global(#{
+  \ ui: 'ff',
+  \ uiParams: #{
+    \ ff: #{
+      \ diplayTree: v:true,        
+      \ split: 'tab',
+      \ prompt: '>',
+      \ floatingBorder: 'single',
+      \ autoAction: #{ name: 'preview', delay: 1 },
+      \ startAutoAction: v:true,
+      \ previewFloatingBorder: 'single',
+      \ previewSplit: 'vertical',
+    \ },
+  \ },
+  \ sourceOptions: #{
+    \ _: #{
+      \ ignoreCase: v:true,
+      \ matchers: ["matcher_substring"],
+      \ sorters: ["matcher_substring"],
+    \ },
+  \ },
+  \ kindOptions: #{ _: #{ defaultAction: 'open' } },
+\ })
+" }}}
+
+" ddu.vim Keybinds {{{
+let g:mapleader = ' '
+
+" ddu-sources mappings {{{
+nnoremap <Leader>gs <Cmd>call ddu#start(#{ name: 'git_status', sources: [#{ name: 'git_status' }], resume: v:true })<CR>
+nnoremap <Leader>gl <Cmd>call ddu#start(#{ name: 'git_log', sources: [#{ name: 'git_log' }], resume: v:true })<CR>
+" }}}
+
+" ddu-ui-ff mappings {{{
+function! s:ddu_ui_ff_mappings() abort
+  nnoremap <C-o> <NOP>
+  nnoremap <C-j> <NOP>
+  nnoremap m <NOP>
+  nnoremap t <NOP>
+
+  nnoremap <CR> <Cmd>call ddu#ui#do_action('itemAction')<CR>
+  nnoremap / <Cmd>call ddu#ui#do_action('openFilterWindow')<CR>
+  nnoremap + <Cmd>call ddu#ui#do_action('chooseAction')<CR>
+  nnoremap l <Cmd>call ddu#ui#do_action('expandItem')<CR>
+  nnoremap h <Cmd>call ddu#ui#do_action('collapseItem')<CR>
+  nnoremap q <Cmd>call ddu#ui#do_action('quit')<CR>
+
+  nnoremap <Tab> <Cmd>call ddu#ui#do_action('toggleSelectItem')<CR>
+  nnoremap <C-r> <Cmd>call ddu#ui#do_action('redraw', #{ method: 'refreshItems' })<CR>
+  nnoremap <C-x> <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'open', params: #{ command: 'split' } })<CR>
+  nnoremap <C-v> <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'open', params: #{ command: 'vsplit' } })<CR>
+  nnoremap <C-t> <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'open', params: #{ command: 'tabedit' } })<CR>
+
+  if b:ddu_ui_name ==# 'git_status'
+    nnoremap a <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'add' })<CR>
+    nnoremap r <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'reset' })<CR>
+    nnoremap R <Cmd>call ddu#ui#do_action('itemAction', #{ name: 'restore' })<CR>
+  endif
+endfunction
+
+augroup DduUiFf
+  autocmd!
+  autocmd FileType ddu-ff call s:ddu_ui_ff_mappings()
+augroup END
+" }}}
+" }}}
+
+nnoremap <Leader>gc <Cmd>Gin commit<CR>
+let g:committia_open_only_vim_starting = 0
+```
+
+## 各プラグインの解説
+
+この記事では以下の3プラグインを中心に紹介していきます。
+
+* [`Shougo/ddu.vim`](https://github.com/Shougo/ddu.vim) (+ 関連プラグイン群)
+* [`lambdalisue/vim-gin`](https://github.com/lambdalisue/vim-gin)
+* [`rhysd/committia.vim`](https://github.com/rhysd/committia.vim) (+ [`lambdalisue/vim-guise`](https://github.com/lambdalisue/vim-guise))
+
+### ddu.vim
+
+実質どんなものでも操作できてしまうFuzzy Finderです。
+Shougoさん作のプラグインなので色々と導入のハードルは高いですが、ある程度まで導入してしまえば(完璧に設定できずとも)便利になります。
+
+今回はGit操作だけに目的を設定し、以下の関連プラグインのみを導入すれば動くような設定を記載しています。
+
+* [`Shougo/ddu-ui-ff`](https://github.com/Shougo/ddu-ui-ff)
+* [`Shougo/ddu-filter-matcher_substring`](https://github.com/Shougo/ddu-filter-matcher_substring)
+* [`kuuote/ddu-source-git_status`](https://github.com/kuuote/ddu-source-git_status)
+* [`kyoh86/ddu-source-git_log`](https://github.com/kyoh86/ddu-source-git_log)
+
+ddu-source-git_statusでgit statusとstage/unstageなどの操作を、ddu-source-git_logでcommit logの表示ができます。
+
+###  vim-gin & committia.vim (\+ vim-guise)
+
+Git commitを同じvimインスタンスから実行するために使用します。
+`rhysd/committia.vim` でメッセージ入力の画面をリッチに見やすくしています。
+
+これらはプラグインを導入すれば、以下の2行だけで使えます。
+
+```vim
+nnoremap <Leader>gc <Cmd>Gin commit<CR>
+let g:committia_open_only_vim_starting = 0
+```
+
+## Appendix (おまけ)
+
+Ginでinstant fixupを実装する方法がatusyさんの記事[「gin.vimで捗るgitのログ改竄 (instant fixup)」](https://blog.atusy.net/2024/03/15/instant-fixup-with-gin-vim/)で紹介されています。
+amend commitでメッセージの修正をしたり、fixup commitを積んでintractive rebaseでまとめることが簡単にできます。
