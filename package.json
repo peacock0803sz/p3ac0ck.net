@@ -38,7 +38,7 @@
     "@typescript-eslint/parser": "^8.46.2",
     "@unocss/preset-attributify": "^66.5.2",
     "@unocss/preset-typography": "^66.5.3",
-    "@unocss/preset-wind4": "^66.5.1",
+    "@unocss/preset-wind4": "^66.5.5",
     "eslint": "^9.39.0",
     "eslint-plugin-astro": "^1.4.0",
     "prettier": "^3.6.2",
