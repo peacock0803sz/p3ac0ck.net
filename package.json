@@ -41,7 +41,7 @@
     "@unocss/preset-wind4": "^66.5.9",
     "eslint": "^9.39.1",
     "eslint-plugin-astro": "^1.5.0",
-    "prettier": "^3.6.2",
+    "prettier": "^3.7.3",
     "prettier-plugin-astro": "^0.14.1",
     "unocss-language-server": "^0.1.8"
   }
