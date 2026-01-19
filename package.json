@@ -32,7 +32,7 @@
     "sharp": "^0.34.5",
     "tw-to-css": "0.0.12",
     "typescript": "^5.9.3",
-    "unocss": "^66.5.12"
+    "unocss": "^66.6.0"
   },
   "devDependencies": {
     "@typescript-eslint/parser": "^8.52.0",
