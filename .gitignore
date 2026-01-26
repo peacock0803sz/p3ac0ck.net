@@ -20,12 +20,8 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 .astro
-# Devenv
-.devenv*
-devenv.local.nix
+# Nix
+result
 
 # direnv
 .direnv
-
-# pre-commit
-.pre-commit-config.yaml
