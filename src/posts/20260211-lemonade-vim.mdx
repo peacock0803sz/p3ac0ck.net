@@ -1,0 +1,133 @@
+---
+slug: 20260211-lemonade-vim
+title: "SSH先のVimとクリップボードを共有するShort Tips (feat. lemonade)"
+lang: ja
+emoji: "🍋"
+pubDate: 2026-02-11
+---
+
+この記事は [Vim駅伝](https://vim-jp.org/ekiden) の [2026-02-11](https://vim-jp.org/ekiden#article-2026-02-11) の記事です。
+
+## 対象読者
+
+普段Vim/Neovim (以下、単にVimと表記)をカスタマイズして(=`.vimrc` を書いて)使っている人
+
+## モチベーション
+
+SSH先でもカスタマイズしたVimでクリップボードをホストと共有したい
+
+## デモ (Neovim)
+
+<video controls muted autoplay transition:persist>
+  <source src="https://img.p3ac0ck.net/figs/20260211-lemonade-vim.mp4" type="video/mp4" />
+</video>
+
+## 方法
+
+注: SSHホスト側を **Server**, SSH先を **Client** と表記します
+
+### 1: lemonadeをインストール
+
+[lemonade](https://github.com/lemonade-command/lemonade) をインストール(SSH元・先どちらにも)
+
+### 2: Lemonade Server起動
+
+ホスト側で `lemonade server --allow=0.0.0.0/0` と実行 (またはAppendixのようにデーモンを作成し起動)
+
+### 3: Vim Pluginの作成
+
+Client側で以下のように `lemonade.vim` を作成
+
+```vim
+" Clipboard configuration for lemonade (SSH remote clipboard)
+if exists('$SSH_CLIENT') && executable('lemonade')
+  " リモートホストのIPを抽出 (例: '192.168.1.100 54321 22' -> '192.168.1.100')
+  let s:remote_host = split($SSH_CLIENT)[0]
+
+  if !empty(s:remote_host)
+    let g:clipboard = {
+          \ 'name': 'lemonade',
+          \ 'copy': {
+          \   '+': ['lemonade', '--host', s:remote_host, 'copy'],
+          \   '*': ['lemonade', '--host', s:remote_host, 'copy'],
+          \ },
+          \ 'paste': {
+          \   '+': ['lemonade', '--host', s:remote_host, 'paste'],
+          \   '*': ['lemonade', '--host', s:remote_host, 'paste'],
+          \ },
+          \ 'cache_enabled': v:false,
+          \ }
+
+    if exists('g:loaded_clipboard_provider')
+      unlet g:loaded_clipboard_provider
+      runtime autoload/provider/clipboard.vim
+    endif
+
+    set clipboard=unnamed
+  endif
+elseif has('clipboard')
+  set clipboard=unnamed
+endif
+```
+
+#### 注: `lemonade.vim` の保存場所
+
+プラグインとして読み込まれるディレクトリに保存する必要があるので、以下のような場所に作成してください
+
+* Vim: `$HOME/.vim/plugin/` [Cf. `load-plugins` (Vim日本語ドキュメント)](https://vim-jp.org/vimdoc-ja/starting.html#load-plugins)
+* Neovim: `$HOME/.config/nvim/plugin/` [Cf. `load-plugins` (Neovim公式ヘルプ)](https://neovim.io/doc/user/starting.html#load-plugins)
+
+## Appendix: NixOS / nix-darwin用デーモン
+
+### For nix-darwin
+
+Full Version: https://github.com/peacock0803sz/dotfiles/blob/fc735b76cee9405733500468fa14dc1e08e59b59/.config/nix/nix-darwin/lemonade.nix
+
+```nix
+{ ... }@inputs: {
+  launchd.user.agents.lemonade = {
+    serviceConfig = {
+      EnvironmentVariables = {
+        LANG = "ja_JP.UTF-8";
+        LC_ALL = "ja_JP.UTF-8";
+      };
+      ProgramArguments = [
+        "${inputs.pkgs.lemonade}/bin/lemonade"
+        "server"
+        "--allow=0.0.0.0/0"
+      ];
+      KeepAlive = true;
+      StandardErrorPath = "/tmp/lemonade.err.log";
+      StandardOutPath = "/tmp/lemonade.out.log";
+    };
+  };
+}
+```
+
+### For NixOS
+
+Full Version: https://github.com/peacock0803sz/dotfiles/blob/fc735b76cee9405733500468fa14dc1e08e59b59/.config/nix/nixos/lemonade.nix
+
+```nix
+{ ... }@inputs:
+{
+  systemd.services.lemonade = {
+    description = "Lemonade clipboard server";
+    wantedBy = [ "multi-user.target" ];
+    after = [ "network.target" ];
+    serviceConfig = {
+      Type = "simple";
+      User = inputs.username;
+      Environment = [
+        "LANG=ja_JP.UTF-8"
+        "LC_ALL=ja_JP.UTF-8"
+      ];
+      ExecStart = "${inputs.pkgs.lemonade}/bin/lemonade server --allow=0.0.0.0/0";
+      Restart = "always";
+      RestartSec = 5;
+      StandardOutput = "append:/tmp/lemonade.out.log";
+      StandardError = "append:/tmp/lemonade.err.log";
+    };
+  };
+}
+```
