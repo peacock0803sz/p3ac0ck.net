@@ -1,0 +1,408 @@
+---
+slug: 20260220-ai-agents-config-nix
+title: NixでAIエージェントの設定を宣言的に管理するために
+lang: ja
+emoji: "🤖"
+pubDate: 2026-02-20
+---
+
+Nixを用いてAIエージェントの設定を管理する個人的ノウハウが蓄積されてきたので、執筆時点(2026-02-20)の設計思想などをまとめておく。
+
+# 想定読者
+
+- Nix (Home Manager)を利用してdotfilesなどで各種プログラムの設定ファイルを管理している
+- AIエージェント(Claude Code, Codex CLI等)の設定ファイルもNixで管理したい
+    - 管理しているが他人の設定思想が気になる
+
+# 前提知識
+
+- [Nix](https://nixos.org/) / [Home Manager](https://github.com/nix-community/home-manager) の基本的な使い方
+- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) の設定ファイル構成
+
+# 構成
+
+## 利用しているモジュール群
+
+- [numtide/llm-agents.nix](https://github.com/numtide/llm-agents.nix): 日々更新されるClaude Code, Codex CLI, Gemini CLI等の最新版リリースを利用するため
+- [natsukium/mcp-servers-nix](https://github.com/natsukium/mcp-servers-nix): MCP Serverを宣言的に設定するため
+- [Kyure-A/agent-skills-nix](https://github.com/Kyure-A/agent-skills-nix): 外部とローカル管理のSkillを包括的に管理するため
+
+## ディレクトリ構成 (抜粋)
+
+```
+$HOME/dotfiles
+├── flake.lock
+├── flake.nix                                # ルートflake
+├── .config
+│   ├── agents
+│   │   ├── AGENTS.md                        # 全エージェント共有メモリ (CLAUDE.md)
+│   │   ├── LICENSE.md
+│   │   ├── local-skills                     # 自作スキル配置場所
+│   │   │   ├── commit
+│   │   │   │   └── SKILL.md
+│   │   │   ├── maintain-agent
+│   │   │   │   └── SKILL.md
+│   │   └── rules                            # Claude Code用ルール
+│   │       └── documentation.md
+│   ├── nix
+│   │   ├── home-manager
+│   │   │   ├── platforms
+│   │   │   │   ├── darwin.nix
+│   │   │   │   └── nixos.nix
+│   │   │   ├── presets
+│   │   │   │   ├── large.nix                # claude-code, codex, gemini を含むプリセット
+│   │   │   │   └── tiny.nix / tiny.nix ...  # 他プリセット定義
+│   │   │   └── programs
+│   │   │       ├── agent-skill              # スキル管理sub-flake
+│   │   │       │   ├── flake.lock
+│   │   │       │   └── flake.nix
+│   │   │       ├── claude-code.nix          # Claude Code設定
+│   │   │       ├── codex.nix                # Codex CLI設定
+│   │   │       ├── gemini.nix               # Gemini CLI設定
+│   │   │       ├── mcp-servers
+│   │   │       │   ├── default.nix          # MCP Server評価エントリポイント
+│   │   │       │   ├── programs.nix         # 共有MCP Server定義
+│   │   │       │   ├── esa                  # ホスト固有MCP Server
+│   │   │       │   │   └── default.nix
+│   │   │       │   └── wrike
+│   │   │       │       └── default.nix
+│   │   │       ├── ...
+│   │   │       └── neovim.nix
+│   │   ├── hosts
+│   │   │   ├── arpeggio                     # 社用マシン定義 (aarch64-darwin)
+│   │   │   │   ├── default.nix
+│   │   │   │   └── home.nix
+│   │   │   └── enigma/                      # 他ホストの定義
+│   │   └── nix-darwin
+│   │       └── default.nix
+└─ README.md
+```
+
+## [claude-code.nix](https://github.com/peacock0803sz/dotfiles/blob/f68763eb18af2daec12a4c5b022aa9efe8d00593/.config/nix/home-manager/programs/claude-code.nix): Claude Code設定
+
+`programs.claude-code` Home ManagerモジュールでClaude Codeの全設定をNixで記述し、llm-agents.nixを利用して最新版のClaude Codeを常に実行するように構成。
+
+```nix
+{ pkgs, config, hostName, mcp-servers-nix, ... }:
+let
+  mkOutOfStoreSymlink = config.lib.file.mkOutOfStoreSymlink;
+  homeDirectory = config.home.homeDirectory;
+  enableCodex = true;
+  mcp-servers = import ./mcp-servers { inherit pkgs mcp-servers-nix enableCodex; };
+in
+{
+  home.packages = with pkgs; [
+    llm-agents.ccusage
+    llm-agents.claude-code-acp
+  ];
+
+  home.file = {
+    ".claude/rules".source = mkOutOfStoreSymlink
+      "${homeDirectory}/dotfiles/.config/agents/rules";
+  };
+
+  programs.claude-code = {
+    enable = true;
+    package = pkgs.llm-agents.claude-code;
+    memory.source = ../../../agents/AGENTS.md;
+
+    settings = {
+      theme = "light";
+      autoUpdates = false;
+      includeCoAuthoredBy = false;
+      autoCompactEnabled = false;
+      enableAllProjectMcpServers = true;
+      outputStyle = "Explanatory";
+      statusLine = {
+        type = "command";
+        command = "echo $(cat) | ccusage statusline";
+      };
+
+      permissions = {
+        deny = [
+          "Bash(rm -rf /*)"
+          "Bash(rm -rf /)"
+          "Bash(sudo *)"
+          # ... 他の危険なコマンドパターン
+        ];
+      };
+
+      enabledPlugins = {
+        "gopls-lsp@claude-plugins-official" = true;
+        "lua-lsp@claude-plugins-official" = true;
+        "pyright-lsp@claude-plugins-official" = true;
+        "typescript-lsp@claude-plugins-official" = true;
+        "atlassian@claude-plugins-official" =
+          if hostName == "arpeggio" then true else false;
+        "pr-review-toolkit@claude-plugins-official" = true;
+        "feature-dev@claude-plugins-official" = true;
+      };
+    };
+
+    mcpServers = mcp-servers // (if hostName == "arpeggio" then {
+      esa = (import ./mcp-servers/esa { inherit pkgs; });
+      wrike = (import ./mcp-servers/wrike { inherit pkgs; });
+    } else { });
+  };
+}
+```
+
+### 設計のポイント
+
+#### 可変と不変の境界
+
+設定の性質に応じて、ファイルの配置方法を2つに分けている。
+
+| ファイル | 配置方法 | 更新方法 |
+|---|---|---|
+| `AGENTS.md` | Nix Storeにコピー | `nix run nix-darwin -- switch` |
+| `rules/` | Out-of-Store Symlink | ファイル編集のみ、リビルド不要 |
+
+`AGENTS.md` は `memory.source` でNix Storeに取り込まれ、リビルド時に `~/.claude/CLAUDE.md` へ反映される。変更頻度が低く、確定した内容を確実に反映したいものに向いている。
+
+`rules/` は `mkOutOfStoreSymlink` で実ファイルへのシンボリックリンクを張る。Nix Storeを経由しないので、ファイルを編集すればそのままClaude Codeに反映される。ルールを試行錯誤しながら調整するのに都合がいい。
+
+#### ホスト条件分岐
+
+`hostName` パラメータで、同じNixコードから異なるホスト向けの設定を生成できる。業務マシンでだけAtlassianプラグインやesa/wrike MCPサーバーを有効にする、といった切り替えが1箇所で済む。
+
+```nix
+# ホスト固有の設定は hostName で分岐
+"atlassian@claude-plugins-official" = if hostName == "arpeggio" then true else false;
+```
+
+`hostName` はホスト定義ファイルで設定し、`home-manager.extraSpecialArgs` 経由で全モジュールに渡る。
+
+```nix
+# .config/nix/hosts/nocturne/default.nix (抜粋)
+home-manager.extraSpecialArgs = { inherit hostName mcp-servers-nix; };
+home-manager.users.${username} = {
+  imports = [
+    ../../home-manager/presets/huge.nix
+    inputs.agent-skills.homeManagerModules.upstream
+    inputs.agent-skills.homeManagerModules.config
+  ];
+};
+```
+
+## [mcp-servers/programs.nix](https://github.com/peacock0803sz/dotfiles/blob/f68763eb18af2daec12a4c5b022aa9efe8d00593/.config/nix/home-manager/programs/mcp-servers/programs.nix): MCP Server定義の共有
+
+Claude Code, Codex CLI, Gemini CLIの3エージェントで同じMCP Serverセットを使えるよう、定義を1ファイルにまとめている。
+
+```nix
+{ pkgs, enableCodex, ... }: {
+  codex.enable = enableCodex;
+  serena = {
+    enable = true;
+    args = [ "--context" "ide-assistant" "--enable-web-dashboard" "False" ];
+  };
+  context7.enable = true;
+  playwright = {
+    enable = true;
+    executable =
+      if pkgs.stdenv.isDarwin
+      then "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+      else "${pkgs.chromium}/bin/chromium";
+  };
+  github = {
+    enable = true;
+    passwordCommand = "echo \"GITHUB_PERSONAL_ACCESS_TOKEN=$(gh auth token)\"";
+  };
+  terraform.enable = true;
+  nixos.enable = true;
+  time = {
+    enable = true;
+    args = [ "--local-timezone=Asia/Tokyo" ];
+  };
+}
+```
+
+`mcp-servers-nix` の宣言的モジュールにより、各MCP Serverの有効無効やオプションをNixの属性セットで書ける。`enable = true` とするだけで、パッケージの取得からコマンドパスの解決、設定ファイルの生成まで自動で行われる。
+
+### 各エージェントでの利用
+
+この `programs.nix` を、各エージェントの設定ファイルからインポートする。
+
+```nix
+# claude-code.nix での利用
+mcp-servers = import ./mcp-servers { inherit pkgs mcp-servers-nix enableCodex; };
+```
+
+```nix
+# codex.nix での利用 -- TOML形式で出力
+config = mcp-servers-nix.lib.mkConfig pkgs {
+  flavor = "codex";
+  format = "toml-inline";
+  fileName = ".mcp.toml";
+  programs = import ./mcp-servers/programs.nix { inherit pkgs mcp-servers-nix enableCodex; };
+};
+```
+
+```nix
+# gemini.nix での利用 -- settings内に直接埋め込み
+mcpServers = import ./mcp-servers { inherit pkgs mcp-servers-nix enableCodex; };
+```
+
+エージェント間で異なるのは `enableCodex` フラグだけ。Claude CodeはCodex CLIをMCP Server経由のサブエージェントとして使うため `enableCodex = true` にする。  
+一方、Codex CLI自身の設定で自分を呼ぶと再帰になるので `enableCodex = false` とする。Gemini CLIも同様。
+
+| エージェント | `enableCodex` | 出力形式 |
+|---|---|---|
+| Claude Code | `true` | JSON |
+| Codex CLI | `false` | TOML |
+| Gemini CLI | `false` | JSON |
+
+### AGENTS.md の共有
+
+3エージェント全てが同一の `AGENTS.md` をシステムプロンプトとして読み込む。
+
+```nix
+# claude-code.nix
+memory.source = ../../../agents/AGENTS.md;
+
+# codex.nix -- symlinkJoinのメタ属性として
+custom-instructions = builtins.readFile ../../../agents/AGENTS.md;
+
+# gemini.nix
+context = { GEMINI = "../../../agents/AGENTS.md"; };
+```
+
+これで操作制限やスキル一覧といった基本ルールが、エージェントを問わず同じ内容になる。
+
+## [agent-skills/flake.nix](https://github.com/peacock0803sz/dotfiles/blob/f68763eb18af2daec12a4c5b022aa9efe8d00593/.config/nix/home-manager/programs/agent-skills/flake.nix): Agent Skills の宣言的管理
+
+```nix
+{
+  description = "Agent Skills Nix Configuration";
+
+  inputs = {
+    agent-skills-nix.url = "github:Kyure-A/agent-skills-nix";
+    anthropic = {
+      url = "github:anthropics/skills";
+      flake = false;  # flakeではないリポジトリをソースとして取得
+    };
+    vercel = {
+      url = "github:vercel-labs/agent-skills";
+      flake = false;
+    };
+  };
+
+  outputs = { agent-skills-nix, ... }@inputs: {
+    # モジュール本体をそのままre-export
+    homeManagerModules.upstream = agent-skills-nix.homeManagerModules.default;
+
+    # 設定をモジュールとして提供
+    homeManagerModules.config = { config, lib, hostName, ... }: {
+      programs.agent-skills = {
+        enable = true;
+
+        # スキルソースの定義
+        sources = {
+          anthropic = {
+            path = inputs.anthropic.outPath;
+            subdir = "skills";
+          };
+          vercel-labs = {
+            path = inputs.vercel.outPath;
+            subdir = "skills";
+          };
+          local = {
+            path = "${config.home.homeDirectory}/dotfiles/.config/agents/local-skills";
+          };
+        } // lib.optionalAttrs (hostName == "arpeggio") {
+          gx-agent-recipes = {  # 社内で共有・管理しているスキル群
+            path = "${config.home.homeDirectory}/ghq/github.com/groove-x/gx-agent-recipes";
+            subdir = "skills";
+          };
+        };
+
+        # ソース内の全スキルを有効化
+        skills.enableAll = [ "local" ] ++ lib.optional (hostName == "arpeggio") "gx-agent-recipes";
+
+        # 個別スキルの選択的有効化
+        skills.enable = [
+          "frontend-design"
+          "skill-creator"
+          "webapp-testing"
+          "composition-patterns"
+          "react-best-practices"
+          "web-design-guidelines"
+        ];
+
+        # デプロイ先の定義
+        targets = {
+          claude = { dest = ".claude/skills"; structure = "link"; };
+          codex  = { dest = ".codex/skills";  structure = "link"; };
+        };
+      };
+    };
+  };
+}
+```
+
+Agent Skillsは、Claude CodeやCodex CLIのスラッシュコマンドを拡張する仕組み。この管理を独立したsub-flakeに切り出している。
+
+### なぜsub-flakeにしているのか
+
+スキルのソースはAnthropicやVercel Labsの外部GitHubリポジトリに依存しており、これらのバージョンをメインの `flake.lock` とは別にピン留めしたいので、`agent-skills/` ディレクトリを独自のflakeとして分離した。
+
+```
+flake.nix (ルート)
+  └── inputs.agent-skills.url = "path:./.config/nix/home-manager/programs/agent-skills"
+        └── agent-skills/flake.nix (sub-flake)
+              ├── inputs.agent-skills-nix  -- Home Managerモジュール
+              ├── inputs.anthropic         -- anthropics/skills リポジトリ
+              └── inputs.vercel            -- vercel-labs/agent-skills リポジトリ
+```
+
+
+### スキルソースの3種類
+
+| ソース種別 | 例 | 配置先 | 更新方法 |
+|---|---|---|---|
+| 外部リポジトリ | `anthropic`, `vercel-labs` | Nix Store | `nix flake update` |
+| ローカルパス | `local` | 実ファイルへのシンボリックリンク | ファイル編集のみ |
+| ホスト固有 | `gx-agent-recipes` | 実ファイルへのシンボリックリンク | ファイル編集のみ |
+
+外部リポジトリは `flake = false` で取得し、`outPath` でNix Store上のパスを参照する。特定コミットへのピン留めは `flake.lock` が自動で管理してくれる。
+
+ローカルスキルは `config.home.homeDirectory` を使って実パスを直接指定する。Nix Storeを経由しないので、`rules/` と同じくリビルドなしで内容を変更できる。
+
+### targets でマルチエージェントにデプロイ
+
+`targets` で、有効化したスキルのデプロイ先を複数指定する。
+
+```nix
+targets = {
+  claude = { dest = ".claude/skills"; structure = "link"; };
+  codex  = { dest = ".codex/skills";  structure = "link"; };
+};
+```
+
+`structure = "link"` にすると、各スキルディレクトリへのシンボリックリンクが `~/.claude/skills/` と `~/.codex/skills/` の両方に作成される。スキルの追加や削除はNix設定を変えてリビルドすれば反映される。手動でファイルをコピーする必要はない。
+
+### ホスト定義での統合
+
+sub-flakeの2つのモジュールは、ホスト定義の `imports` に追加する。
+
+```nix
+# .config/nix/hosts/nocturne/default.nix (抜粋)
+home-manager.users.${username} = {
+  imports = [
+    ../../home-manager/presets/huge.nix
+    inputs.agent-skills.homeManagerModules.upstream  # モジュール定義
+    inputs.agent-skills.homeManagerModules.config    # 設定
+  ];
+};
+```
+
+`upstream` がHome Managerモジュール本体、`config` がスキルの選択とソース定義を担当する。分離しておくと、モジュール自体のアップデートと設定変更を独立して行える。
+
+# まとめ
+
+- 複数エージェント間の設定同期: 共有 `programs.nix` と `AGENTS.md`
+- MCP Serverの追加と削除: `enable = true/false` の1行変更
+- スキルのバージョン管理: `flake.lock` による自動ピン留め
+- ホスト間の設定差異: `hostName` による条件分岐
+
+上記のような課題に対して、それに対するNix側のアプローチで管理の煩雑さを省力化している。
