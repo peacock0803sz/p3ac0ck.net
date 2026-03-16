@@ -1,0 +1,32 @@
+---
+slug: 20260309-ekiden-dependabot
+title: "懺悔: DependabotのPRでCIが落ちているのに自動マージされていました(直した)"
+lang: ja
+emoji: "✅"
+pubDate: 2026-03-09
+---
+
+この記事は[Vim駅伝](https://vim-jp.org/ekiden/)2026-03-09の記事です。
+
+# TL;DR
+
+DependabotのPR自動マージ、本当にCIが通ってから実行されるようになっていますか?  
+ブランチ保護を設定して「CIを通過していないPRのマージを拒否」しましょう!
+
+# 顛末
+
+事は[2026-03-14 (Sat), Meguro.vim #34](https://megurovim.connpass.com/event/381824/)にて。
+
+2026-03-13の記事がVim駅伝のページからリンクされておらず、直近の枠も埋まっていない。何か変だなと気づきました。  
+もしやと思いGitHub PagesにデプロイしているGitHub Actionsの履歴を見に行ったところ、実は2026-03-03以降の実行が全て失敗していました...  
+![](https://img.p3ac0ck.net/figs/20260309-ekiden-dependabot_gha.png)
+
+最初にビルドが失敗しているのが[2026-03-02のDependabotによる自動更新](https://github.com/vim-jp/ekiden/pull/1426)と判明。
+手元で該当Commitの直前に戻すとビルドは成功。原因は究明できました。
+
+UnoCSSが `66.6.1` だとビルドに失敗する模様。応急処置として `package.json` で `unocss` の指定を `<= 66.6.0` にして[修正](https://github.com/vim-jp/ekiden/pull/1448)。  
+根本原因は「ビルドのCIが通っていないのにDependabotのPRが自動マージされた」ことです。  
+対策として [@thinca](https://github.com/thinca)さんがブランチ保護を設定してくれたので、これでCIが失敗しているPRは自動マージできないようになりました。
+![](https://img.p3ac0ck.net/figs/20260309-ekiden-dependabot_branch.png)
+
+ﾁｬﾝﾁｬﾝ
