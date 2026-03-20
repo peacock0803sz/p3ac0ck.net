@@ -17,6 +17,7 @@ export default defineConfig([
   ...eslintPluginAstro.configs.recommended,
   {
     files: ["**/*.astro"],
+    extends: [tseslint.configs.disableTypeChecked],
     rules: {
       "@typescript-eslint/no-unused-vars": [
         "warn",
@@ -24,6 +25,12 @@ export default defineConfig([
           varsIgnorePattern: "^Props$",
         },
       ],
+    },
+  },
+  {
+    files: ["src/env.d.ts"],
+    rules: {
+      "@typescript-eslint/triple-slash-reference": "off",
     },
   },
 ]);
