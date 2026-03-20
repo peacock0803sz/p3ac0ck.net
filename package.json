@@ -1,5 +1,5 @@
 {
-  "name": "new.p3ac0ck.net",
+  "name": "p3ac0ck.net",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -44,5 +44,14 @@
     "prettier": "^3.8.1",
     "prettier-plugin-astro": "^0.14.1",
     "unocss-language-server": "^0.1.8"
+  },
+  "private": true,
+  "packageManager": "pnpm@10.32.1",
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "^24.0.0",
+      "onFail": "download"
+    }
   }
 }
