@@ -6,9 +6,5 @@ import {
 } from "unocss";
 
 export default defineConfig({
-  presets: [
-    presetAttributify(),
-    presetTypography(),
-    presetWind4(),
-  ],
+  presets: [presetAttributify(), presetTypography(), presetWind4()],
 });
