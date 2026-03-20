@@ -4,7 +4,8 @@ import fs from "fs/promises";
 import * as react from "react";
 import satori from "satori";
 import sharp from "sharp";
-import { tailwindToCSS, type TailwindConfig } from "tw-to-css";
+import { tailwindToCSS } from "tw-to-css";
+import tailwindConfig from "../../../../tailwind.config.mts";
 
 import OGImage from "../../../components/OGImage";
 
@@ -13,13 +14,19 @@ interface Props {
   props: { post: CollectionEntry<"posts"> };
 }
 
-const { twj } = tailwindToCSS({
-  config: (await import("../../../../tailwind.config.mts"))
-    .default as TailwindConfig,
-});
+const { twj } = tailwindToCSS({ config: tailwindConfig });
 
 // ref: https://skyfall.dev/posts/satori-with-tailwind-config
-function inlineTailwind(el: react.JSX.Element): react.JSX.Element {
+interface SatoriElementProps {
+  tw?: string;
+  children?: react.ReactNode;
+  style?: Record<string, unknown>;
+  [key: string]: unknown;
+}
+
+type SatoriElement = react.ReactElement<SatoriElementProps>;
+
+function inlineTailwind(el: SatoriElement): SatoriElement {
   const { tw, children, style: originalStyle, ...props } = el.props;
   // Generate style from the `tw` prop
   const twStyle = tw ? twj(tw.split(" ")) : {};
@@ -27,8 +34,8 @@ function inlineTailwind(el: react.JSX.Element): react.JSX.Element {
   const mergedStyle = { ...originalStyle, ...twStyle };
   // Recursively process children
   const processedChildren = react.Children.map(children, (child) =>
-    react.isValidElement(child)
-      ? inlineTailwind(child as react.JSX.Element)
+    react.isValidElement<SatoriElementProps>(child)
+      ? inlineTailwind(child)
       : child,
   );
   // Return cloned element with updated props
@@ -39,7 +46,7 @@ function inlineTailwind(el: react.JSX.Element): react.JSX.Element {
   );
 }
 
-export async function SVG(component: any) {
+export async function SVG(component: react.ReactElement) {
   return await satori(component, {
     width: 1200,
     height: 630,
@@ -90,7 +97,7 @@ export async function SVG(component: any) {
   });
 }
 
-export async function PNG(component: any) {
+export async function PNG(component: react.ReactElement) {
   return await sharp(Buffer.from(await SVG(component)))
     .png()
     .toBuffer();
