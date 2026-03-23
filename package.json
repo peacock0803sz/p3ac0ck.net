@@ -19,7 +19,7 @@
     "@astrojs/mdx": "^4.3.13",
     "@astrojs/partytown": "^2.1.5",
     "@astrojs/react": "^5.0.0",
-    "@astrojs/rss": "^4.0.15",
+    "@astrojs/rss": "^4.0.17",
     "@astrojs/sitemap": "^3.7.0",
     "@types/react": "^19.2.13",
     "@types/react-dom": "^19.2.3",
