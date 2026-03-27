@@ -19,20 +19,17 @@ export default defineConfig({
     remarkPlugins: [[remarkToc, { heading: "目次" }]],
     rehypePlugins: [rehypeHeadingIds, rehypeAccessibleEmojis],
   },
-
-  experimental: {
-    fonts: [
-      {
-        name: "Jost",
-        cssVariable: "--font-jost",
-        weights: [300, 400, 500, 600, 700, 800, 900],
-        provider: fontProviders.google(),
-      },
-      {
-        name: "Noto Sans JP",
-        cssVariable: "--font-noto-sans-jp",
-        provider: fontProviders.google(),
-      },
-    ],
-  },
+  fonts: [
+    {
+      name: "Jost",
+      cssVariable: "--font-jost",
+      weights: [300, 400, 500, 600, 700, 800, 900],
+      provider: fontProviders.google(),
+    },
+    {
+      name: "Noto Sans JP",
+      cssVariable: "--font-noto-sans-jp",
+      provider: fontProviders.google(),
+    },
+  ]
 });
