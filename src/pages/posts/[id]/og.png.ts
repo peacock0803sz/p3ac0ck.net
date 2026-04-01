@@ -5,7 +5,6 @@ import * as react from "react";
 import satori from "satori";
 import sharp from "sharp";
 import { tailwindToCSS } from "tw-to-css";
-import tailwindConfig from "../../../../tailwind.config.mts";
 
 import OGImage from "../../../components/OGImage";
 
@@ -14,7 +13,7 @@ interface Props {
   props: { post: CollectionEntry<"posts"> };
 }
 
-const { twj } = tailwindToCSS({ config: tailwindConfig });
+const { twj } = tailwindToCSS({ config: { theme: { extend: {} }, plugins: [] } });
 
 // ref: https://skyfall.dev/posts/satori-with-tailwind-config
 interface SatoriElementProps {
