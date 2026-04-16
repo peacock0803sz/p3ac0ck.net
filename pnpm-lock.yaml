@@ -73,8 +73,8 @@ importers:
         specifier: ^66.6.7
         version: 66.6.7(vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0)(yaml@2.8.2))
       '@unocss/preset-attributify':
-        specifier: ^66.6.7
-        version: 66.6.7
+        specifier: ^66.6.8
+        version: 66.6.8
       '@unocss/preset-typography':
         specifier: ^66.6.7
         version: 66.6.7
@@ -1208,6 +1208,9 @@ packages:
 
   '@unocss/preset-attributify@66.6.7':
     resolution: {integrity: sha512-thtoLQb53+Acy2QJYT6n+YhgNJ5ilhS8k9bqi+UzflbsuK4TJqOuQQjC9fRkULP5QjtNxgqN3d5Up7ms8tBPDA==}
+
+  '@unocss/preset-attributify@66.6.8':
+    resolution: {integrity: sha512-YxyRSF5rq0WbY8kCG0gpj3DSXPL89QGxZeqABmceCzPJbXJBBHEJz/pgBPmzSa2Ziulgs0AEkHzWFPfpb2uGTA==}
 
   '@unocss/preset-icons@66.6.7':
     resolution: {integrity: sha512-mGAOyI/qz1pZUV1BcOtWAMm5czdFCjhFCYcDk0KY+Jw37pKRVSQRFeh4gpHuYKmehGv36caLyVrWXpTAwRBdFQ==}
@@ -4546,6 +4549,10 @@ snapshots:
   '@unocss/preset-attributify@66.6.7':
     dependencies:
       '@unocss/core': 66.6.7
+
+  '@unocss/preset-attributify@66.6.8':
+    dependencies:
+      '@unocss/core': 66.6.8
 
   '@unocss/preset-icons@66.6.7':
     dependencies:
