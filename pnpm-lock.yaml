@@ -76,8 +76,8 @@ importers:
         specifier: ^66.6.8
         version: 66.6.8
       '@unocss/preset-typography':
-        specifier: ^66.6.7
-        version: 66.6.7
+        specifier: ^66.6.8
+        version: 66.6.8
       '@unocss/preset-wind4':
         specifier: ^66.6.8
         version: 66.6.8
@@ -1223,6 +1223,9 @@ packages:
 
   '@unocss/preset-typography@66.6.7':
     resolution: {integrity: sha512-RA7MwPDD5N9xGrbWnguVm5tP+F4/n/9X1rJsq2nBjvvK2dbtIRJZjRFM1vBDsR0GIhtvbHMoTchZaSZed5I+Hw==}
+
+  '@unocss/preset-typography@66.6.8':
+    resolution: {integrity: sha512-wOApJpE0QfeOTWN5RuQts8zS6PXhTZIfjpt6cBj8dmv7+GlIQlwopxL7wcDb2wVwdCByuMvUbWl7nC3kz/iFTA==}
 
   '@unocss/preset-uno@66.6.7':
     resolution: {integrity: sha512-imGCe6Yv2XgrJxP77gV8WZCz0xL99MsGov5rYn64lh2/tcsHF2rUIhTj/Urgxt0kwk8rLFtGbR1JuwPMNL5EDw==}
@@ -4613,6 +4616,11 @@ snapshots:
     dependencies:
       '@unocss/core': 66.6.7
       '@unocss/rule-utils': 66.6.7
+
+  '@unocss/preset-typography@66.6.8':
+    dependencies:
+      '@unocss/core': 66.6.8
+      '@unocss/rule-utils': 66.6.8
 
   '@unocss/preset-uno@66.6.7':
     dependencies:
