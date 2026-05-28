@@ -39,8 +39,8 @@ importers:
         specifier: ^6.3.3
         version: 6.3.3(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.4)(yaml@2.9.0)
       date-fns:
-        specifier: ^4.1.0
-        version: 4.1.0
+        specifier: ^4.3.0
+        version: 4.3.0
       github-markdown-css:
         specifier: ^5.9.0
         version: 5.9.0
@@ -1584,8 +1584,8 @@ packages:
   csstype@3.2.3:
     resolution: {integrity: sha512-z1HGKcYy2xA8AGQfwrn0PAy+PB7X/GSj3UVJW9qKyn43xWa+gl5nXmU4qqLMRzWVLFC8KusUX8T/0kCiOYpAIQ==}
 
-  date-fns@4.1.0:
-    resolution: {integrity: sha512-Ukq0owbQXxa/U3EGtsdVBkR1w7KOQ5gIBqdH2hkvknzZPYvBxb/aa6E8L7tmjFtkwZBu3UXBbjIgPo/Ez4xaNg==}
+  date-fns@4.3.0:
+    resolution: {integrity: sha512-OYcL+3N/jyWbYdFGqoMAhytDgxP9pbYPUUiRCOgn4Fewaadk9l/Wam4Avciiyp2BgkpfQyBV9B+ehnVJych+eQ==}
 
   debug@4.4.3:
     resolution: {integrity: sha512-RGwwWnwQvkVfavKVt22FGLw+xYSdzARwm0ru6DhTVA3umU5hZc28V3kO4stgYryrTlLpuvgI9GiijltAjNbcqA==}
@@ -5086,7 +5086,7 @@ snapshots:
 
   csstype@3.2.3: {}
 
-  date-fns@4.1.0: {}
+  date-fns@4.3.0: {}
 
   debug@4.4.3:
     dependencies:
