@@ -23,7 +23,7 @@
     "@astrojs/sitemap": "^3.7.3",
     "@types/react": "^19.2.15",
     "@types/react-dom": "^19.2.3",
-    "astro": "^6.4.2",
+    "astro": "^6.4.4",
     "date-fns": "^4.3.0",
     "github-markdown-css": "^5.9.0",
     "react": "^19.2.5",
