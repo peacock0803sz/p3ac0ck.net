@@ -24,7 +24,7 @@
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "astro": "^6.4.4",
-    "date-fns": "^4.3.0",
+    "date-fns": "^4.4.0",
     "github-markdown-css": "^5.9.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.5",
