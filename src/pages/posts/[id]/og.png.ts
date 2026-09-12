@@ -13,7 +13,9 @@ interface Props {
   props: { post: CollectionEntry<"posts"> };
 }
 
-const { twj } = tailwindToCSS({ config: { theme: { extend: {} }, plugins: [] } });
+const { twj } = tailwindToCSS({
+  config: { theme: { extend: {} }, plugins: [] },
+});
 
 // ref: https://skyfall.dev/posts/satori-with-tailwind-config
 interface SatoriElementProps {
