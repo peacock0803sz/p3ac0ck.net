@@ -91,7 +91,7 @@ importers:
         specifier: runtime:^24.0.0
         version: runtime:24.21.0
       prettier:
-        specifier: ^3.8.3
+        specifier: ^3.9.6
         version: 3.9.6
       prettier-plugin-astro:
         specifier: ^0.14.1
