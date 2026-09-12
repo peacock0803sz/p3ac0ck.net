@@ -82,7 +82,7 @@ importers:
         specifier: ^66.7.0
         version: 66.10.2
       eslint:
-        specifier: ^10.4.1
+        specifier: ^10.10.0
         version: 10.10.0(jiti@2.7.0)
       eslint-plugin-astro:
         specifier: ^1.7.0
