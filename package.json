@@ -8,8 +8,8 @@
     "build": "astro check && astro build",
     "format": "prettier --write src/",
     "format:check": "prettier --check src/",
-    "lint": "eslint src/",
-    "lint:fix": "eslint --fix src/",
+    "lint": "astro sync && eslint src/",
+    "lint:fix": "astro sync && eslint --fix src/",
     "preview": "astro preview",
     "astro": "astro"
   },
