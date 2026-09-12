@@ -70,16 +70,16 @@ importers:
         version: 5.9.3
     devDependencies:
       '@unocss/astro':
-        specifier: ^66.6.7
+        specifier: ^66.10.1
         version: 66.10.2(@devframes/hub@0.9.18(crossws@0.4.12(srvx@1.0.4))(devframe@0.9.18(cac@7.0.0)(srvx@1.0.4)))(cac@7.0.0)(crossws@0.4.12(srvx@1.0.4))(srvx@1.0.4)(vite@7.3.6(@types/node@24.13.4)(jiti@2.7.0)(yaml@2.9.1))
       '@unocss/preset-attributify':
-        specifier: ^66.7.0
+        specifier: ^66.10.1
         version: 66.10.2
       '@unocss/preset-typography':
-        specifier: ^66.7.0
+        specifier: ^66.10.1
         version: 66.10.2
       '@unocss/preset-wind4':
-        specifier: ^66.7.0
+        specifier: ^66.10.1
         version: 66.10.2
       eslint:
         specifier: ^10.10.0
@@ -103,7 +103,7 @@ importers:
         specifier: ^8.70.0
         version: 8.70.0(eslint@10.10.0(jiti@2.7.0))(typescript@5.9.3)
       unocss:
-        specifier: ^66.6.7
+        specifier: ^66.10.1
         version: 66.10.2(@devframes/hub@0.9.18(crossws@0.4.12(srvx@1.0.4))(devframe@0.9.18(cac@7.0.0)(srvx@1.0.4)))(@unocss/astro@66.10.2(@devframes/hub@0.9.18(crossws@0.4.12(srvx@1.0.4))(devframe@0.9.18(cac@7.0.0)(srvx@1.0.4)))(cac@7.0.0)(crossws@0.4.12(srvx@1.0.4))(srvx@1.0.4)(vite@7.3.6(@types/node@24.13.4)(jiti@2.7.0)(yaml@2.9.1)))(cac@7.0.0)(crossws@0.4.12(srvx@1.0.4))(rollup@4.63.2)(srvx@1.0.4)(vite@7.3.6(@types/node@24.13.4)(jiti@2.7.0)(yaml@2.9.1))
 
 packages:
