@@ -97,7 +97,7 @@ importers:
         specifier: ^0.14.1
         version: 0.14.1
       tailwindcss:
-        specifier: ^4.2.4
+        specifier: ^4.3.3
         version: 4.3.3
       typescript-eslint:
         specifier: ^8.60.1
