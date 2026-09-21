@@ -33,7 +33,7 @@
     "satori": "^0.33.4",
     "sharp": "^0.35.4",
     "tw-to-css": "0.0.12",
-    "typescript": "^5.9.3"
+    "typescript": "^7.0.2"
   },
   "devDependencies": {
     "@unocss/astro": "^66.10.1",
