@@ -169,7 +169,7 @@ export function SiteCard(props: { logo: string }) {
           display: "flex",
           justifyContent: "center",
           padding: "0 64px 36px",
-          fontFamily: "Fragment Mono",
+          fontFamily: "IBM Plex Mono",
           fontSize: 22,
           letterSpacing: 1,
           color: color.ink2,

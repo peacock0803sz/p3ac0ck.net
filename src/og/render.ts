@@ -15,7 +15,7 @@ const fontFiles: [string, string, Weight, FontStyle][] = [
   ["Newsreader", "Newsreader-MediumItalic.ttf", 500, "italic"],
   ["Cormorant Garamond", "CormorantGaramond-MediumItalic.ttf", 500, "italic"],
   ["IBM Plex Mono", "IBMPlexMono-Medium.ttf", 500, "normal"],
-  ["Fragment Mono", "FragmentMono-Regular.ttf", 400, "normal"],
+  ["IBM Plex Mono", "IBMPlexMono-Regular.ttf", 400, "normal"],
   ["Noto Emoji", "NotoEmoji-Regular.ttf", 400, "normal"],
 ];
 
@@ -28,8 +28,13 @@ const fonts = Promise.all(
   })),
 );
 
-export const logoDataUri = async (name: string) =>
-  `data:image/svg+xml;base64,${(await fs.readFile(`./src/assets/logos/${name}.svg`)).toString("base64")}`;
+// The logos use currentColor for the site theme; OG cards are always light.
+export async function logoDataUri(name: string) {
+  const svg = (
+    await fs.readFile(`./src/assets/logos/${name}.svg`, "utf8")
+  ).replaceAll("currentColor", "#123D22");
+  return `data:image/svg+xml;base64,${Buffer.from(svg).toString("base64")}`;
+}
 
 export async function renderPng(element: ReactElement) {
   const loaded = await fonts;
