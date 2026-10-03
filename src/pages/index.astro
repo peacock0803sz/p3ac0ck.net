@@ -1,61 +1,182 @@
 ---
-import { Picture } from "astro:assets";
+import { Image } from "astro:assets";
 
-import cover from "../../public/cover.jpg";
 import Base from "../layouts/Base.astro";
-import License from "../components/License.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import portrait from "../assets/portrait-pycontw2023.webp";
+import Kujakuya from "../assets/logos/kujakuya-horizontal.svg";
+import LogoHorizontal from "../assets/logos/studio-peacock-horizontal.svg";
+import LogoSquare from "../assets/logos/studio-peacock-square.svg";
+
+const about = [
+  { key: "Work", value: "Cloud Engineer, GROOVE X, Inc." },
+  { key: "Craft", value: "Go · Python · Google Cloud · IaC · Nix · Vim" },
+  { key: "Music", value: "Classical, listening and playing the clarinet" },
+  { key: "Off-hours", value: "Skiing, cameras, beer and whiskey" },
+];
+
+const elsewhere = [
+  {
+    key: "GitHub",
+    value: "peacock0803sz",
+    href: "https://github.com/peacock0803sz",
+  },
+  { key: "X", value: "peacock0803sz", href: "https://x.com/peacock0803sz" },
+  {
+    key: "Bluesky",
+    value: "@p3ac0ck.net",
+    href: "https://bsky.app/profile/p3ac0ck.net",
+  },
+  {
+    key: "Instagram",
+    value: "peacock0803sz",
+    href: "https://www.instagram.com/peacock0803sz",
+  },
+];
+
+const arrow = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8l4 4-4 4"/><path d="M2 12h20"/></svg>`;
 ---
 
-<Base title="Welcome" slug="/">
-  <div max-w-2xl>
-    <h1 py-4 text-center>
-      <span font-medium text-6xl>Peacock</span>
-      <br /><span font-thin text-4xl>Yoichi Takai</span>
-    </h1>
-    <div class="flex" flex-row border-y-4 border-gray-900>
-      <div basis-256>
-        <Picture formats={["webp"]} src={cover} alt="At PyCon Taiwan 2023" />
-      </div>
-      <div basis-64 border-l-4 border-gray-900 px-6 text-2xl>
-        <ul class="flex" my-2 flex-col gap-2>
-          <li><a href="talks/">Talks</a></li>
-          <li><a href="posts/">Blog</a></li>
-          <li><a href="activities/">Activities</a></li>
-          <li><a href="resume/">Resume</a></li>
-          <li><a href="contacts/">Contacts</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="flex" flex-row>
-      <h2 class="text-vertical" text-right my-4 mx-4 text-4xl basis-16>
-        About
-      </h2>
-      <div basis-144 border-l-4 border-gray-900 py-4 px-4 text-lg>
-        Cloud Engineer at GROOVE X, Inc. and Vice Chair of PyCon JP (2022, 2023,
-        2025)<br />
-        Promoting Go and IaC (with Google Cloud) and Contributing Python communites.<br
+<Base title="Welcome" slug="/" lang="en">
+  <Header />
+  <main class="flex-1">
+    <section
+      class="flex flex-col items-center gap-1 px-6 pb-16 md:gap-11 md:px-[72px] md:pt-12 md:pb-28"
+    >
+      <h1 class="m-0 w-full" aria-label="Studio Peacock">
+        <LogoSquare
+          class="mx-auto block h-auto w-full max-w-[342px] md:hidden"
+          aria-hidden="true"
         />
-        Loves classical music (both listening and playing). Bartok is his favorite.<br
-        />Other favorites: skiing, cameras, beer and whiskey.
+        <LogoHorizontal
+          class="mx-auto hidden h-auto w-full max-w-[1040px] md:block"
+          aria-hidden="true"
+        />
+      </h1>
+      <p
+        class="m-0 max-w-[820px] text-center font-serif text-[26px] leading-[1.25] font-semibold italic md:text-[44px] md:leading-[1.15] md:font-medium"
+      >
+        Building cloud infrastructure,<br class="md:hidden" /> gathering techies,<br
+        />
+        playing the clarinet.
+      </p>
+    </section>
+
+    <section
+      class="flex flex-col items-center gap-10 mx-6 border-t border-line py-16 md:mx-[72px] md:gap-12 md:py-28"
+    >
+      <figure class="m-0 flex flex-col items-center gap-4">
+        <div
+          class="rounded-[50%] border-[1.5px] border-frame-outer p-2.5 md:p-3"
+          aria-hidden="true"
+        >
+          <div
+            class="portrait relative h-[225px] w-[180px] overflow-hidden rounded-[50%] border-2 border-frame md:h-[275px] md:w-[220px] md:border-[2.5px]"
+          >
+            <Image
+              src={portrait}
+              alt=""
+              widths={[360, 440, 720]}
+              sizes="(min-width: 768px) 220px, 180px"
+              class="block h-full w-full object-cover"
+            />
+          </div>
+        </div>
+        <figcaption class="font-serif text-2xl font-bold italic md:text-[28px]">
+          Yoichi Takai
+        </figcaption>
+      </figure>
+
+      <div class="flex w-full flex-col items-center gap-6 md:gap-8">
+        <h2
+          class="m-0 text-center font-serif text-[44px] leading-[1.02] font-semibold md:text-[74px] md:leading-none"
+        >
+          Many feathers,<br class="md:hidden" /> one bird.
+        </h2>
+        <p
+          class="m-0 max-w-[640px] text-center text-base leading-[1.7] text-ink-2 md:text-xl"
+        >
+          I’m Yoichi Takai — Peacock. By day, a cloud engineer at GROOVE X,
+          advocating Go and infrastructure as code on Google Cloud. Beyond that,
+          a long-time hand in the Python community.
+        </p>
+        <a
+          href="/origin.en/"
+          class="flex items-center gap-2.5 font-serif text-[19px] font-bold italic no-underline hover:underline md:text-[22px]"
+        >
+          Why “Peacock”? — a poem by Ady Endre
+          <Fragment set:html={arrow} />
+        </a>
+        <dl class="m-0 w-full max-w-[640px] border-t border-line">
+          {
+            about.map(({ key, value }) => (
+              <div class="flex flex-col items-center gap-1 border-b border-line py-3.5 text-center md:flex-row md:gap-8 md:py-4 md:text-left">
+                <dt class="font-serif text-[19px] font-semibold italic md:w-[150px] md:flex-none md:text-right md:text-[22px]">
+                  {key}
+                </dt>
+                <dd class="m-0 text-[15px] leading-[1.5] md:text-[17px]">
+                  {value}
+                </dd>
+              </div>
+            ))
+          }
+        </dl>
       </div>
-    </div>
-    <div px-2 py-4 border-y-4 border-gray-900>
-      A Poem of my name origin "The Peacock": <a
-        class="text-gray-800 after:content-['_↗']"
-        href="origin.en/"></a>
-    </div>
-    <div text-sm mx-2>
-      <License />
-    </div>
-  </div>
+    </section>
+
+    <section
+      class="flex flex-col items-center gap-8 mx-6 border-t border-line pt-16 md:mx-[72px] md:gap-10 md:pt-28"
+    >
+      <h2
+        class="m-0 text-center font-serif text-[44px] leading-[1.02] font-semibold md:text-[74px] md:leading-none"
+      >
+        Write to the studio.
+      </h2>
+      <a
+        href="mailto:me@p3ac0ck.net"
+        class="flex h-[52px] w-full items-center justify-center gap-3 rounded bg-ink font-sans text-[17px] font-medium text-on-ink no-underline md:h-auto md:w-auto md:gap-3.5 md:px-[30px] md:py-[18px] md:text-xl"
+      >
+        me@p3ac0ck.net
+        <Fragment set:html={arrow} />
+      </a>
+      <dl class="m-0 w-full max-w-[640px] border-t border-line">
+        {
+          elsewhere.map(({ key, value, href }) => (
+            <div class="flex items-center justify-center gap-5 border-b border-line py-3.5 md:justify-start md:gap-8 md:py-4">
+              <dt class="w-1/2 text-right font-serif text-xl font-semibold italic md:w-[150px] md:flex-none md:text-[22px]">
+                {key}
+              </dt>
+              <dd class="m-0 w-1/2 text-sm leading-[1.5] md:w-auto md:text-[17px]">
+                <a href={href} rel="me" class="no-underline hover:underline">
+                  {value}
+                </a>
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+      <Kujakuya
+        class="mt-4 block h-auto w-[200px] md:mt-0 md:w-[360px]"
+        role="img"
+        aria-label="Kujaku-ya"
+      />
+    </section>
+  </main>
+  <Footer seal={false} />
 </Base>
 
 <style>
-  :root {
-    font-family: var(--font-jost), sans-serif;
-  }
-  h2.text-vertical {
-    writing-mode: sideways-lr;
-    text-orientation: sideways;
+  /* Darkens the photo's edge in dark mode; transparent in light mode. */
+  .portrait::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      closest-side,
+      var(--sp-vignette-0) 55%,
+      var(--sp-vignette) 100%
+    );
+    pointer-events: none;
   }
 </style>

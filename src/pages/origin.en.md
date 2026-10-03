@@ -1,11 +1,8 @@
 ---
 layout: ../layouts/Origin.astro
-title: "The Origin of my Name - Peacock"
+title: "Why “Peacock”?"
 lang: en
 ---
-
-[原版 (ハンガリー語) / Original Version: (Hungarian)](./origin.hu)  
-[日本語版 (英語版からの転訳) / Japanese Version (self-translated from English):](./origin.ja)
 
 ## Ady Endre: The Peacock (Fölszállott a páva)
 

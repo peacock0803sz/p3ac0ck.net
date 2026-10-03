@@ -1,0 +1,86 @@
+---
+export type Lang = "ja" | "en" | "hu";
+
+export interface LangItem {
+  lang: Lang;
+  href: string;
+  /** Marks the source text that the others were translated from. */
+  original?: boolean;
+}
+
+interface Props {
+  items: LangItem[];
+  current: Lang;
+}
+
+const { items, current } = Astro.props;
+
+const labels: Record<Lang, string> = {
+  ja: "日本語",
+  en: "English",
+  hu: "Magyar",
+};
+// The "original" tag is written in the language of the page being read.
+const originalTag: Record<Lang, string> = {
+  ja: "原文",
+  en: "original",
+  hu: "eredeti",
+};
+---
+
+<nav class="flex items-center gap-3" aria-label="Language">
+  {
+    items.map((item, i) => (
+      <>
+        {i > 0 && (
+          <span
+            class="mx-1 mt-1 block h-[13px] w-px bg-bar"
+            aria-hidden="true"
+          />
+        )}
+        <span class="flex items-center gap-1.5">
+          {item.lang === current ? (
+            <span
+              class:list={[
+                "leading-none text-ink",
+                item.lang === "ja"
+                  ? "font-serif-jp text-[21px] font-bold"
+                  : "font-serif text-[22px] font-bold italic",
+              ]}
+              lang={item.lang}
+              aria-current="true"
+            >
+              {labels[item.lang]}
+            </span>
+          ) : (
+            <a
+              href={item.href}
+              class:list={[
+                "leading-none text-ink-2 no-underline hover:underline",
+                item.lang === "ja"
+                  ? "font-serif-jp text-[21px] font-semibold"
+                  : "font-serif text-[22px] font-semibold italic",
+              ]}
+              lang={item.lang}
+              hreflang={item.lang}
+            >
+              {labels[item.lang]}
+            </a>
+          )}
+          {item.original && (
+            <span
+              class:list={[
+                "rounded-full border border-line px-2 py-px text-ink-2",
+                current === "ja"
+                  ? "font-serif-jp text-[15px] font-medium"
+                  : "font-serif text-[17px] font-medium italic",
+              ]}
+            >
+              {originalTag[current]}
+            </span>
+          )}
+        </span>
+      </>
+    ))
+  }
+</nav>

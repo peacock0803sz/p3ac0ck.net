@@ -3,8 +3,6 @@ layout: ../layouts/Experience.astro
 title: 業務以外の活動・登壇など
 ---
 
-# 目次
-
 最終更新: 2023年11月
 
 業務での実績については[こちら](/resume)を、登壇などは[こちら](/talks)を参照

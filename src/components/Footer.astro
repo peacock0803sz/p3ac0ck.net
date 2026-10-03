@@ -1,63 +1,33 @@
 ---
 import License from "./License.astro";
+import Kujakuya from "../assets/logos/kujakuya-horizontal.svg";
+
+interface Props {
+  /** Hide the seal image when the page already shows a larger one (TOP). */
+  seal?: boolean;
+}
+
+const { seal = true } = Astro.props;
 ---
 
-<div class="footer pt-3 pb-5 border-black border-solid border-t-2">
-  <p class="pb-3 text-2xl font-semibold">連絡先 / Contacts</p>
-  <div id="contacts">
-    <ul
-      class="grid text-base grid-cols-1 min-[550px]:grid-cols-2 lg:grid-cols-3"
-    >
-      <li>
-        Email: <a href="mailto:me@p3ac0ck.net">me@p3ac0ck.net</a>
-      </li>
-      <li>
-        Twitter: <a
-          target="_blank"
-          href="
-          https://twitter.com/peacock0803sz">peacock0803sz</a
-        >
-      </li>
-      <li>
-        GitHub: <a target="_blank" href="https://github.com/peacock0803sz"
-          >peacock0803sz</a
-        >
-      </li>
-      <li>
-        Facebook: <a
-          target="_blank"
-          href="https://www.facebook.com/peacock0803sz">peacock0803sz</a
-        >
-      </li>
-      <li>
-        Instagram: <a href="https://www.instagram.com/peacock0803sz"
-          >peacock0803sz</a
-        >
-      </li>
-      <li>
-        Mastodon: <a rel="me" href="https://mtd.pythonasia.org/@peacock"
-          >@peacock@mtd.pythonasia.org</a
-        >
-      </li>
-    </ul>
+<footer class="site-footer px-6 pt-4 pb-8 md:px-[72px]">
+  <div
+    class="flex flex-col items-center gap-2 border-t border-line pt-5 text-center md:flex-row md:items-end md:justify-between md:text-left"
+  >
+    <License />
+    <div class="flex flex-col items-center gap-1 md:items-end">
+      {
+        seal && (
+          <Kujakuya
+            class="hidden h-12 w-auto md:block"
+            role="img"
+            aria-label="Kujaku-ya"
+          />
+        )
+      }
+      <p class="m-0 font-serif text-base font-semibold italic md:text-[17px]">
+        Studio Peacock — Kujaku-ya
+      </p>
+    </div>
   </div>
-  <License />
-</div>
-
-<style>
-  h2 {
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-  }
-  div#contacts a {
-    color: #333;
-    text-decoration: none;
-  }
-  div#contacts a:hover {
-    text-decoration: underline;
-  }
-  li {
-    @apply mx-3 my-1;
-  }
-</style>
+</footer>

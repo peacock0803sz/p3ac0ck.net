@@ -1,0 +1,54 @@
+/* Color tokens from the Studio Peacock design (studio.pen). */
+:root {
+  color-scheme: light;
+  --sp-surface: #ffffff;
+  --sp-surface-2: #f1f5f1;
+  --sp-ink: #123d22;
+  --sp-ink-2: #4a6b52;
+  --sp-line: #d6ddd0;
+  --sp-bar: #afc0b4;
+  --sp-on-ink: #ffffff;
+  --sp-frame: #123d22;
+  --sp-frame-outer: #123d22;
+  --sp-vignette-0: #ffffff00;
+  --sp-vignette: #ffffff00;
+  --sp-code-bg: #f5f8f6;
+  --sp-code-muted: #6e8577;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --sp-surface: #0e1a13;
+  --sp-surface-2: #18291f;
+  --sp-ink: #dde9e0;
+  --sp-ink-2: #9ab6a3;
+  --sp-line: #2b3f33;
+  --sp-bar: #3d5646;
+  --sp-on-ink: #0e1a13;
+  --sp-frame: #4f6d59;
+  --sp-frame-outer: #0e1a1300;
+  --sp-vignette-0: #0e1a1333;
+  --sp-vignette: #0e1a13bf;
+  --sp-code-bg: #132219;
+  --sp-code-muted: #7f9c89;
+}
+
+/* Without JS the theme still follows the OS setting. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+    --sp-surface: #0e1a13;
+    --sp-surface-2: #18291f;
+    --sp-ink: #dde9e0;
+    --sp-ink-2: #9ab6a3;
+    --sp-line: #2b3f33;
+    --sp-bar: #3d5646;
+    --sp-on-ink: #0e1a13;
+    --sp-frame: #4f6d59;
+    --sp-frame-outer: #0e1a1300;
+    --sp-vignette-0: #0e1a1333;
+    --sp-vignette: #0e1a13bf;
+    --sp-code-bg: #132219;
+    --sp-code-muted: #7f9c89;
+  }
+}
