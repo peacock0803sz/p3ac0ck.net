@@ -44,10 +44,11 @@ export async function renderPng(element: ReactElement) {
     height: 630,
     fonts: loaded,
     // Draw emoji with the monochrome Noto Emoji instead of fetching images.
-    loadAdditionalAsset: async (code) => (code === "emoji" ? emoji : []),
+    loadAdditionalAsset: (code) =>
+      Promise.resolve(code === "emoji" ? emoji : []),
   });
   const png = await sharp(Buffer.from(svg)).png().toBuffer();
-  return new Uint8Array(png.buffer as ArrayBuffer, png.byteOffset, png.length);
+  return Uint8Array.from(png);
 }
 
 export const pngResponse = (png: Uint8Array<ArrayBuffer>) =>
