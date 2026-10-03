@@ -3,7 +3,7 @@ import { Font } from "astro:assets";
 import { SiteName } from "../constants";
 
 const { title, lang } = Astro.props;
-const ogImage = Astro.props.ogImage || "";
+const ogImage = Astro.props.ogImage || `${Astro.site}og.png`;
 ---
 
 <html lang={lang || "ja"}>
