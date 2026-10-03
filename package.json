@@ -49,6 +49,11 @@
   },
   "private": true,
   "packageManager": "pnpm@10.34.5",
+  "pnpm": {
+    "ignoredBuiltDependencies": [
+      "esbuild"
+    ]
+  },
   "devEngines": {
     "runtime": {
       "name": "node",
