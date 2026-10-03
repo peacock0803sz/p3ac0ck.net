@@ -1,10 +1,12 @@
 ---
+import { Font } from "astro:assets";
 import { getCollection, render } from "astro:content";
 
 import { format } from "date-fns";
 
 import "../../../styles/markdown.css";
 import Default from "../../../layouts/Default.astro";
+import PageHeader from "../../../components/PageHeader.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
@@ -21,16 +23,55 @@ const { Content } = await render(post);
 <Default
   slug=`/posts/${post.id}`
   title={post.data.title}
-  head="Peacock's Blog"
   description={post.data.description}
   ogImage=`${Astro.site}posts/${post.id}/og.png`
 >
-  <h1 class="text-4xl font-bold pb-10">
-    {post.data.emoji}
-    {post.data.title}
-  </h1>
-  <p class="text-right">公開日: {format(post.data.pubDate, "yyyy-MM-dd")}</p>
-  <article class="markdown-body">
-    <Content />
-  </article>
+  <Font slot="head" cssVariable="--font-plex-mono" />
+  <PageHeader title={post.data.title} emoji={post.data.emoji}>
+    <p
+      class="m-0 flex items-center gap-3.5 font-serif text-2xl font-medium italic md:text-[34px]"
+    >
+      <span>Blog</span>
+      <span class="text-ink-2" aria-hidden="true">/</span>
+      <time datetime={format(post.data.pubDate, "yyyy-MM-dd")}>
+        {format(post.data.pubDate, "yyyy.MM.dd")}
+      </time>
+    </p>
+  </PageHeader>
+  <div class="px-6 pb-12 md:px-[72px]">
+    <article class="markdown-body mx-auto max-w-[720px]" lang={post.data.lang}>
+      <Content />
+    </article>
+    <div class="flex flex-col items-center gap-7 pt-16">
+      <span class="block h-px w-12 bg-ink" aria-hidden="true"></span>
+      <a
+        href="/posts/"
+        class="flex items-center gap-2.5 font-serif text-[22px] font-medium italic no-underline hover:underline"
+      >
+        <span aria-hidden="true">←</span> All posts
+      </a>
+    </div>
+  </div>
 </Default>
+
+<script>
+  const copyIcon = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>`;
+
+  for (const block of document.querySelectorAll(".markdown-body .code-block")) {
+    const pre = block.querySelector("pre");
+    if (!pre) continue;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "copy-code";
+    button.ariaLabel = "Copy code";
+    button.innerHTML = copyIcon;
+    button.addEventListener("click", async () => {
+      await navigator.clipboard.writeText(
+        pre.querySelector("code")?.innerText ?? "",
+      );
+      button.dataset.copied = "";
+      setTimeout(() => delete button.dataset.copied, 1500);
+    });
+    block.append(button);
+  }
+</script>

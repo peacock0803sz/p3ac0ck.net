@@ -1,0 +1,57 @@
+---
+interface Props {
+  title: string;
+  emoji?: string;
+  /** Draw the line that separates the header from a list/body below. */
+  rule?: boolean;
+  /** Font for the title: Japanese mincho (default) or the Latin serif. */
+  font?: "ja" | "en";
+}
+
+const { title, emoji, rule = false, font = "ja" } = Astro.props;
+// Render first so a slot that evaluates to nothing doesn't leave a lone ornament.
+const meta = Astro.slots.has("default")
+  ? (await Astro.slots.render("default")).trim()
+  : "";
+---
+
+<header
+  class:list={[
+    "flex flex-col items-center gap-6 px-6 pt-16 text-center md:px-[72px] md:pt-24",
+    rule ? "pb-12" : "pb-10 md:pb-16",
+  ]}
+>
+  {
+    emoji && (
+      <p class="m-0 font-emoji text-5xl leading-none" aria-hidden="true">
+        {emoji}
+      </p>
+    )
+  }
+  <h1
+    class:list={[
+      "m-0 max-w-[880px] leading-[1.45] font-medium",
+      font === "ja"
+        ? "font-serif-jp text-[30px] md:text-[44px]"
+        : "font-serif text-[40px] md:text-[52px]",
+    ]}
+  >
+    {title}
+  </h1>
+  {
+    meta && (
+      <>
+        <span class="block h-px w-12 bg-ink" aria-hidden="true" />
+        <Fragment set:html={meta} />
+      </>
+    )
+  }
+  {
+    rule && (
+      <span
+        class="mt-4 block h-px w-full max-w-[720px] bg-line"
+        aria-hidden="true"
+      />
+    )
+  }
+</header>
