@@ -1,6 +1,7 @@
 ---
 import { Font } from "astro:assets";
 import { SiteName } from "../constants";
+import "../styles/theme.css";
 
 const { title, lang } = Astro.props;
 const ogImage = Astro.props.ogImage || `${Astro.site}og.png`;
@@ -9,6 +10,22 @@ const ogImage = Astro.props.ogImage || `${Astro.site}og.png`;
 <html lang={lang || "ja"}>
   <head>
     <meta charset="utf-8" />
+    <script is:inline>
+      // Apply the theme before first paint: a saved choice wins, otherwise follow the OS.
+      (() => {
+        const media = matchMedia("(prefers-color-scheme: dark)");
+        const apply = () => {
+          let saved = null;
+          try {
+            saved = localStorage.getItem("theme");
+          } catch {}
+          document.documentElement.dataset.theme =
+            saved ?? (media.matches ? "dark" : "light");
+        };
+        apply();
+        media.addEventListener("change", apply);
+      })();
+    </script>
     <link rel="icon" type="image" href="/favicon.jpg" />
     <script
       is:inline
@@ -46,7 +63,7 @@ const ogImage = Astro.props.ogImage || `${Astro.site}og.png`;
     <meta property="twitter:image" content={ogImage} />
     <Font cssVariable="--font-cormorant" />
     <Font cssVariable="--font-karla" />
-    <Font cssVariable="--font-fragment-mono" />
+    <Font cssVariable="--font-plex-mono" />
     <Font cssVariable="--font-shippori" />
     <Font cssVariable="--font-zen-kaku" />
     <Font cssVariable="--font-noto-emoji" />
@@ -88,7 +105,7 @@ const ogImage = Astro.props.ogImage || `${Astro.site}og.png`;
     text-decoration-color: currentColor;
   }
   ::selection {
-    background-color: #f1f5f1;
+    background-color: var(--sp-surface-2);
   }
   @media print {
     .site-header,

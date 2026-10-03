@@ -44,7 +44,9 @@ export default defineConfig({
       footnoteLabelProperties: { className: ["footnotes-label"] },
     },
     shikiConfig: {
-      theme: "github-light",
+      // Colors are emitted as --shiki-light / --shiki-dark and picked in markdown.css.
+      themes: { light: "github-light", dark: "github-dark" },
+      defaultColor: false,
       transformers: [codeBlockTransformer],
     },
   },
@@ -52,7 +54,7 @@ export default defineConfig({
     {
       name: "Cormorant Garamond",
       cssVariable: "--font-cormorant",
-      weights: [400, 500, 700],
+      weights: [500, 600, 700],
       styles: ["normal", "italic"],
       fallbacks: ["serif"],
       provider: fontProviders.google(),
@@ -65,16 +67,9 @@ export default defineConfig({
       provider: fontProviders.google(),
     },
     {
-      name: "Fragment Mono",
-      cssVariable: "--font-fragment-mono",
-      weights: [400],
-      fallbacks: ["monospace"],
-      provider: fontProviders.google(),
-    },
-    {
       name: "Shippori Mincho",
       cssVariable: "--font-shippori",
-      weights: [500, 700],
+      weights: [500, 600, 700],
       subsets: cjkSubsets,
       // Fallback metrics derived from CJK glyphs blow up non-Japanese scripts (~220%).
       optimizedFallbacks: false,
