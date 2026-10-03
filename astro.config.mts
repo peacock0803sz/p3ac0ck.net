@@ -10,6 +10,10 @@ import { rehypeHeadingIds } from "@astrojs/markdown-remark";
 import remarkToc from "remark-toc";
 import { rehypeAccessibleEmojis } from "rehype-accessible-emojis";
 
+import { rehypeNumericColumns } from "./src/plugins/rehype-numeric-columns";
+import { rehypeTocNav } from "./src/plugins/rehype-toc-nav";
+import { codeBlockTransformer } from "./src/plugins/shiki-code-block";
+
 // Google Fonts splits CJK fonts into unicode-range chunks labeled "[0]", "[1]", ...
 // Astro only keeps "latin" by default, which drops all Japanese glyphs.
 const numberedSubsets = Array.from({ length: 130 }, (_, i) => `[${i}]`);
@@ -28,7 +32,21 @@ export default defineConfig({
 
   markdown: {
     remarkPlugins: [[remarkToc, { heading: "目次" }]],
-    rehypePlugins: [rehypeHeadingIds, rehypeAccessibleEmojis],
+    rehypePlugins: [
+      rehypeHeadingIds,
+      rehypeAccessibleEmojis,
+      rehypeTocNav,
+      rehypeNumericColumns,
+    ],
+    remarkRehype: {
+      footnoteLabel: "Notes",
+      footnoteLabelTagName: "p",
+      footnoteLabelProperties: { className: ["footnotes-label"] },
+    },
+    shikiConfig: {
+      theme: "github-light",
+      transformers: [codeBlockTransformer],
+    },
   },
   fonts: [
     {
