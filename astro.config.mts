@@ -5,7 +5,7 @@ import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import partytown from "@astrojs/partytown";
 import UnoCSS from "unocss/astro";
-import { rehypeHeadingIds } from "@astrojs/markdown-remark";
+import { rehypeHeadingIds, unified } from "@astrojs/markdown-remark";
 
 import remarkToc from "remark-toc";
 import { rehypeAccessibleEmojis } from "rehype-accessible-emojis";
@@ -31,18 +31,20 @@ export default defineConfig({
   integrations: [mdx(), sitemap(), UnoCSS(), react(), partytown()],
 
   markdown: {
-    remarkPlugins: [[remarkToc, { heading: "目次" }]],
-    rehypePlugins: [
-      rehypeHeadingIds,
-      rehypeAccessibleEmojis,
-      rehypeTocNav,
-      rehypeNumericColumns,
-    ],
-    remarkRehype: {
-      footnoteLabel: "Notes",
-      footnoteLabelTagName: "p",
-      footnoteLabelProperties: { className: ["footnotes-label"] },
-    },
+    processor: unified({
+      remarkPlugins: [[remarkToc, { heading: "目次" }]],
+      rehypePlugins: [
+        rehypeHeadingIds,
+        rehypeAccessibleEmojis,
+        rehypeTocNav,
+        rehypeNumericColumns,
+      ],
+      remarkRehype: {
+        footnoteLabel: "Notes",
+        footnoteLabelTagName: "p",
+        footnoteLabelProperties: { className: ["footnotes-label"] },
+      },
+    }),
     shikiConfig: {
       // Colors are emitted as --shiki-light / --shiki-dark and picked in markdown.css.
       themes: { light: "github-light", dark: "github-dark" },
