@@ -1,5 +1,4 @@
 ---
-import { Font } from "astro:assets";
 import { getCollection, render } from "astro:content";
 
 import { format } from "date-fns";
@@ -26,10 +25,9 @@ const { Content } = await render(post);
   description={post.data.description}
   ogImage=`${Astro.site}posts/${post.id}/og.png`
 >
-  <Font slot="head" cssVariable="--font-plex-mono" />
   <PageHeader title={post.data.title} emoji={post.data.emoji}>
     <p
-      class="m-0 flex items-center gap-3.5 font-serif text-2xl font-medium italic md:text-[34px]"
+      class="m-0 flex items-center gap-3.5 font-serif text-2xl font-semibold italic md:text-[34px]"
     >
       <span>Blog</span>
       <span class="text-ink-2" aria-hidden="true">/</span>
@@ -46,7 +44,7 @@ const { Content } = await render(post);
       <span class="block h-px w-12 bg-ink" aria-hidden="true"></span>
       <a
         href="/posts/"
-        class="flex items-center gap-2.5 font-serif text-[22px] font-medium italic no-underline hover:underline"
+        class="flex items-center gap-2.5 font-serif text-[22px] font-semibold italic no-underline hover:underline"
       >
         <span aria-hidden="true">←</span> All posts
       </a>

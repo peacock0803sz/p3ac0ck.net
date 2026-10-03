@@ -1,8 +1,6 @@
 ---
-import { Image } from "astro:assets";
-
 import License from "./License.astro";
-import kujakuya from "../assets/logos/kujakuya-horizontal.svg";
+import Kujakuya from "../assets/logos/kujakuya-horizontal.svg";
 
 interface Props {
   /** Hide the seal image when the page already shows a larger one (TOP). */
@@ -20,14 +18,14 @@ const { seal = true } = Astro.props;
     <div class="flex flex-col items-center gap-1 md:items-end">
       {
         seal && (
-          <Image
-            src={kujakuya}
-            alt="Kujaku-ya"
+          <Kujakuya
             class="hidden h-12 w-auto md:block"
+            role="img"
+            aria-label="Kujaku-ya"
           />
         )
       }
-      <p class="m-0 font-serif text-base font-medium text-ink-2 italic">
+      <p class="m-0 font-serif text-base font-semibold italic md:text-[17px]">
         Studio Peacock — Kujaku-ya
       </p>
     </div>

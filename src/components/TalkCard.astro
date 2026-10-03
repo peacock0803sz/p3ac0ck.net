@@ -39,7 +39,7 @@ const image = `${url}/cover.png`;
           d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3"></path><path
           d="m7 21 5-5 5 5"></path></svg
       >
-      <span class="font-serif text-lg font-medium italic">Slides</span>
+      <span class="font-serif text-lg font-semibold italic">Slides</span>
     </span>
     <img
       class="relative block h-full w-full object-cover"
@@ -50,27 +50,28 @@ const image = `${url}/cover.png`;
     />
   </a>
   <div class="flex min-w-0 flex-col gap-2">
-    <h2 class="talk-title m-0 text-[21px] leading-[1.5] font-medium">
+    <h2 class="talk-title m-0 text-[22px] leading-[1.5] font-semibold">
       <a href={url} class="no-underline hover:underline">{title}</a>
     </h2>
     <p class="m-0 flex flex-wrap items-center gap-x-2.5 text-ink-2">
-      <time datetime={date} class="font-serif text-xl font-medium italic">
+      <time datetime={date} class="font-serif text-2xl font-bold italic">
         {date.replaceAll("-", ".")}
       </time>
-      <span class="font-serif text-xl text-line italic" aria-hidden="true"
-        >/</span
+      <span
+        class="font-serif text-2xl font-medium text-line italic"
+        aria-hidden="true">/</span
       >
-      <span class="text-[15px]">{event}</span>
+      <span class="text-base font-medium">{event}</span>
     </p>
     {
       video && (
         <a
           href={video}
-          class="flex items-center gap-1.5 self-start pt-1 font-serif text-xl font-medium italic no-underline hover:underline"
+          class="flex items-center gap-1.5 self-start pt-1 font-serif text-[22px] font-bold italic no-underline hover:underline"
         >
           <svg
-            width="14"
-            height="14"
+            width="16"
+            height="16"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"

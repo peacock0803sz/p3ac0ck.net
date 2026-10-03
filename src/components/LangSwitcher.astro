@@ -34,7 +34,7 @@ const originalTag: Record<Lang, string> = {
       <>
         {i > 0 && (
           <span
-            class="mx-1 mt-1 block h-[13px] w-px bg-[#AFC0B4]"
+            class="mx-1 mt-1 block h-[13px] w-px bg-bar"
             aria-hidden="true"
           />
         )}
@@ -58,8 +58,8 @@ const originalTag: Record<Lang, string> = {
               class:list={[
                 "leading-none text-ink-2 no-underline hover:underline",
                 item.lang === "ja"
-                  ? "font-serif-jp text-[21px]"
-                  : "font-serif text-[22px] font-medium italic",
+                  ? "font-serif-jp text-[21px] font-semibold"
+                  : "font-serif text-[22px] font-semibold italic",
               ]}
               lang={item.lang}
               hreflang={item.lang}
@@ -72,8 +72,8 @@ const originalTag: Record<Lang, string> = {
               class:list={[
                 "rounded-full border border-line px-2 py-px text-ink-2",
                 current === "ja"
-                  ? "font-serif-jp text-[15px]"
-                  : "font-serif text-[17px] italic",
+                  ? "font-serif-jp text-[15px] font-medium"
+                  : "font-serif text-[17px] font-medium italic",
               ]}
             >
               {originalTag[current]}
