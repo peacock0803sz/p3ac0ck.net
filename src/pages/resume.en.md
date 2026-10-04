@@ -1,6 +1,7 @@
 ---
 layout: ../layouts/Experience.astro
 title: "Resume"
+metaTitle: "Resume - Peacock (Yoichi Takai)"
 description: "Resume: web application development with Python and infrastructure as code on Google Cloud with Terraform."
 lang: en
 ---

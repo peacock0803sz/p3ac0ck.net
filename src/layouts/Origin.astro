@@ -14,7 +14,7 @@ const translations: LangItem[] = [
 ---
 
 <Default
-  title={frontmatter.title}
+  title={frontmatter.metaTitle ?? frontmatter.title}
   lang={lang}
   description={frontmatter.description}
   ogImage="https://p3ac0ck.net/og-images/origin.png"

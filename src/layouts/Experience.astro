@@ -23,7 +23,7 @@ const translations: LangItem[] = [
 ---
 
 <Default
-  title={frontmatter.title}
+  title={frontmatter.metaTitle ?? frontmatter.title}
   lang={lang}
   description={frontmatter.description}
 >

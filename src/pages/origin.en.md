@@ -1,6 +1,7 @@
 ---
 layout: ../layouts/Origin.astro
 title: "Why “Peacock”?"
+metaTitle: "Why “Peacock”? — Ady Endre's poem"
 description: "The origin of the name Peacock: Ady Endre's poem \"Fölszállott a páva\" in English translation."
 lang: en
 ---

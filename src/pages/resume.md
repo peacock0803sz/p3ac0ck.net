@@ -1,6 +1,7 @@
 ---
 layout: ../layouts/Experience.astro
 title: "職務経歴書"
+metaTitle: "職務経歴書 - Peacock (Yoichi Takai)"
 description: "PythonによるWebアプリケーション開発と、Google Cloud・TerraformによるIaCの経験をまとめた職務経歴書"
 ---
 
