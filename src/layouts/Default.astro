@@ -1,16 +1,14 @@
 ---
+import type { ComponentProps } from "astro/types";
+
 import Base from "./Base.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+
+type Props = ComponentProps<typeof Base>;
 ---
 
-<Base
-  slug={Astro.props.slug}
-  title={Astro.props.title}
-  lang={Astro.props.lang}
-  description={Astro.props.description}
-  ogImage={Astro.props.ogImage}
->
+<Base {...Astro.props}>
   <slot name="head" slot="head" />
   <Header />
   <main class="flex-1">

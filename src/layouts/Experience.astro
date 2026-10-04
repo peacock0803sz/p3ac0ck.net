@@ -22,7 +22,11 @@ const translations: LangItem[] = [
 ];
 ---
 
-<Default title={frontmatter.title} lang={lang}>
+<Default
+  title={frontmatter.title}
+  lang={lang}
+  description={frontmatter.description}
+>
   <PageHeader title={frontmatter.title} rule>
     {
       translations.length > 1 && (

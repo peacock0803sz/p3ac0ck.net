@@ -1,13 +1,29 @@
 ---
 import { Font } from "astro:assets";
-import { SiteName } from "../constants";
+import { SiteDescription, SiteName } from "../constants";
 import "../styles/theme.css";
 
-const { title, lang } = Astro.props;
-const ogImage = Astro.props.ogImage || `${Astro.site}og.png`;
+interface Props {
+  title: string;
+  lang?: string;
+  description?: string;
+  ogImage?: string;
+  /** Marks the page as an article (posts) for og:type and its publish date. */
+  publishedTime?: Date;
+}
+
+const { title, lang = "ja", publishedTime } = Astro.props;
+const description = Astro.props.description || SiteDescription;
+const ogImage = Astro.props.ogImage || new URL("/og.png", Astro.site).href;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const locales: Record<string, string> = {
+  ja: "ja_JP",
+  en: "en_US",
+  hu: "hu_HU",
+};
 ---
 
-<html lang={lang || "ja"}>
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <script is:inline>
@@ -26,7 +42,7 @@ const ogImage = Astro.props.ogImage || `${Astro.site}og.png`;
         media.addEventListener("change", apply);
       })();
     </script>
-    <link rel="icon" type="image" href="/favicon.jpg" />
+    <link rel="icon" type="image/jpeg" href="/favicon.jpg" />
     <script
       is:inline
       async
@@ -43,23 +59,35 @@ const ogImage = Astro.props.ogImage || `${Astro.site}og.png`;
     </script>
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="description" content={Astro.props.description || ""} />
-    <meta property="og:url" content=`${Astro.site}${Astro.props.slug || ""}` />
-    <meta property="og:type" content="website" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={SiteName}
+      href={new URL("/rss.xml", Astro.site)}
+    />
+    <meta property="og:site_name" content={SiteName} />
+    <meta property="og:locale" content={locales[lang] ?? "ja_JP"} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content={publishedTime ? "article" : "website"} />
     <meta property="og:title" content={title} />
-    <meta property="og:description" content={Astro.props.description || ""} />
+    <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
+    {
+      publishedTime && (
+        <meta
+          property="article:published_time"
+          content={publishedTime.toISOString()}
+        />
+      )
+    }
     <meta name="twitter:card" content="summary_large_image" />
-    <meta property="twitter:domain" content={Astro.site} />
-    <meta
-      property="twitter:url"
-      content=`${Astro.site}${Astro.props.slug || ""}`
-    />
+    <meta name="twitter:creator" content="@peacock0803sz" />
+    <meta property="twitter:domain" content={new URL(Astro.site!).host} />
+    <meta property="twitter:url" content={canonical} />
     <meta property="twitter:title" content={title} />
-    <meta
-      property="twitter:description"
-      content={Astro.props.description || ""}
-    />
+    <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={ogImage} />
     <Font cssVariable="--font-cormorant" />
     <Font cssVariable="--font-karla" />

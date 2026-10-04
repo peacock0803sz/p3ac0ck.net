@@ -7,6 +7,7 @@ import "../../../styles/markdown.css";
 import Default from "../../../layouts/Default.astro";
 import Icon from "../../../components/Icon.astro";
 import PageHeader from "../../../components/PageHeader.astro";
+import { excerpt } from "../../../utils/excerpt";
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
@@ -21,10 +22,11 @@ const { Content } = await render(post);
 ---
 
 <Default
-  slug=`/posts/${post.id}`
   title={post.data.title}
-  description={post.data.description}
-  ogImage=`${Astro.site}posts/${post.id}/og.png`
+  lang={post.data.lang}
+  description={post.data.description ?? excerpt(post.body ?? "")}
+  publishedTime={post.data.pubDate}
+  ogImage={new URL(`/posts/${post.id}/og.png`, Astro.site).href}
 >
   <PageHeader title={post.data.title} emoji={post.data.emoji}>
     <p
