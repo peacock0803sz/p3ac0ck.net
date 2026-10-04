@@ -1,5 +1,6 @@
 ---
 import { SiteName } from "../constants.ts";
+import Icon from "./Icon.astro";
 import Kujakuya from "../assets/logos/kujakuya-horizontal.svg";
 
 const links = [
@@ -13,15 +14,6 @@ const menuLinks = [{ href: "/", label: "Home" }, ...links];
 const path = Astro.url.pathname.replace(/\/?$/, "/");
 const isCurrent = (href: string) =>
   href === "/" ? path === "/" : path.startsWith(href);
-
-const icon = (d: string) =>
-  `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
-const moon = icon(
-  `<path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/>`,
-);
-const sun = icon(
-  `<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>`,
-);
 ---
 
 <header
@@ -51,8 +43,8 @@ const sun = icon(
       data-theme-toggle
       aria-label="Toggle dark mode"
     >
-      <span class="icon-moon"><Fragment set:html={moon} /></span>
-      <span class="icon-sun"><Fragment set:html={sun} /></span>
+      <Icon name="dark_mode" size={20} class="icon-moon" />
+      <Icon name="light_mode" size={20} class="icon-sun" />
     </button>
   </nav>
   <button
@@ -173,15 +165,13 @@ const sun = icon(
   .theme-toggle:hover {
     color: var(--sp-ink);
   }
-  .icon-sun,
-  :global([data-theme="dark"]) .icon-moon {
+  /* Global: the spans are rendered by Icon.astro, outside this scope. */
+  .theme-toggle :global(.icon-sun),
+  :global([data-theme="dark"]) .theme-toggle :global(.icon-moon) {
     display: none;
   }
-  :global([data-theme="dark"]) .icon-sun {
-    display: contents;
-  }
-  .icon-moon {
-    display: contents;
+  :global([data-theme="dark"]) .theme-toggle :global(.icon-sun) {
+    display: inline-block;
   }
   /* The theme that is not active reads as a link. */
   .theme-choice {

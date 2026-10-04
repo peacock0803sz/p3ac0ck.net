@@ -149,6 +149,31 @@ export default defineConfig({
       fallbacks: [],
       provider: fontProviders.google(),
     },
+    {
+      name: "Material Symbols Outlined",
+      cssVariable: "--font-icons",
+      weights: ["100 700"],
+      fallbacks: [],
+      optimizedFallbacks: false,
+      // Hide the ligature names until the font is ready.
+      display: "block",
+      provider: fontProviders.googleicons(),
+      // Subset the font to the icons src/components/Icon.astro is used with.
+      options: {
+        experimental: {
+          glyphs: [
+            "arrow_left_alt",
+            "arrow_right_alt",
+            "check",
+            "co_present",
+            "content_copy",
+            "dark_mode",
+            "light_mode",
+            "play_circle",
+          ],
+        },
+      },
+    },
     // OG images only: satori can't read woff2, so request TTF. These are read
     // through `fontData` in src/og/render.ts and never rendered with <Font>.
     ...ogFonts.map((font) => ({

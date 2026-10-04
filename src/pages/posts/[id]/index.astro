@@ -5,6 +5,7 @@ import { format } from "date-fns";
 
 import "../../../styles/markdown.css";
 import Default from "../../../layouts/Default.astro";
+import Icon from "../../../components/Icon.astro";
 import PageHeader from "../../../components/PageHeader.astro";
 
 export async function getStaticPaths() {
@@ -46,14 +47,16 @@ const { Content } = await render(post);
         href="/posts/"
         class="flex items-center gap-2.5 font-serif text-[22px] font-semibold italic no-underline hover:underline"
       >
-        <span aria-hidden="true">←</span> All posts
+        <Icon name="arrow_left_alt" size={22} /> All posts
       </a>
     </div>
   </div>
 </Default>
 
 <script>
-  const copyIcon = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>`;
+  // Same markup as Icon.astro; the button is created on the client.
+  const icon = (name: string) =>
+    `<span class="icon" style="font-size:16px" aria-hidden="true">${name}</span>`;
 
   for (const block of document.querySelectorAll(".markdown-body .code-block")) {
     const pre = block.querySelector("pre");
@@ -62,13 +65,17 @@ const { Content } = await render(post);
     button.type = "button";
     button.className = "copy-code";
     button.ariaLabel = "Copy code";
-    button.innerHTML = copyIcon;
+    button.innerHTML = icon("content_copy");
     button.addEventListener("click", async () => {
       await navigator.clipboard.writeText(
         pre.querySelector("code")?.innerText ?? "",
       );
       button.dataset.copied = "";
-      setTimeout(() => delete button.dataset.copied, 1500);
+      button.innerHTML = icon("check");
+      setTimeout(() => {
+        delete button.dataset.copied;
+        button.innerHTML = icon("content_copy");
+      }, 1500);
     });
     block.append(button);
   }

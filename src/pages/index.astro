@@ -3,6 +3,7 @@ import { Image } from "astro:assets";
 
 import Base from "../layouts/Base.astro";
 import Header from "../components/Header.astro";
+import Icon from "../components/Icon.astro";
 import Footer from "../components/Footer.astro";
 import portrait from "../assets/portrait-pycontw2023.webp";
 import Kujakuya from "../assets/logos/kujakuya-horizontal.svg";
@@ -34,8 +35,6 @@ const elsewhere = [
     href: "https://www.instagram.com/peacock0803sz",
   },
 ];
-
-const arrow = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8l4 4-4 4"/><path d="M2 12h20"/></svg>`;
 ---
 
 <Base title="Welcome" slug="/" lang="en">
@@ -106,7 +105,7 @@ const arrow = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" strok
           class="flex items-center gap-2.5 font-serif text-[19px] font-bold italic no-underline hover:underline md:text-[22px]"
         >
           Why “Peacock”? — a poem by Ady Endre
-          <Fragment set:html={arrow} />
+          <Icon name="arrow_right_alt" size={22} />
         </a>
         <dl class="m-0 w-full max-w-[640px] border-t border-line">
           {
@@ -138,7 +137,7 @@ const arrow = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" strok
         class="flex h-[52px] w-full items-center justify-center gap-3 rounded bg-ink font-sans text-[17px] font-medium text-on-ink no-underline md:h-auto md:w-auto md:gap-3.5 md:px-[30px] md:py-[18px] md:text-xl"
       >
         me@p3ac0ck.net
-        <Fragment set:html={arrow} />
+        <Icon name="arrow_right_alt" size={22} />
       </a>
       <dl class="m-0 w-full max-w-[640px] border-t border-line">
         {

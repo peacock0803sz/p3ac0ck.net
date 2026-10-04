@@ -1,4 +1,6 @@
 ---
+import Icon from "./Icon.astro";
+
 interface Props {
   title: string;
   date: string;
@@ -26,19 +28,7 @@ const image = `${url}/cover.png`;
       class="absolute inset-0 flex flex-col items-center justify-center gap-1.5 text-ink-2"
       aria-hidden="true"
     >
-      <svg
-        width="22"
-        height="22"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        ><path d="M2 3h20"></path><path
-          d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3"></path><path
-          d="m7 21 5-5 5 5"></path></svg
-      >
+      <Icon name="co_present" size={24} />
       <span class="font-serif text-lg font-semibold italic">Slides</span>
     </span>
     <img
@@ -69,19 +59,7 @@ const image = `${url}/cover.png`;
           href={video}
           class="flex items-center gap-1.5 self-start pt-1 font-serif text-[22px] font-bold italic no-underline hover:underline"
         >
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M6 3l14 9-14 9V3z" />
-          </svg>
+          <Icon name="play_circle" size={20} />
           Video
         </a>
       )
