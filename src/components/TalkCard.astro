@@ -1,5 +1,6 @@
 ---
 import Icon from "./Icon.astro";
+import Phrases from "./Phrases.astro";
 
 interface Props {
   title: string;
@@ -41,7 +42,9 @@ const image = `${url}/cover.png`;
   </a>
   <div class="flex min-w-0 flex-col gap-2">
     <h2 class="talk-title m-0 text-[22px] leading-[1.5] font-semibold">
-      <a href={url} class="no-underline hover:underline">{title}</a>
+      <a href={url} class="no-underline hover:underline"
+        ><Phrases text={title} /></a
+      >
     </h2>
     <p class="m-0 flex flex-wrap items-center gap-x-2.5 text-ink-2">
       <time datetime={date} class="font-serif text-2xl font-bold italic">

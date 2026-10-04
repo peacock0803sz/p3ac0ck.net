@@ -6,6 +6,7 @@ import { format, compareDesc } from "date-fns";
 import Default from "../../layouts/Default.astro";
 import PageHeader from "../../components/PageHeader.astro";
 import Icon from "../../components/Icon.astro";
+import Phrases from "../../components/Phrases.astro";
 
 interface Entry {
   title: string;
@@ -76,7 +77,7 @@ const byYear = Map.groupBy(
                           class="text-[17px] leading-[1.7] no-underline hover:underline"
                           lang={p.lang}
                         >
-                          {p.title}
+                          <Phrases text={p.title} />
                         </a>
                         <span class="font-sans text-[13px] leading-[1.4] text-ink-2">
                           <span class="sr-only">外部サイト: </span>
@@ -97,7 +98,7 @@ const byYear = Map.groupBy(
                         class="text-[17px] leading-[1.7] no-underline hover:underline"
                         lang={p.lang}
                       >
-                        {p.title}
+                        <Phrases text={p.title} />
                       </a>
                     </>
                   )}

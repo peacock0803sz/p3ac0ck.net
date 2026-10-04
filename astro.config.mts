@@ -10,6 +10,7 @@ import { rehypeHeadingIds, unified } from "@astrojs/markdown-remark";
 import remarkToc from "remark-toc";
 import { rehypeAccessibleEmojis } from "rehype-accessible-emojis";
 
+import { rehypeBudoux } from "./src/plugins/rehype-budoux";
 import { rehypeNumericColumns } from "./src/plugins/rehype-numeric-columns";
 import { rehypeTocNav } from "./src/plugins/rehype-toc-nav";
 import { dropOgFonts } from "./src/plugins/drop-og-fonts";
@@ -84,6 +85,7 @@ export default defineConfig({
         rehypeAccessibleEmojis,
         rehypeTocNav,
         rehypeNumericColumns,
+        rehypeBudoux,
       ],
       remarkRehype: {
         footnoteLabel: "Notes",
