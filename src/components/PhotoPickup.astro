@@ -1,0 +1,87 @@
+---
+import Phrases from "./Phrases.astro";
+import { getPickup } from "../utils/flickr";
+
+interface Props {
+  title: string;
+  /** Flickr album id. */
+  album: string;
+  /** Photo ids to show: the large one, then two squares. Defaults to the album's cover and the first two others. */
+  photos?: [string, string, string];
+  description?: string;
+  /** Put the small photos on the left. */
+  reverse?: boolean;
+}
+
+const { title, album, photos, description, reverse } = Astro.props;
+const pickup = await getPickup(album, photos);
+const label = pickup?.url.replace(/^https?:\/\//, "");
+// `!` utilities win over the .markdown-body element styles.
+---
+
+{
+  pickup && (
+    <div class="flex flex-col gap-5 border-t border-line pt-7 pb-9">
+      <a
+        href={pickup.url}
+        class:list={["flex gap-2", { "flex-row-reverse": reverse }]}
+        aria-hidden="true"
+        tabindex="-1"
+      >
+        <img
+          {...pickup.images[0]}
+          sizes="(min-width: 768px) 566px, 70vw"
+          alt=""
+          loading="lazy"
+          decoding="async"
+          class="block !h-[200px] min-w-0 flex-1 bg-surface-2 object-cover sm:!h-[300px]"
+        />
+        <span class="flex flex-none flex-col gap-2">
+          {pickup.images.slice(1).map((image) => (
+            <img
+              {...image}
+              sizes="(min-width: 640px) 146px, 96px"
+              alt=""
+              loading="lazy"
+              decoding="async"
+              class="block size-[96px] !h-[96px] bg-surface-2 object-cover sm:size-[146px] sm:!h-[146px]"
+            />
+          ))}
+        </span>
+      </a>
+      <div class="flex flex-col gap-2">
+        <h2 class="!pt-0 !leading-[1.5]">
+          <a href={pickup.url} class="no-underline hover:underline">
+            <Phrases text={title} />
+          </a>
+        </h2>
+        <p class="m-0 flex flex-wrap items-center gap-x-2.5 text-ink-2">
+          <time
+            datetime={pickup.date}
+            class="font-serif text-2xl leading-[1.4] font-bold italic"
+          >
+            {pickup.date.replaceAll("-", ".")}
+          </time>
+          <span
+            class="font-serif text-2xl leading-[1.4] font-medium text-line italic"
+            aria-hidden="true"
+          >
+            /
+          </span>
+          <span class="text-base font-medium">{pickup.photos} photos</span>
+        </p>
+        {description && (
+          <p class="m-0 text-[15px] leading-[1.8] text-ink-2">
+            <Phrases text={description} />
+          </p>
+        )}
+        <a
+          href={pickup.url}
+          class="self-start font-mono text-[13px] leading-[1.6] !font-normal tracking-[0.3px] [overflow-wrap:anywhere]"
+        >
+          {label}
+        </a>
+      </div>
+    </div>
+  )
+}

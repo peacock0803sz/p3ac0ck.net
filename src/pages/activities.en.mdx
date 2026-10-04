@@ -1,15 +1,21 @@
 ---
 layout: ../layouts/Experience.astro
 title: Activities Outside Work
-description: "Work outside the day job: staff for PyCon JP and other events, OSS, translation and writing."
+description: "Staff work at tech events and concert performances"
 lang: en
 ---
 
+import ConcertList from "../components/ConcertList.astro";
+import ConcertCard from "../components/ConcertCard.astro";
+import owe21 from "../assets/concerts/2026-08-16.jpg";
+import owe20 from "../assets/concerts/2025-07-05.jpg";
+import wwo2 from "../assets/concerts/2022-03-27.jpg";
+
 Last updated: October 2026
 
-For my professional experience, see [my resume](/resume.en). For talks, see [here](/talks).
+For my professional experience, see [my resume](/resume.en). For talks, see [here](/talks), and for things I made, see [here](/works.en).
 
-# Event Staff and Community Work
+# Events
 
 ## Python Community
 
@@ -24,8 +30,6 @@ For my professional experience, see [my resume](/resume.en). For talks, see [her
     - Running a monthly YouTube live show since February 2021 as a [board member of PyCon JP Association](https://www.pycon.jp/committee/members.html#yoichi-takai-a-k-a-peacock)
 - [DjangoCongress JP 2022](https://django.connpass.com/event/259310/), [DjangoCongress JP 2023](https://django.connpass.com/event/295303/): Liaison with PyCon JP Association, on-site photographer
 - Plone User's Group Japan: YouTube Live director for World Plone Day 2021 Tokyo
-- Plone User's Group Japan: Japanese translation of Plone (co-translator) <https://github.com/collective/plone.app.locales>
-    - <https://github.com/collective/plone.app.locales/commit/0d74afd7361e17ebf9d7bd87299702baec286004>
 
 ## Other Communities
 
@@ -37,12 +41,28 @@ For my professional experience, see [my resume](/resume.en). For talks, see [her
     - [Open Source Conference 2023 Tokyo/Spring](https://event.ospn.jp/osc2023-spring/): On-site photographer
     - [Open Developers Conference 2023](https://event.ospn.jp/odc2023/): On-site photographer
 
-# Other Works and OSS
+# Music Performances
 
-- My Website (this repo): [p3ac0ck.net/peacock0803sz](https://github.com/peacock0803sz/p3ac0ck.net)
-- [mr.s3](https://github.com/peacock0803sz/mr.s3)
-    - A script to sync a Plone database with AWS S3
-- Japanese translation of [HTTP/3 explained](https://daniel.haxx.se/http3-explained/)
-- Article in [Software Design, July 2022](https://gihyo.jp/magazine/SD/archive/2022/202207)
-    - Title: [Special feature] PyCon US 2022 Report
-    - Part: General session coverage (a little over one page)
+<ConcertList>
+  <ConcertCard
+    title="Otsuka Wind Ensemble 21st Regular Concert"
+    date="2026-08-16"
+    venue="Takinogawa Kaikan, Main Hall"
+    flyer={owe21}
+    youtube="https://www.youtube.com/watch?v=qsBXMGEl4sE&list=PLLHxpzsE1pJg&pp=8AUB0gcJCbwFa94AFGB0"
+  />
+  <ConcertCard
+    title="Otsuka Wind Ensemble 20th Regular Concert"
+    date="2025-07-05"
+    venue="Hokutopia Tsutsuji Hall"
+    flyer={owe20}
+    youtube="https://www.youtube.com/watch?v=nL1NDxfkh60&list=PLKDkrBHhWueGgxjd7JtSpxsYssZSEb0EB"
+  />
+  <ConcertCard
+    title="Wind Orchestra Origin 2nd Regular Concert"
+    date="2022-03-27"
+    venue="Nippori Sunny Hall"
+    flyer={wwo2}
+    youtube="https://www.youtube.com/watch?v=LurUN3IFtv8&list=PLigglKq3G-TV_eS6lKiWgKHg1_WNuGaJ5&pp=8AUB"
+  />
+</ConcertList>

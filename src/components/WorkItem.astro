@@ -1,0 +1,59 @@
+---
+import Phrases from "./Phrases.astro";
+import { getOgImage } from "../utils/ogp";
+
+interface Props {
+  title: string;
+  description: string;
+  tag: string;
+  url: string;
+  /** Image URL; defaults to the og:image of `url`. */
+  cover?: string;
+}
+
+const { title, description, tag, url, cover } = Astro.props;
+const image = cover ?? (await getOgImage(url));
+const label = url.replace(/^https?:\/\//, "").replace(/\/$/, "");
+---
+
+<!-- `!` utilities win over the .markdown-body element styles. -->
+<div class="flex flex-col gap-4 border-t border-line py-6 sm:flex-row sm:gap-7">
+  <a
+    href={url}
+    class="block aspect-[16/9] w-full flex-none overflow-hidden rounded border border-line bg-surface-2 sm:aspect-auto sm:h-[126px] sm:w-[240px]"
+    aria-hidden="true"
+    tabindex="-1"
+  >
+    {
+      image && (
+        <img
+          src={image}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          class="block !h-full w-full object-cover"
+        />
+      )
+    }
+  </a>
+  <div class="flex min-w-0 flex-col gap-2">
+    <h2 class="!pt-0 !leading-[1.5]">
+      <a href={url} class="no-underline hover:underline"
+        ><Phrases text={title} /></a
+      >
+    </h2>
+    <p class="m-0 text-[15px] leading-[1.8] text-ink-2">
+      <Phrases text={description} />
+    </p>
+    <p
+      class="m-0 font-serif text-lg leading-[1.4] font-semibold text-ink-2 italic"
+    >
+      {tag}
+    </p>
+    <a
+      href={url}
+      class="self-start font-mono text-[13px] leading-[1.6] !font-normal tracking-[0.3px] [overflow-wrap:anywhere]"
+      >{label}</a
+    >
+  </div>
+</div>

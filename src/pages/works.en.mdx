@@ -1,0 +1,68 @@
+---
+layout: ../layouts/Experience.astro
+title: Works
+description: "Software I made, translations, magazine articles and photos."
+lang: en
+---
+
+import WorkSection from "../components/WorkSection.astro";
+import WorkItem from "../components/WorkItem.astro";
+import PhotoPickup from "../components/PhotoPickup.astro";
+import AlbumGrid from "../components/AlbumGrid.astro";
+
+Software I made, translations, magazine articles and more. My work as event staff is listed in [Activities](/activities.en).
+
+<WorkSection title="Open Source" kicker="OSS" id="open-source">
+  <WorkItem
+    title="Lanterna"
+    description="A list-style window switcher for macOS"
+    tag="Software"
+    url="https://github.com/peacock0803sz/Lanterna"
+  />
+  <WorkItem
+    title="Europa.vim"
+    description="A plugin to read and write Jupyter Notebooks from Vim/Neovim"
+    tag="Software"
+    url="https://github.com/peacock0803sz/Europa.vim"
+  />
+  <WorkItem
+    title="p3ac0ck.net"
+    description="The repository of this website"
+    tag="Website"
+    url="https://github.com/peacock0803sz/p3ac0ck.net"
+  />
+  <WorkItem
+    title="HTTP/3 explained"
+    description="Japanese translation of the HTTP/3 document"
+    tag="Translation"
+    url="https://http3-explained.haxx.se/ja"
+  />
+</WorkSection>
+
+<WorkSection title="Articles" kicker="Writing" id="writing">
+  <WorkItem
+    title="Software Design, July 2022"
+    description="Wrote the general session coverage (a little over one page) for the special feature “PyCon US 2022 Report”"
+    tag="Magazine"
+    url="https://gihyo.jp/magazine/SD/archive/2022/202207"
+  />
+</WorkSection>
+
+<WorkSection title="Photos" kicker="Photography" id="photography" rule={false}>
+  <PhotoPickup
+    title="Ume (+α) Photo Walk"
+    album="72177720332178113"
+    description="Yushima Tenjin, Kiyosumi Garden, Koishikawa Korakuen and Koishikawa Botanical Garden"
+    photos={["55111531153", "55111583104", "55110443387"]}
+  />
+  <PhotoPickup
+    title="Osaka Snaps"
+    album="72177720325046922"
+    description="Snapshots of Osaka just before Expo 2025 opened"
+    photos={["54448634498", "54448394601", "54448634543"]}
+    reverse
+  />
+  <AlbumGrid
+    exclude={["72177720332178113", "72177720325046922", "72177720321217740"]}
+  />
+</WorkSection>

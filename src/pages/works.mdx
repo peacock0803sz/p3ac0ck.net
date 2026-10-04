@@ -1,0 +1,65 @@
+---
+layout: ../layouts/Experience.astro
+title: Works / 制作物
+description: "作ったソフトウェアや翻訳、雑誌への寄稿、写真など"
+---
+
+import WorkSection from "../components/WorkSection.astro";
+import WorkItem from "../components/WorkItem.astro";
+import PhotoPickup from "../components/PhotoPickup.astro";
+import AlbumGrid from "../components/AlbumGrid.astro";
+
+作ったソフトウェアや翻訳、雑誌への寄稿など。イベントスタッフとしての活動は[Activities](/activities)にまとめています。
+
+<WorkSection title="オープンソース活動" kicker="OSS" id="open-source">
+  <WorkItem
+    title="Lanterna"
+    description="macOS 向けのリスト型ウィンドウスイッチャー"
+    tag="Software"
+    url="https://github.com/peacock0803sz/Lanterna"
+  />
+  <WorkItem
+    title="Europa.vim"
+    description="Vim/NeovimからJupyter Notebookを読み書きするためのプラグイン"
+    tag="Software"
+    url="https://github.com/peacock0803sz/Europa.vim"
+  />
+  <WorkItem
+    title="p3ac0ck.net"
+    description="このサイトのリポジトリ"
+    tag="Website"
+    url="https://github.com/peacock0803sz/p3ac0ck.net"
+  />
+  <WorkItem
+    title="HTTP/3 explained"
+    description="HTTP/3ドキュメントの日本語訳"
+    tag="Translation"
+    url="https://http3-explained.haxx.se/ja"
+  />
+</WorkSection>
+
+<WorkSection title="寄稿" kicker="Writing" id="writing">
+  <WorkItem
+    title="Software Design 2022年7月号"
+    description="［特別企画］PyCon US 2022レポートとして一般セッション記事(1ページ強)を担当"
+    tag="Magazine"
+    url="https://gihyo.jp/magazine/SD/archive/2022/202207"
+  />
+</WorkSection>
+
+<WorkSection title="写真" kicker="Photography" id="photography" rule={false}>
+  <PhotoPickup
+    title="梅 (+α) Photo Walk"
+    album= "72177720332178113"
+    description="湯島天神、清澄庭園、小石川後楽園、小石川植物園"
+    photos={["55111531153", "55111583104", "55110443387"]}
+  />
+  <PhotoPickup
+    title="大阪スナップ"
+    album= "72177720325046922"
+    description="大阪万博開催直前の大阪をスナップ"
+    photos={["54448634498", "54448394601", "54448634543"]}
+    reverse
+  />
+  <AlbumGrid exclude={Object.values([ "72177720332178113",  "72177720325046922", "72177720321217740" ])} />
+</WorkSection>
