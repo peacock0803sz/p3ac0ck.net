@@ -1,6 +1,7 @@
 ---
 layout: ../layouts/Origin.astro
 title: "なぜ「Peacock」なのか"
+description: "Peacockという名前の由来、アディ・エンドレの詩「孔雀は飛んだ」の日本語訳"
 lang: ja
 ---
 

@@ -1,6 +1,7 @@
 ---
 layout: ../layouts/Origin.astro
 title: "Why “Peacock”?"
+description: "Ady Endre: Fölszállott a páva — a Peacock név eredete."
 lang: hu
 ---
 

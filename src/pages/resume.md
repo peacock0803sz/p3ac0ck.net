@@ -1,6 +1,7 @@
 ---
 layout: ../layouts/Experience.astro
 title: "職務経歴書"
+description: "PythonによるWebアプリケーション開発と、Google Cloud・TerraformによるIaCの経験をまとめた職務経歴書"
 ---
 
 最終更新: 2026-03-10

@@ -1,6 +1,7 @@
 ---
 layout: ../layouts/Experience.astro
 title: Activities Outside Work
+description: "Work outside the day job: staff for PyCon JP and other events, OSS, translation and writing."
 lang: en
 ---
 

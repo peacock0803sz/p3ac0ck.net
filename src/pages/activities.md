@@ -1,6 +1,7 @@
 ---
 layout: ../layouts/Experience.astro
 title: 業務以外の活動・登壇など
+description: "PyCon JPをはじめとするイベントスタッフやOSS、翻訳、寄稿など、業務以外の活動実績"
 ---
 
 最終更新: 2023年11月
