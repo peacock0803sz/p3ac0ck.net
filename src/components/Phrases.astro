@@ -1,0 +1,17 @@
+---
+/**
+ * Renders text with <wbr> between Japanese phrases (BudouX) so a line only
+ * breaks between phrases. Same as rehype-budoux, for text in templates.
+ */
+import { phrases } from "../utils/budoux";
+
+interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+---
+
+<span class="break-keep"
+  >{phrases(text).map((p, i) => (i > 0 ? [<wbr />, p] : p))}</span
+>

@@ -1,0 +1,85 @@
+# Articles published on other sites. `slug` is the article URL and must be unique.
+#
+# - slug: https://zenn.dev/peacock0803sz/articles/example
+#   title: 記事タイトル
+#   lang: ja
+#   pubDate: 2026-04-15
+- slug: https://tech.groove-x.com/entry/gcloud-readonly-mcp
+  title: 社内向けにGoogle Cloudのread-only MCPサーバーを追加しました
+  lang: ja
+  pubDate: 2026-04-30
+
+- slug: https://tech.groove-x.com/entry/20251207/1765058400
+  title: 入社して2ヶ月で感じたGROOVE Xの面白さ
+  lang: ja
+  pubDate: 2025-12-07
+
+- slug: https://blog.g-gen.co.jp/entry/mock-smtp-server-with-cloud-run-sidecar
+  title: Cloud RunのサイドカーでSMTPのモックサーバーを構築する
+  lang: ja
+  pubDate: 2025-07-29
+
+- slug: https://blog.g-gen.co.jp/entry/google-cloud-next-tokyo-24-platform-engineering-introduction
+  title: "Google Cloud Next Tokyo '24 速報レポート（Platform Engineering 入門: Golden Path の構築と活用）"
+  lang: ja
+  pubDate: 2024-08-02
+
+- slug: https://peacock0803sz.hatenablog.jp/entry/2022/07/17/130422
+  title: 「Pythonで理解する微分積分の基礎」は「統計・データサイエンスをやるために微分積分の基礎を学びたい方」が最初に読むと良さそうな本
+  lang: ja
+  pubDate: 2022-07-17
+
+- slug: https://peacock0803sz.hatenablog.jp/entry/2021/12/12/120754
+  title: PyCon JP 2021配信の裏側
+  lang: ja
+  pubDate: 2021-12-12
+
+- slug: https://peacock0803sz.hatenablog.jp/entry/2021/11/09/225830
+  title: クラリネット再開したので吹奏楽団を探しています
+  lang: ja
+  pubDate: 2021-11-09
+
+- slug: https://peacock0803sz.hatenablog.jp/entry/2021/08/01/230452
+  title: EuroPython 2021にSpeakerとして登壇してきました
+  lang: ja
+  pubDate: 2021-08-01
+
+- slug: https://peacock0803sz.hatenablog.jp/entry/2020/12/14/000222
+  title: "初めての英語カンファレンス #PloneConf2020 に参加してきました"
+  lang: ja
+  pubDate: 2020-12-14
+
+- slug: https://peacock0803sz.hatenablog.jp/entry/2019/12/13/035358
+  title: 今年を振り返って
+  lang: ja
+  pubDate: 2019-12-13
+
+- slug: https://peacock0803sz.hatenablog.jp/entry/2018/12/19/043408
+  title: AURのパッケージマネージャを導入した
+  lang: ja
+  pubDate: 2018-12-19
+
+- slug: https://peacock0803sz.hatenablog.jp/entry/2018/12/14/180344
+  title: 愛の星
+  lang: ja
+  pubDate: 2018-12-14
+
+- slug: https://peacock0803sz.hatenablog.jp/entry/2018/12/07/015217
+  title: ユーフォはいいぞ
+  lang: ja
+  pubDate: 2018-12-07
+
+- slug: https://peacock0803sz.hatenablog.jp/entry/2018/12/07/004859
+  title: NO MUSIC NO LIFE.
+  lang: ja
+  pubDate: 2018-12-07
+
+- slug: https://peacock0803sz.hatenablog.jp/entry/2018/04/30/215932
+  title: 通信制高校に編入します
+  lang: ja
+  pubDate: 2018-04-30
+
+- slug: https://peacock0803sz.hatenablog.jp/entry/2018/03/16/102545
+  title: はじめまして
+  lang: ja
+  pubDate: 2018-03-16

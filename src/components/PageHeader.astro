@@ -1,4 +1,6 @@
 ---
+import Phrases from "./Phrases.astro";
+
 interface Props {
   title: string;
   emoji?: string;
@@ -36,7 +38,7 @@ const meta = Astro.slots.has("default")
         : "font-serif text-[40px] md:text-[52px]",
     ]}
   >
-    {title}
+    <Phrases text={title} />
   </h1>
   {
     meta && (
