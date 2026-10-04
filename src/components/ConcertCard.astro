@@ -1,0 +1,53 @@
+---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+import Icon from "./Icon.astro";
+import Phrases from "./Phrases.astro";
+
+interface Props {
+  title: string;
+  date: string;
+  venue: string;
+  flyer: ImageMetadata;
+  /** YouTube playlist of the concert. */
+  youtube?: string;
+}
+
+const { title, date, venue, flyer, youtube } = Astro.props;
+---
+
+<!-- `!` utilities win over the .markdown-body element styles. -->
+<div class="flex min-w-0 flex-col gap-3.5">
+  <Image
+    src={flyer}
+    alt={`${title} flyer`}
+    widths={[480, 720]}
+    sizes="(min-width: 640px) 346px, 100vw"
+    class="block w-full rounded-sm border border-line"
+  />
+  <div class="flex flex-col gap-1">
+    <time
+      datetime={date}
+      class="font-serif text-xl leading-[1.4] font-bold text-ink-2 italic"
+    >
+      {date.replaceAll("-", ".")}
+    </time>
+    <h2 class="!pt-0 !text-xl !leading-[1.5]">
+      <Phrases text={title} />
+    </h2>
+    <p class="m-0 text-[15px] leading-[1.7] text-ink-2">
+      <Phrases text={venue} />
+    </p>
+    {
+      youtube && (
+        <a
+          href={youtube}
+          class="flex items-center gap-1.5 self-start pt-1.5 font-serif text-lg leading-[1.4] !font-semibold italic no-underline hover:underline"
+        >
+          <Icon name="play_circle" size={16} />
+          YouTube Playlist
+        </a>
+      )
+    }
+  </div>
+</div>

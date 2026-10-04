@@ -1,8 +1,14 @@
 ---
 layout: ../layouts/Experience.astro
 title: 業務以外の活動
-description: "PyCon JPをはじめとするイベントスタッフなどの活動実績"
+description: "技術イベントや演奏会での活動実績"
 ---
+
+import ConcertList from "../components/ConcertList.astro";
+import ConcertCard from "../components/ConcertCard.astro";
+import owe21 from "../assets/concerts/2026-08-16.jpg";
+import owe20 from "../assets/concerts/2025-07-05.jpg";
+import wwo2 from "../assets/concerts/2022-03-27.jpg";
 
 最終更新: 2026年10月
 
@@ -33,3 +39,29 @@ description: "PyCon JPをはじめとするイベントスタッフなどの活�
     - [Open Source Conference](https://event.ospn.jp/eventlist)2020年のオンライン開催において、オンライン配信スタッフ
     - [Open Source Conference 2023 Tokyo/Spring](https://event.ospn.jp/osc2023-spring/) 当日カメラマン
     - [Open Developers Conference 2023](https://event.ospn.jp/odc2023/) 当日カメラマン
+
+# 演奏活動
+
+<ConcertList>
+  <ConcertCard
+    title="大塚ウィンドアンサンブル 第21回定期演奏会"
+    date="2026-08-16"
+    venue="滝野川会館 大ホール"
+    flyer={owe21}
+    youtube="https://www.youtube.com/watch?v=qsBXMGEl4sE&list=PLLHxpzsE1pJg&pp=8AUB0gcJCbwFa94AFGB0"
+  />
+  <ConcertCard
+    title="大塚ウィンドアンサンブル 第20回定期演奏会"
+    date="2025-07-05"
+    venue="北とぴあ つつじホール"
+    flyer={owe20}
+    youtube="https://www.youtube.com/watch?v=nL1NDxfkh60&list=PLKDkrBHhWueGgxjd7JtSpxsYssZSEb0EB"
+  />
+  <ConcertCard
+    title="ウィンドオーケストラオリジン 第2回定期演奏会"
+    date="2022-03-27"
+    venue="日暮里サニーホール"
+    flyer={wwo2}
+    youtube="https://www.youtube.com/watch?v=LurUN3IFtv8&list=PLigglKq3G-TV_eS6lKiWgKHg1_WNuGaJ5&pp=8AUB"
+  />
+</ConcertList>
