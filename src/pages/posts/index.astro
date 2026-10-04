@@ -1,18 +1,45 @@
 ---
 import { getCollection } from "astro:content";
-import type { CollectionEntry } from "astro:content";
 
 import { format, compareDesc } from "date-fns";
 
 import Default from "../../layouts/Default.astro";
 import PageHeader from "../../components/PageHeader.astro";
+import Icon from "../../components/Icon.astro";
+
+interface Entry {
+  title: string;
+  href: string;
+  lang: "en" | "ja";
+  pubDate: Date;
+  emoji?: string;
+  /** Host name of an article published on another site. */
+  source?: string;
+}
 
 const title = "記事一覧";
-const posts: CollectionEntry<"posts">[] = await getCollection("posts");
+const posts: Entry[] = (await getCollection("posts")).map((p) => ({
+  title: p.data.title,
+  href: `/posts/${p.id}/`,
+  lang: p.data.lang,
+  pubDate: p.data.pubDate,
+  emoji: p.data.emoji,
+}));
+const externalPosts: Entry[] = (await getCollection("externalPosts")).map(
+  (p) => ({
+    title: p.data.title,
+    href: p.data.slug,
+    lang: p.data.lang,
+    pubDate: p.data.pubDate,
+    source: new URL(p.data.slug).hostname.replace(/^www\./, ""),
+  }),
+);
 
 const byYear = Map.groupBy(
-  posts.sort((a, b) => compareDesc(a.data.pubDate, b.data.pubDate)),
-  (p) => p.data.pubDate.getFullYear(),
+  [...posts, ...externalPosts].sort((a, b) =>
+    compareDesc(a.pubDate, b.pubDate),
+  ),
+  (p) => p.pubDate.getFullYear(),
 );
 ---
 
@@ -33,24 +60,47 @@ const byYear = Map.groupBy(
               {entries.map((p) => (
                 <li class="flex gap-4 border-b border-line py-3.5">
                   <time
-                    datetime={format(p.data.pubDate, "yyyy-MM-dd")}
+                    datetime={format(p.pubDate, "yyyy-MM-dd")}
                     class="w-[66px] flex-none font-serif text-[26px] leading-[1.11] font-bold text-ink-2 italic"
                   >
-                    {format(p.data.pubDate, "MM.dd")}
+                    {format(p.pubDate, "MM.dd")}
                   </time>
-                  <span
-                    class="flex h-[28.6px] w-[26px] flex-none items-center justify-center font-emoji text-xl"
-                    aria-hidden="true"
-                  >
-                    {p.data.emoji}
-                  </span>
-                  <a
-                    href={`/posts/${p.id}/`}
-                    class="text-[17px] leading-[1.7] no-underline hover:underline"
-                    lang={p.data.lang}
-                  >
-                    {p.data.title}
-                  </a>
+                  {p.source ? (
+                    <>
+                      <span class="flex h-[28.6px] w-[26px] flex-none items-center justify-center text-ink-2">
+                        <Icon name="north_east" size={20} />
+                      </span>
+                      <div class="flex min-w-0 flex-col gap-0.5">
+                        <a
+                          href={p.href}
+                          class="text-[17px] leading-[1.7] no-underline hover:underline"
+                          lang={p.lang}
+                        >
+                          {p.title}
+                        </a>
+                        <span class="font-sans text-[13px] leading-[1.4] text-ink-2">
+                          <span class="sr-only">外部サイト: </span>
+                          {p.source}
+                        </span>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <span
+                        class="flex h-[28.6px] w-[26px] flex-none items-center justify-center font-emoji text-xl"
+                        aria-hidden="true"
+                      >
+                        {p.emoji}
+                      </span>
+                      <a
+                        href={p.href}
+                        class="text-[17px] leading-[1.7] no-underline hover:underline"
+                        lang={p.lang}
+                      >
+                        {p.title}
+                      </a>
+                    </>
+                  )}
                 </li>
               ))}
             </ul>

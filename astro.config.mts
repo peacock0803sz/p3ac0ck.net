@@ -169,6 +169,7 @@ export default defineConfig({
             "content_copy",
             "dark_mode",
             "light_mode",
+            "north_east",
             "play_circle",
           ],
         },

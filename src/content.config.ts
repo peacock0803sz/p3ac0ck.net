@@ -1,5 +1,5 @@
 import { defineCollection } from "astro:content";
-import { glob } from "astro/loaders";
+import { file, glob } from "astro/loaders";
 import { z } from "astro/zod";
 
 const posts = defineCollection({
@@ -14,4 +14,16 @@ const posts = defineCollection({
   }),
 });
 
-export const collections = { posts };
+// Articles published on other sites, listed on /posts alongside our own.
+const externalPosts = defineCollection({
+  loader: file("./src/external-posts.yaml"),
+  schema: z.object({
+    // The article URL. The file loader uses `slug` as the entry id.
+    slug: z.url(),
+    title: z.string(),
+    lang: z.enum(["en", "ja"]),
+    pubDate: z.date(),
+  }),
+});
+
+export const collections = { posts, externalPosts };
