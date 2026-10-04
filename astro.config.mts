@@ -12,6 +12,7 @@ import { rehypeAccessibleEmojis } from "rehype-accessible-emojis";
 
 import { rehypeNumericColumns } from "./src/plugins/rehype-numeric-columns";
 import { rehypeTocNav } from "./src/plugins/rehype-toc-nav";
+import { dropOgFonts } from "./src/plugins/drop-og-fonts";
 import { codeBlockTransformer } from "./src/plugins/shiki-code-block";
 
 // Google Fonts splits CJK fonts into unicode-range chunks labeled "[0]", "[1]", ...
@@ -66,7 +67,14 @@ const ogFonts = [
 // https://astro.build/config
 export default defineConfig({
   site: "https://p3ac0ck.net",
-  integrations: [mdx(), sitemap(), UnoCSS(), react(), partytown()],
+  integrations: [
+    mdx(),
+    sitemap(),
+    UnoCSS(),
+    react(),
+    partytown(),
+    dropOgFonts(),
+  ],
 
   markdown: {
     processor: unified({
