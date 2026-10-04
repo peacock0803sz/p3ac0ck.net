@@ -1,3 +1,4 @@
+import type { APIContext } from "astro";
 import { getCollection, type CollectionEntry } from "astro:content";
 
 import { format } from "date-fns";
@@ -5,12 +6,11 @@ import { format } from "date-fns";
 import { PostCard } from "../../../og/cards";
 import { logoDataUri, pngResponse, renderPng } from "../../../og/render";
 
-interface Props {
-  params: { id: string };
+interface Props extends APIContext {
   props: { post: CollectionEntry<"posts"> };
 }
 
-export async function GET({ props }: Props) {
+export async function GET({ props, url }: Props) {
   const { post } = props;
   const png = await renderPng(
     PostCard({
@@ -19,6 +19,7 @@ export async function GET({ props }: Props) {
       date: format(post.data.pubDate, "yyyy.MM.dd"),
       seal: await logoDataUri("kujakuya-horizontal"),
     }),
+    url,
   );
   return pngResponse(png);
 }

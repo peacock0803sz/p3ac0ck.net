@@ -25,6 +25,44 @@ const cjkSubsets: [string, ...string[]] = [
   ...numberedSubsets,
 ];
 
+const ogFonts = [
+  {
+    name: "Shippori Mincho",
+    cssVariable: "--og-shippori",
+    weights: [600],
+    subsets: cjkSubsets,
+  },
+  {
+    name: "Newsreader",
+    cssVariable: "--og-newsreader",
+    weights: [400, 500],
+    styles: ["italic"] as ["italic"],
+  },
+  {
+    name: "Cormorant Garamond",
+    cssVariable: "--og-cormorant",
+    weights: [500],
+    styles: ["italic"] as ["italic"],
+  },
+  {
+    name: "IBM Plex Mono",
+    cssVariable: "--og-plex-mono",
+    weights: [400, 500],
+  },
+  {
+    name: "Noto Emoji",
+    cssVariable: "--og-noto-emoji",
+    weights: [400],
+    subsets: ["emoji", ...numberedSubsets] as [string, ...string[]],
+  },
+] satisfies {
+  name: string;
+  cssVariable: string;
+  weights: [number, ...number[]];
+  styles?: ["italic"];
+  subsets?: [string, ...string[]];
+}[];
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://p3ac0ck.net",
@@ -103,5 +141,13 @@ export default defineConfig({
       fallbacks: [],
       provider: fontProviders.google(),
     },
+    // OG images only: satori can't read woff2, so request TTF. These are read
+    // through `fontData` in src/og/render.ts and never rendered with <Font>.
+    ...ogFonts.map((font) => ({
+      ...font,
+      formats: ["ttf"] as ["ttf"],
+      optimizedFallbacks: false,
+      provider: fontProviders.google(),
+    })),
   ],
 });
