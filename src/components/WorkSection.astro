@@ -1,0 +1,25 @@
+---
+interface Props {
+  title: string;
+  /** Latin label shown on the right of the heading. */
+  kicker: string;
+  id?: string;
+  /** Draw the rule under the last item (off for content with its own rules). */
+  rule?: boolean;
+}
+
+const { title, kicker, id, rule = true } = Astro.props;
+---
+
+<section class="flex flex-col">
+  <div class="flex items-end justify-between gap-4 pb-4">
+    <h1 id={id}>{title}</h1>
+    <span
+      class="font-serif text-xl leading-[1.4] font-semibold text-ink-2 italic"
+      >{kicker}</span
+    >
+  </div>
+  <div class:list={["flex flex-col", { "border-b border-line": rule }]}>
+    <slot />
+  </div>
+</section>

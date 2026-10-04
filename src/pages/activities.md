@@ -1,16 +1,14 @@
 ---
 layout: ../layouts/Experience.astro
-title: 業務以外の活動・登壇など
-description: "PyCon JPをはじめとするイベントスタッフやOSS、翻訳、寄稿など、業務以外の活動実績"
+title: 業務以外の活動
+description: "PyCon JPをはじめとするイベントスタッフなどの活動実績"
 ---
 
 最終更新: 2026年10月
 
 業務での実績については[こちら](/resume)を、登壇などは[こちら](/talks)を参照
 
-# イベントスタッフなどの活動
-
-## Pythonコミュニティでの活動
+# Pythonコミュニティでの活動
 
 - [PyCon JP 2027](https://2027.pycon.jp): 共同座長
 - [PyCon JP 2026](https://2026.pycon.jp): 会場チームリーダー
@@ -35,13 +33,3 @@ description: "PyCon JPをはじめとするイベントスタッフやOSS、翻�
     - [Open Source Conference](https://event.ospn.jp/eventlist)2020年のオンライン開催において、オンライン配信スタッフ
     - [Open Source Conference 2023 Tokyo/Spring](https://event.ospn.jp/osc2023-spring/) 当日カメラマン
     - [Open Developers Conference 2023](https://event.ospn.jp/odc2023/) 当日カメラマン
-
-# その他作品・OSS活動
-
-- My Website(This repo): [p3ac0ck.net/peacock0803sz](https://github.com/peacock0803sz/p3ac0ck.net)
-- [mr.s3](https://github.com/peacock0803sz/mr.s3)
-    - PloneのデータベースをAWS S3と同期するためのスクリプト
-- [HTTP/3 explained](https://daniel.haxx.se/http3-explained/)の日本語訳
-- [Software Design 2022年7月号](https://gihyo.jp/magazine/SD/archive/2022/202207)へ記事寄稿
-    - タイトル: ［特別企画］PyCon US 2022レポート
-    - 担当: 一般セッション記事(1ページ強)

@@ -1,7 +1,7 @@
 ---
 layout: ../layouts/Experience.astro
 title: Activities Outside Work
-description: "Work outside the day job: staff for PyCon JP and other events, OSS, translation and writing."
+description: "Work outside the day job: staff for PyCon JP and other events"
 lang: en
 ---
 
@@ -9,7 +9,7 @@ Last updated: October 2026
 
 For my professional experience, see [my resume](/resume.en). For talks, see [here](/talks).
 
-# Event Staff and Community Work
+# Event Staff Activities
 
 ## Python Community
 
@@ -36,13 +36,3 @@ For my professional experience, see [my resume](/resume.en). For talks, see [her
     - [Open Source Conference](https://event.ospn.jp/eventlist) 2020 (online): Streaming staff
     - [Open Source Conference 2023 Tokyo/Spring](https://event.ospn.jp/osc2023-spring/): On-site photographer
     - [Open Developers Conference 2023](https://event.ospn.jp/odc2023/): On-site photographer
-
-# Other Works and OSS
-
-- My Website (this repo): [p3ac0ck.net/peacock0803sz](https://github.com/peacock0803sz/p3ac0ck.net)
-- [mr.s3](https://github.com/peacock0803sz/mr.s3)
-    - A script to sync a Plone database with AWS S3
-- Japanese translation of [HTTP/3 explained](https://daniel.haxx.se/http3-explained/)
-- Article in [Software Design, July 2022](https://gihyo.jp/magazine/SD/archive/2022/202207)
-    - Title: [Special feature] PyCon US 2022 Report
-    - Part: General session coverage (a little over one page)

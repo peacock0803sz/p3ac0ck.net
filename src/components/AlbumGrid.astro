@@ -1,0 +1,68 @@
+---
+import Icon from "./Icon.astro";
+import Phrases from "./Phrases.astro";
+import { albumsUrl, getAlbums } from "../utils/flickr";
+
+interface Props {
+  /** Album ids to leave out, e.g. the ones shown as pickups. */
+  exclude?: string[];
+  /** Number of albums to show. */
+  limit?: number;
+}
+
+const { exclude = [], limit = 6 } = Astro.props;
+const albums = (await getAlbums())
+  .filter(({ id }) => !exclude.includes(id))
+  .slice(0, limit);
+---
+
+<!-- `!` utilities win over the .markdown-body element styles. -->
+<div class="flex flex-col gap-8 border-y border-line pt-7 pb-6">
+  {
+    albums.length > 0 && (
+      <>
+        <p class="m-0 font-serif text-xl leading-[1.4] font-semibold text-ink-2 italic">
+          More albums
+        </p>
+        <div class="grid grid-cols-2 gap-x-5 gap-y-8 sm:grid-cols-3">
+          {albums.map(({ title, date, url, cover }) => (
+            <a
+              href={url}
+              class="group flex min-w-0 flex-col gap-2.5 !font-normal no-underline"
+            >
+              <img
+                src={cover.src}
+                srcset={cover.srcset}
+                sizes="(min-width: 640px) 227px, 50vw"
+                width={cover.width}
+                height={cover.height}
+                alt=""
+                loading="lazy"
+                decoding="async"
+                class="block !h-[120px] w-full rounded-sm bg-surface-2 object-cover sm:!h-[152px]"
+              />
+              <span class="flex flex-col gap-0.5">
+                <span class="line-clamp-2 font-serif-jp text-[17px] leading-[1.5] font-semibold group-hover:underline">
+                  <Phrases text={title} />
+                </span>
+                <time
+                  datetime={date}
+                  class="font-serif text-lg leading-[1.4] font-bold text-ink-2 italic"
+                >
+                  {date.replaceAll("-", ".")}
+                </time>
+              </span>
+            </a>
+          ))}
+        </div>
+      </>
+    )
+  }
+  <a
+    href={albumsUrl}
+    class="flex items-center gap-2.5 self-end font-serif text-xl leading-[1.4] !font-semibold italic no-underline hover:underline"
+  >
+    All albums on Flickr
+    <Icon name="north_east" size={18} />
+  </a>
+</div>
