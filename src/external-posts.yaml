@@ -19,10 +19,25 @@
   lang: ja
   pubDate: 2025-07-29
 
+- slug: https://zenn.dev/vim_jp/articles/volar-for-nvim-lsp-with-nix
+  title: Volar (Vueの言語サーバー)をnvim-lspconfigとNixで使うための設定
+  lang: ja
+  pubDate: 2024-08-05
+
 - slug: https://blog.g-gen.co.jp/entry/google-cloud-next-tokyo-24-platform-engineering-introduction
   title: "Google Cloud Next Tokyo '24 速報レポート（Platform Engineering 入門: Golden Path の構築と活用）"
   lang: ja
   pubDate: 2024-08-02
+
+- slug: https://zenn.dev/vim_jp/articles/git-operations-with-ddu
+  title: ddu.vimでGitの操作を快適にする設定
+  lang: ja
+  pubDate: 2024-03-13
+
+- slug: https://zenn.dev/vim_jp/articles/wezterm-karabiner
+  title: "[WezTerm] macSKKとskkeletonを使用して同じキーバインドで入力切り替えをしたい!"
+  lang: ja
+  pubDate: 2024-02-26
 
 - slug: https://peacock0803sz.hatenablog.jp/entry/2022/07/17/130422
   title: 「Pythonで理解する微分積分の基礎」は「統計・データサイエンスをやるために微分積分の基礎を学びたい方」が最初に読むと良さそうな本
@@ -38,6 +53,11 @@
   title: クラリネット再開したので吹奏楽団を探しています
   lang: ja
   pubDate: 2021-11-09
+
+- slug: https://zenn.dev/peacock0803sz/articles/fe331e04183257
+  title: PyramidでのCORSとPreflight request
+  lang: ja
+  pubDate: 2021-11-08
 
 - slug: https://peacock0803sz.hatenablog.jp/entry/2021/08/01/230452
   title: EuroPython 2021にSpeakerとして登壇してきました
