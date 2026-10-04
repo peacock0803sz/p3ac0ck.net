@@ -10,14 +10,16 @@ import LangSwitcher, {
 const { frontmatter } = Astro.props;
 const lang: Lang = frontmatter.lang ?? "ja";
 
-// Translations live next to the page as "<name>.<lang>.md" (e.g. activities.en.md);
+// Translations live next to the page as "<name>.<lang>.md(x)" (e.g. activities.en.md);
 // the switcher appears once at least one exists.
-const pages = Object.keys(import.meta.glob("../pages/*.md"));
+const pages = Object.keys(import.meta.glob("../pages/*.{md,mdx}")).map((p) =>
+  p.replace(/\.mdx?$/, ""),
+);
 const name = Astro.url.pathname.split("/").filter(Boolean)[0]?.split(".")[0];
 const translations: LangItem[] = [
   { lang: "ja", href: `/${name}/` },
   ...(["en", "hu"] as const)
-    .filter((l) => pages.includes(`../pages/${name}.${l}.md`))
+    .filter((l) => pages.includes(`../pages/${name}.${l}`))
     .map((l) => ({ lang: l, href: `/${name}.${l}/` })),
 ];
 ---
