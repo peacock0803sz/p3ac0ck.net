@@ -1,0 +1,45 @@
+---
+/**
+ * Material Symbols icon. The font is subset to the names listed in
+ * astro.config.mts, so add new names there too.
+ */
+interface Props {
+  name: string;
+  /** Size in px. */
+  size?: number;
+  class?: string;
+}
+
+const { name, size = 20, class: className } = Astro.props;
+---
+
+<span
+  class:list={["icon", className]}
+  style={{ fontSize: `${size}px` }}
+  aria-hidden="true">{name}</span
+>
+
+<style is:global>
+  .icon {
+    display: inline-block;
+    flex: none;
+    width: 1em;
+    height: 1em;
+    overflow: hidden;
+    font-family: var(--font-icons);
+    font-style: normal;
+    font-weight: normal;
+    font-variation-settings:
+      "wght" 300,
+      "opsz" 20;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    font-feature-settings: "liga";
+    -webkit-font-smoothing: antialiased;
+    user-select: none;
+  }
+</style>

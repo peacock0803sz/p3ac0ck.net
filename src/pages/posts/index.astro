@@ -2,31 +2,58 @@
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 
-import { format, compareAsc } from "date-fns";
+import { format, compareDesc } from "date-fns";
 
 import Default from "../../layouts/Default.astro";
+import PageHeader from "../../components/PageHeader.astro";
 
 const title = "記事一覧";
 const posts: CollectionEntry<"posts">[] = await getCollection("posts");
+
+const byYear = Map.groupBy(
+  posts.sort((a, b) => compareDesc(a.data.pubDate, b.data.pubDate)),
+  (p) => p.data.pubDate.getFullYear(),
+);
 ---
 
-<Default slug="/posts/" title={title} head="Peacock's Blog">
-  <h1 class="text-4xl font-bold pb-10">{title}</h1>
-  <div>
-    {
-      posts
-        .sort((a, b) => compareAsc(a.data.pubDate, b.data.pubDate))
-        .map((p) => (
-          <p>
-            <span class="font-mono">
-              {format(p.data.pubDate, "yyyy-MM-dd")}
-            </span>
-            :
-            <a href={`/posts/${p.id}/`}>
-              {p.data.emoji} {p.data.title}
-            </a>
-          </p>
+<Default slug="/posts/" title={title}>
+  <PageHeader title={title} rule />
+  <div class="px-6 pb-16 md:px-[72px]">
+    <div class="mx-auto flex max-w-[720px] flex-col gap-12">
+      {
+        [...byYear].map(([year, entries]) => (
+          <section>
+            <h2 class="m-0 font-serif text-[34px] leading-[1.2] font-semibold italic">
+              {year}
+            </h2>
+            <ul class="m-0 list-none p-0 pt-2">
+              {entries.map((p) => (
+                <li class="flex gap-4 border-b border-line py-3.5">
+                  <time
+                    datetime={format(p.data.pubDate, "yyyy-MM-dd")}
+                    class="w-[66px] flex-none font-serif text-[26px] leading-[1.11] font-bold text-ink-2 italic"
+                  >
+                    {format(p.data.pubDate, "MM.dd")}
+                  </time>
+                  <span
+                    class="flex h-[28.6px] w-[26px] flex-none items-center justify-center font-emoji text-xl"
+                    aria-hidden="true"
+                  >
+                    {p.data.emoji}
+                  </span>
+                  <a
+                    href={`/posts/${p.id}/`}
+                    class="text-[17px] leading-[1.7] no-underline hover:underline"
+                    lang={p.data.lang}
+                  >
+                    {p.data.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
         ))
-    }
+      }
+    </div>
   </div>
 </Default>

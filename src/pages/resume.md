@@ -3,8 +3,6 @@ layout: ../layouts/Experience.astro
 title: "職務経歴書"
 ---
 
-# 目次
-
 最終更新: 2026-03-10
 
 業務以外の活動については[こちら](/activities)を参照

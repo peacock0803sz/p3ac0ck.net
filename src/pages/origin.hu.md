@@ -1,6 +1,6 @@
 ---
 layout: ../layouts/Origin.astro
-title: "The Origin of my Name - Peacock (in Hungarian)"
+title: "Why “Peacock”?"
 lang: hu
 ---
 

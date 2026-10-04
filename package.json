@@ -32,7 +32,6 @@
     "remark-toc": "^9.0.0",
     "satori": "^0.33.5",
     "sharp": "^0.35.4",
-    "tw-to-css": "0.0.12",
     "typescript": "^5.9.3"
   },
   "devDependencies": {
@@ -50,6 +49,11 @@
   },
   "private": true,
   "packageManager": "pnpm@10.34.5",
+  "pnpm": {
+    "ignoredBuiltDependencies": [
+      "esbuild"
+    ]
+  },
   "devEngines": {
     "runtime": {
       "name": "node",

@@ -5,6 +5,8 @@ import { format } from "date-fns";
 
 import "../../../styles/markdown.css";
 import Default from "../../../layouts/Default.astro";
+import Icon from "../../../components/Icon.astro";
+import PageHeader from "../../../components/PageHeader.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
@@ -21,16 +23,60 @@ const { Content } = await render(post);
 <Default
   slug=`/posts/${post.id}`
   title={post.data.title}
-  head="Peacock's Blog"
   description={post.data.description}
   ogImage=`${Astro.site}posts/${post.id}/og.png`
 >
-  <h1 class="text-4xl font-bold pb-10">
-    {post.data.emoji}
-    {post.data.title}
-  </h1>
-  <p class="text-right">公開日: {format(post.data.pubDate, "yyyy-MM-dd")}</p>
-  <article class="markdown-body">
-    <Content />
-  </article>
+  <PageHeader title={post.data.title} emoji={post.data.emoji}>
+    <p
+      class="m-0 flex items-center gap-3.5 font-serif text-2xl font-semibold italic md:text-[34px]"
+    >
+      <span>Blog</span>
+      <span class="text-ink-2" aria-hidden="true">/</span>
+      <time datetime={format(post.data.pubDate, "yyyy-MM-dd")}>
+        {format(post.data.pubDate, "yyyy.MM.dd")}
+      </time>
+    </p>
+  </PageHeader>
+  <div class="px-6 pb-12 md:px-[72px]">
+    <article class="markdown-body mx-auto max-w-[720px]" lang={post.data.lang}>
+      <Content />
+    </article>
+    <div class="flex flex-col items-center gap-7 pt-16">
+      <span class="block h-px w-12 bg-ink" aria-hidden="true"></span>
+      <a
+        href="/posts/"
+        class="flex items-center gap-2.5 font-serif text-[22px] font-semibold italic no-underline hover:underline"
+      >
+        <Icon name="arrow_left_alt" size={22} /> All posts
+      </a>
+    </div>
+  </div>
 </Default>
+
+<script>
+  // Same markup as Icon.astro; the button is created on the client.
+  const icon = (name: string) =>
+    `<span class="icon" style="font-size:16px" aria-hidden="true">${name}</span>`;
+
+  for (const block of document.querySelectorAll(".markdown-body .code-block")) {
+    const pre = block.querySelector("pre");
+    if (!pre) continue;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "copy-code";
+    button.ariaLabel = "Copy code";
+    button.innerHTML = icon("content_copy");
+    button.addEventListener("click", async () => {
+      await navigator.clipboard.writeText(
+        pre.querySelector("code")?.innerText ?? "",
+      );
+      button.dataset.copied = "";
+      button.innerHTML = icon("check");
+      setTimeout(() => {
+        delete button.dataset.copied;
+        button.innerHTML = icon("content_copy");
+      }, 1500);
+    });
+    block.append(button);
+  }
+</script>

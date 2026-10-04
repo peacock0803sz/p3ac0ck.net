@@ -1,11 +1,8 @@
 ---
 layout: ../layouts/Origin.astro
-title: "出自: Peacock"
+title: "なぜ「Peacock」なのか"
 lang: ja
 ---
-
-[原版 (ハンガリー語) / Original Version: (Hungarian)](./origin.hu)  
-[英訳版 / English Version:](./origin.en)
 
 ## Ady Endre: 孔雀は飛んだ (Fölszállott a páva)
 

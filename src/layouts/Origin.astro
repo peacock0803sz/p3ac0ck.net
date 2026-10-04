@@ -1,16 +1,112 @@
 ---
-import "../styles/markdown.css";
 import Default from "./Default.astro";
+import PageHeader from "../components/PageHeader.astro";
+import LangSwitcher, { type LangItem } from "../components/LangSwitcher.astro";
+
 const { frontmatter } = Astro.props;
+const lang = frontmatter.lang;
+
+const translations: LangItem[] = [
+  { lang: "hu", href: "/origin.hu/", original: true },
+  { lang: "en", href: "/origin.en/" },
+  { lang: "ja", href: "/origin.ja/" },
+];
 ---
 
 <Default
   title={frontmatter.title}
-  lang={frontmatter.lang}
+  lang={lang}
   ogImage="https://p3ac0ck.net/og-images/origin.png"
 >
-  <h1 class="text-4xl font-bold pb-10">{frontmatter.title}</h1>
-  <article class="markdown-body">
-    <slot />
-  </article>
+  <PageHeader title={frontmatter.title} font={lang === "ja" ? "ja" : "en"} rule>
+    <LangSwitcher items={translations} current={lang} />
+  </PageHeader>
+  <div class="px-6 pb-20 md:px-[72px]">
+    <article
+      class:list={["poem mx-auto max-w-[720px]", { "poem-ja": lang === "ja" }]}
+    >
+      <slot />
+    </article>
+  </div>
 </Default>
+
+<style>
+  .poem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+    font-family: var(--font-cormorant);
+    font-size: 23px;
+    line-height: 1.55;
+    font-weight: 500;
+    text-align: center;
+  }
+  .poem :global(h2) {
+    margin: 0;
+    padding: 8px 0 12px;
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .poem :global(p) {
+    margin: 0;
+  }
+  /* The first and last stanzas are the refrain, set apart by short rules. */
+  .poem :global(p:first-of-type),
+  .poem :global(p:last-of-type) {
+    font-size: 24px;
+    font-style: italic;
+    font-weight: 600;
+  }
+  .poem :global(p:first-of-type)::after,
+  .poem :global(p:last-of-type)::before {
+    content: "";
+    display: block;
+    width: 48px;
+    height: 1px;
+    margin: 28px auto 0;
+    background-color: currentColor;
+  }
+  .poem :global(p:last-of-type)::before {
+    margin: 0 auto 28px;
+  }
+
+  .poem-ja {
+    gap: 32px;
+    font-family: var(--font-shippori);
+    font-size: 20px;
+    line-height: 1.85;
+  }
+  .poem-ja :global(h2) {
+    font-size: 28px;
+    line-height: 1.5;
+  }
+  .poem-ja :global(p:first-of-type),
+  .poem-ja :global(p:last-of-type) {
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  @media (max-width: 767px) {
+    .poem {
+      font-size: 18px;
+    }
+    .poem :global(h2) {
+      font-size: 26px;
+    }
+    .poem :global(p:first-of-type),
+    .poem :global(p:last-of-type) {
+      font-size: 19px;
+    }
+    .poem-ja,
+    .poem-ja :global(p:first-of-type),
+    .poem-ja :global(p:last-of-type) {
+      font-size: 16px;
+    }
+    .poem-ja :global(h2) {
+      font-size: 22px;
+    }
+  }
+</style>
