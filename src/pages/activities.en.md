@@ -5,30 +5,37 @@ description: "Work outside the day job: staff for PyCon JP and other events, OSS
 lang: en
 ---
 
-Last updated: November 2023
+Last updated: October 2026
 
 For my professional experience, see [my resume](/resume.en). For talks, see [here](/talks).
 
 # Event Staff and Community Work
 
-- PyCon JP
-    - [PyCon JP 2024](https://2024.pycon.jp): Accounting lead
-    - [PyCon JP 2022](https://2022.pycon.jp), [PyCon APAC 2023](https://2023-apac.pycon.jp): Vice chair
-    - [PyCon JP 2021](https://2021.pycon.jp): Staff (venue, sponsors, design)
-    - [PyCon JP 2020](https://pycon.jp/2020): Goods & Web Design team lead
-    - [PyCon JP TV](https://tv.pycon.jp): Director
-        - Running a monthly YouTube live show since February 2021 as a [board member of PyCon JP Association](https://www.pycon.jp/committee/members.html#yoichi-takai-a-k-a-peacock)
-    - [DjangoCongress JP 2022](https://django.connpass.com/event/259310/), [DjangoCongress JP 2023](https://django.connpass.com/event/295303/): Liaison with PyCon JP Association, on-site photographer
-    - [Go Conference 2024](https://gocon.jp/2024/): Sponsor team, on-site photographer
-    - OSC (Open Source Conference)
-    - [Open Source Conference](https://event.ospn.jp/eventlist) 2020 (online): Streaming staff
-    - [Open Source Conference 2023 Tokyo/Spring](https://event.ospn.jp/osc2023-spring/): On-site photographer
-    - [Open Developers Conference 2023](https://event.ospn.jp/odc2023/): On-site photographer
-- [Ebitengine Petit Conf #1 (Game development / Go, casual LTs and meetup)](https://gocon.connpass.com/event/292391/): Organizer support, on-site photographer
-- [Gorilla.vim](https://gorillavim.connpass.com): On-site photographer at several meetups (since April 2023)
+## Python Community
+
+- [PyCon JP 2027](https://2027.pycon.jp): Co-chair
+- [PyCon JP 2026](https://2026.pycon.jp): Venue team lead
+- [PyCon JP 2025](https://2025.pycon.jp): Vice chair
+- [PyCon JP 2024](https://2024.pycon.jp): Accounting lead
+- [PyCon JP 2022](https://2022.pycon.jp), [PyCon APAC 2023](https://2023-apac.pycon.jp): Vice chair
+- [PyCon JP 2021](https://2021.pycon.jp): Staff (venue, sponsors, design)
+- [PyCon JP 2020](https://pycon.jp/2020): Goods & Web Design team lead
+- [PyCon JP TV](https://tv.pycon.jp): Director
+    - Running a monthly YouTube live show since February 2021 as a [board member of PyCon JP Association](https://www.pycon.jp/committee/members.html#yoichi-takai-a-k-a-peacock)
+- [DjangoCongress JP 2022](https://django.connpass.com/event/259310/), [DjangoCongress JP 2023](https://django.connpass.com/event/295303/): Liaison with PyCon JP Association, on-site photographer
 - Plone User's Group Japan: YouTube Live director for World Plone Day 2021 Tokyo
 - Plone User's Group Japan: Japanese translation of Plone (co-translator) <https://github.com/collective/plone.app.locales>
     - <https://github.com/collective/plone.app.locales/commit/0d74afd7361e17ebf9d7bd87299702baec286004>
+
+## Other Communities
+
+- [Ebitengine Petit Conf #1 (Game development / Go, casual LTs and meetup)](https://gocon.connpass.com/event/292391/): Organizer support, on-site photographer
+- [Go Conference 2024](https://gocon.jp/2024/): Sponsor team, on-site photographer
+- [Gorilla.vim](https://gorillavim.connpass.com): On-site photographer at several meetups (since April 2023)
+- OSC (Open Source Conference)
+    - [Open Source Conference](https://event.ospn.jp/eventlist) 2020 (online): Streaming staff
+    - [Open Source Conference 2023 Tokyo/Spring](https://event.ospn.jp/osc2023-spring/): On-site photographer
+    - [Open Developers Conference 2023](https://event.ospn.jp/odc2023/): On-site photographer
 
 # Other Works and OSS
 
