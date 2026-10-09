@@ -1,0 +1,351 @@
+# Visual regression test. One job builds the base branch (HEAD^1 of the test
+# merge commit) and this PR, captures both builds with the same Chromium and
+# compares them (playwright.config.ts, vrt/). No baseline is stored.
+on:
+  pull_request:
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    # Unlike the default shell, this also sets -o pipefail.
+    shell: bash
+
+jobs:
+  vrt:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    env:
+      TZ: UTC
+      LC_ALL: C.UTF-8
+    outputs:
+      mode: ${{ steps.mode.outputs.mode }}
+      result: ${{ steps.result.outputs.result }}
+      artifact-url: ${{ steps.upload.outputs.artifact-url }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # HEAD is the test merge commit, HEAD^1 the base it was merged into.
+          fetch-depth: 2
+          persist-credentials: false
+
+      - name: Decide the mode
+        id: mode
+        env:
+          AUTHOR_TYPE: ${{ github.event.pull_request.user.type }}
+        run: |
+          # skip:   only files that cannot change the built site were modified
+          # gate:   PRs opened by bots (Renovate); a visual diff fails the job
+          # report: anything else; diffs are reported and the job passes
+          ignored='^(flake\.nix|flake\.lock|README\.md|LICENSE\.md|\.envrc|\.github/renovate\.json5)$'
+          changed=$(git diff --name-only --no-renames HEAD^1 HEAD)
+          if [[ -z $(grep -vE "$ignored" <<< "$changed" || true) ]]; then
+            mode=skip
+          elif [[ $AUTHOR_TYPE == Bot ]]; then
+            mode=gate
+          else
+            mode=report
+          fi
+          echo "mode=$mode" >> "$GITHUB_OUTPUT"
+          echo "mode: $mode, base: $(git rev-parse HEAD^1), merge: $(git rev-parse HEAD)"
+
+      - if: steps.mode.outputs.mode != 'skip'
+        uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
+
+      - name: Build the base
+        if: steps.mode.outputs.mode != 'skip'
+        run: |
+          git worktree add --detach "$RUNNER_TEMP/base" HEAD^1
+          cd "$RUNNER_TEMP/base"
+          pnpm install --frozen-lockfile
+          # `astro check` is left to the check job. Google Fonts is fetched
+          # during the build, so retry once, and fail rather than let a family
+          # fall back to a generic font.
+          for attempt in 1 2; do
+            if pnpm exec astro build 2>&1 | tee "$RUNNER_TEMP/build-base.log" &&
+              ! grep -F 'No data found for font family' "$RUNNER_TEMP/build-base.log"; then
+              exit 0
+            fi
+            echo "::warning::Building the base failed (attempt $attempt)"
+          done
+          exit 1
+
+      - name: Build the head
+        if: steps.mode.outputs.mode != 'skip'
+        run: |
+          pnpm install --frozen-lockfile
+          # Use the font files the base got. Share nothing else:
+          # node_modules/.astro/assets is keyed without the sharp version.
+          fonts=$RUNNER_TEMP/base/node_modules/.astro/fonts
+          if [[ ! -d $fonts ]]; then
+            echo "::error::$fonts is missing; did Astro move its font cache?"
+            exit 1
+          fi
+          mkdir -p node_modules/.astro
+          cp -a "$fonts" node_modules/.astro/
+          for attempt in 1 2; do
+            if pnpm exec astro build 2>&1 | tee "$RUNNER_TEMP/build-head.log" &&
+              ! grep -F 'No data found for font family' "$RUNNER_TEMP/build-head.log"; then
+              exit 0
+            fi
+            echo "::warning::Building the head failed (attempt $attempt)"
+          done
+          exit 1
+
+      # Both passes run the head's @playwright/test and this browser.
+      - name: Install Chromium
+        if: steps.mode.outputs.mode != 'skip'
+        run: pnpm exec playwright install --with-deps --only-shell chromium
+
+      - name: Capture the base (pass 1)
+        id: pass1
+        if: steps.mode.outputs.mode != 'skip'
+        env:
+          VRT_DIST: ${{ runner.temp }}/base/dist
+          VRT_SNAPSHOTS: ${{ runner.temp }}/vrt-snapshots
+        run: |
+          rm -rf "$VRT_SNAPSHOTS"
+          status=0
+          pnpm exec playwright test --update-snapshots=all || status=$?
+          echo "exit=$status" >> "$GITHUB_OUTPUT"
+          # The tallest pages; vrt/pages.spec.ts captures long ones in segments.
+          (cd "$VRT_SNAPSHOTS" && grep -r --include=height.txt .) |
+            sort -t: -k2 -nr | head -n 5 || true
+
+      - name: Compare the head (pass 2)
+        id: pass2
+        if: steps.pass1.outputs.exit == '0'
+        env:
+          VRT_DIST: ${{ github.workspace }}/dist
+          VRT_SNAPSHOTS: ${{ runner.temp }}/vrt-snapshots
+        run: |
+          # The HTML report is replaced only at the end of a run: drop pass 1's
+          # reports, so that a crashed pass 2 cannot leave them behind.
+          rm -rf playwright-report test-results
+          # "missing" compares the existing snapshots and writes only the ones
+          # pass 1 did not take; vrt/files.spec.ts reports the added pages.
+          status=0
+          pnpm exec playwright test --update-snapshots=missing || status=$?
+          echo "exit=$status" >> "$GITHUB_OUTPUT"
+
+      - name: Classify the result
+        id: result
+        if: ${{ !cancelled() }}
+        env:
+          MODE: ${{ steps.mode.outputs.mode }}
+          PASS1: ${{ steps.pass1.outputs.exit }}
+          PASS2: ${{ steps.pass2.outputs.exit }}
+        run: |
+          report=test-results/vrt.json
+          failures=$RUNNER_TEMP/vrt-failures.json
+          echo '[]' > "$failures"
+          if [[ -s $report ]]; then
+            jq -f vrt/failures.jq "$report" > "$failures"
+          fi
+          count() {
+            jq --arg kind "$1" 'map(select(.kind == $kind)) | length' "$failures"
+          }
+          if [[ $MODE == skip ]]; then
+            result="skip"
+          elif [[ $PASS1 != 0 || -z $PASS2 || ! -s $report ]]; then
+            result="error" # a build, the base capture or Playwright itself failed
+          elif [[ $(jq '.errors | length' "$report") != 0 || $(count error) != 0 ]]; then
+            result="error"
+          elif [[ $(count diff) != 0 ]]; then
+            result="diff"
+          elif [[ $PASS2 == 0 && $(jq '.stats.expected' "$report") -gt 0 ]]; then
+            result="pass"
+          else
+            result="error"
+          fi
+          echo "result=$result" >> "$GITHUB_OUTPUT"
+          echo "result: $result"
+
+      - name: Upload the report
+        id: upload
+        if: >-
+          ${{ !cancelled() && steps.mode.outputs.mode != 'skip'
+          && steps.result.outputs.result != 'pass'
+          && hashFiles('playwright-report/index.html') != '' }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: vrt-report
+          path: playwright-report/
+          retention-days: 14
+          # A re-run of the job uploads under the same name.
+          overwrite: true
+
+      - name: Write the job summary
+        if: ${{ !cancelled() }}
+        continue-on-error: true
+        env:
+          MODE: ${{ steps.mode.outputs.mode }}
+          RESULT: ${{ steps.result.outputs.result || 'error' }}
+          PASS1: ${{ steps.pass1.outputs.exit }}
+          PASS2: ${{ steps.pass2.outputs.exit }}
+          ARTIFACT_URL: ${{ steps.upload.outputs.artifact-url }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          report=test-results/vrt.json
+          failures=$RUNNER_TEMP/vrt-failures.json
+          case $RESULT in
+            skip) text="Skipped: only files that cannot change the site were modified." ;;
+            pass) text="No visual differences." ;;
+            diff) text="Visual differences found." ;;
+            *) text="The builds could not be compared." ;;
+          esac
+          case $MODE in
+            gate) text+=" Gate mode (PR by a bot): a difference fails this check." ;;
+            report) text+=" Report mode: differences do not fail this check." ;;
+          esac
+          {
+            echo "## VRT: $RESULT"
+            echo
+            echo "$text Base \`$(git rev-parse --short HEAD^1)\`, test merge commit \`$(git rev-parse --short HEAD)\`."
+            if [[ $RESULT == skip ]]; then
+              echo
+              git diff --name-only --no-renames HEAD^1 HEAD |
+                while read -r file; do echo "- \`$file\`"; done
+            fi
+            if [[ -n $PASS1 && $PASS1 != 0 ]]; then
+              echo
+              echo "Capturing the base (pass 1) failed; the results below are from that pass."
+            fi
+            if [[ $RESULT != skip && -s $report ]]; then
+              echo
+              jq -r '.stats | "Tests: \(.expected) passed, \(.unexpected) failed, \(.skipped) skipped."' "$report"
+              errors=$(jq -r '.errors[]? | .message // "" | gsub("\u001b\\[[0-9;]*m"; "")
+                | "- Error outside the tests: \(split("\n")[0])"' "$report")
+              if [[ -n $errors ]]; then
+                echo
+                echo "$errors"
+              fi
+            fi
+            if [[ $(jq length "$failures" 2> /dev/null || echo 0) != 0 ]]; then
+              echo
+              echo "| Result | Project | Test | Detail |"
+              echo "| --- | --- | --- | --- |"
+              jq -r '.[] | "| \(.kind) | \(.project) | `\(.title)` | \(.detail | gsub("\\|"; "\\|")) |"' "$failures"
+            elif [[ $RESULT == error ]]; then
+              echo
+              echo "See the logs of the build and capture steps."
+            fi
+            if [[ -n $ARTIFACT_URL ]]; then
+              # Pass 2 deletes the report of pass 1 before it starts.
+              if [[ -n $PASS2 ]]; then
+                about="Expected: base, Actual: this PR"
+              else
+                about="pass 1: captures of the base only"
+              fi
+              echo
+              echo "[Playwright report]($ARTIFACT_URL) ($about). To open it locally:"
+              echo
+              echo '```sh'
+              # gh does not overwrite files: one directory per run.
+              echo "gh run download $GITHUB_RUN_ID -R $GITHUB_REPOSITORY -n vrt-report -D vrt-report/$GITHUB_RUN_ID"
+              echo "pnpm exec playwright show-report vrt-report/$GITHUB_RUN_ID"
+              echo '```'
+            fi
+            if [[ $RESULT == diff && $MODE == gate ]]; then
+              echo
+              echo "- Intended, and the PR is still open: \`gh pr merge $PR --admin --merge\`"
+              echo "- Not intended, and the PR is already merged: revert it with the Revert button on the PR."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Verdict
+        if: ${{ !cancelled() }}
+        env:
+          MODE: ${{ steps.mode.outputs.mode }}
+          RESULT: ${{ steps.result.outputs.result }}
+        run: |
+          case $RESULT in
+            pass | skip) ;;
+            diff)
+              if [[ $MODE == gate ]]; then
+                echo "::error title=VRT::Visual differences found. See the job summary."
+                exit 1
+              fi
+              echo "::notice title=VRT::Visual differences found (report only). See the job summary."
+              ;;
+            *)
+              echo "::error title=VRT::The builds could not be compared. See the job summary."
+              exit 1
+              ;;
+          esac
+
+  notify:
+    needs: vrt
+    # Failed runs started by renovate[bot] notify nobody, so keep one comment on
+    # the PR up to date. This job runs no code from the repository.
+    if: ${{ !cancelled() && github.event.pull_request.head.repo.full_name == github.repository }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Update the VRT comment
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          MENTION: ${{ github.repository_owner }}
+          JOB_RESULT: ${{ needs.vrt.result }}
+          MODE: ${{ needs.vrt.outputs.mode }}
+          RESULT: ${{ needs.vrt.outputs.result }}
+          ARTIFACT_URL: ${{ needs.vrt.outputs.artifact-url }}
+        run: |
+          # The outputs come from a job that ran the PR's code: accept only
+          # known values.
+          case $MODE in skip | gate | report) ;; *) MODE=unknown ;; esac
+          case $RESULT in skip | pass | diff | error) ;; *) RESULT=error ;; esac
+          if [[ $JOB_RESULT != success && $RESULT != diff ]]; then RESULT=error; fi
+          run_url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID
+          # The quoted part is matched literally.
+          if [[ ! $ARTIFACT_URL =~ ^"$run_url"/artifacts/[0-9]+$ ]]; then
+            ARTIFACT_URL=
+          fi
+
+          case $RESULT in
+            diff) text="found visual differences" ;;
+            error) text="could not compare the builds" ;;
+            pass) text="found no visual differences" ;;
+            skip) text="was skipped: no file that can change the site was modified" ;;
+          esac
+          links="[Job summary]($run_url)"
+          if [[ -n $ARTIFACT_URL ]]; then
+            links+=" · [Playwright report]($ARTIFACT_URL)"
+          fi
+          if [[ $RESULT == diff || $RESULT == error ]]; then
+            state=failing
+            text="${MENTION:+@$MENTION }VRT $text"
+          else
+            state=ok
+            text="VRT $text"
+          fi
+          body="<!-- vrt:$state -->
+          $text (mode \`$MODE\`, head ${HEAD_SHA:0:7}).
+
+          $links"
+
+          api=repos/$GITHUB_REPOSITORY/issues
+          existing=$(gh api --paginate "$api/$PR/comments" | jq -r '
+            .[]
+            | select(.user.login == "github-actions[bot]")
+            | (.body // "" | capture("^<!-- vrt:(?<state>[a-z]+) -->")) as $m
+            | "\(.id) \($m.state)"' | tail -n 1)
+          read -r id old_state <<< "$existing"
+
+          if [[ $state == failing && $old_state != failing ]]; then
+            # A mention added by editing may not notify, so post a new comment.
+            if [[ -n $id ]]; then gh api -X DELETE "$api/comments/$id"; fi
+            gh api "$api/$PR/comments" -f body="$body" > /dev/null
+          elif [[ -n $id ]]; then
+            gh api -X PATCH "$api/comments/$id" -f body="$body" > /dev/null
+          fi

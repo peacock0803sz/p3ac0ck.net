@@ -1,0 +1,16 @@
+/* Injected only while capturing (expect.toHaveScreenshot.stylePath in
+   playwright.config.ts). External content gets a placeholder or is not
+   served at all, so hide it in place: the layout stays the same. */
+img[src^="http:"],
+img[src^="https:"],
+img[src^="//"],
+iframe[src^="http:"],
+iframe[src^="https:"],
+video {
+  visibility: hidden !important;
+}
+
+/* Partytown's sandbox, should a service worker ever get registered. */
+iframe[src*="/~partytown/"] {
+  display: none !important;
+}
