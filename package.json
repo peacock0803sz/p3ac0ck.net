@@ -37,17 +37,17 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.64.0",
-    "@unocss/astro": "^66.10.1",
-    "@unocss/preset-attributify": "^66.10.1",
-    "@unocss/preset-typography": "^66.10.1",
-    "@unocss/preset-wind4": "^66.10.1",
+    "@unocss/astro": "^66.10.5",
+    "@unocss/preset-attributify": "^66.10.5",
+    "@unocss/preset-typography": "^66.10.5",
+    "@unocss/preset-wind4": "^66.10.5",
     "eslint": "^10.10.0",
     "eslint-plugin-astro": "^3.1.0",
     "prettier": "^3.9.9",
     "prettier-plugin-astro": "^0.14.1",
     "tailwindcss": "^4.3.3",
     "typescript-eslint": "^8.70.1",
-    "unocss": "^66.10.1"
+    "unocss": "^66.10.5"
   },
   "private": true,
   "packageManager": "pnpm@10.34.6",
