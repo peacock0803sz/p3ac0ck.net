@@ -50,7 +50,7 @@
     "unocss": "^66.10.1"
   },
   "private": true,
-  "packageManager": "pnpm@10.34.5",
+  "packageManager": "pnpm@10.34.6",
   "pnpm": {
     "ignoredBuiltDependencies": [
       "esbuild"
