@@ -2,18 +2,11 @@
 import Icon from "./Icon.astro";
 import Phrases from "./Phrases.astro";
 
-interface Props {
-  title: string;
-  date: string;
-  event: string;
-  slug: string;
-  video?: string;
-}
+import type { Talk } from "../utils/talks";
 
-const { title, date, event, slug, video } = Astro.props;
+type Props = Talk;
 
-const url = `https://slides.p3ac0ck.net/${slug}`;
-const image = `${url}/cover.png`;
+const { title, date, event, slug, url, cover, video } = Astro.props;
 ---
 
 <li
@@ -32,13 +25,17 @@ const image = `${url}/cover.png`;
       <Icon name="co_present" size={24} />
       <span class="font-serif text-lg font-semibold italic">Slides</span>
     </span>
-    <img
-      class="relative block h-full w-full object-cover"
-      src={image}
-      alt=""
-      loading="lazy"
-      onerror="this.remove()"
-    />
+    {
+      cover && (
+        <img
+          class="relative block h-full w-full object-cover"
+          src={cover}
+          alt=""
+          loading="lazy"
+          onerror="this.remove()"
+        />
+      )
+    }
   </a>
   <div class="flex min-w-0 flex-col gap-2">
     <h2 class="talk-title m-0 text-[22px] leading-[1.5] font-semibold">

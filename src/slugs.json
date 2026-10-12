@@ -1,0 +1,110 @@
+[
+  {
+    "slug": "techtalk-2021-05",
+    "url": "https://slides.p3ac0ck.net/techtalk-2021-05/techtalk-2021-05",
+    "date": "2021-05-07",
+    "cover": null
+  },
+  {
+    "slug": "osc21do",
+    "url": "https://slides.p3ac0ck.net/osc21do/osc21do",
+    "date": "2021-06-25",
+    "cover": null
+  },
+  {
+    "slug": "europython2021",
+    "url": "https://slides.p3ac0ck.net/europython2021/euro",
+    "date": "2021-07-29",
+    "cover": null
+  },
+  {
+    "slug": "osc21hi",
+    "url": "https://slides.p3ac0ck.net/osc21hi/osc21hi-lt",
+    "date": "2021-09-18",
+    "cover": null
+  },
+  {
+    "slug": "stapy74",
+    "url": "https://slides.p3ac0ck.net/stapy74/stapy74",
+    "date": "2021-10-17",
+    "cover": null
+  },
+  {
+    "slug": "techtalk-2022-01",
+    "url": "https://slides.p3ac0ck.net/techtalk-2022-01/techtalk-2022-01",
+    "date": null,
+    "cover": null
+  },
+  {
+    "slug": "pyconus2022",
+    "url": "https://slides.p3ac0ck.net/pyconus2022/",
+    "date": "2022-05-01",
+    "cover": "https://slides.p3ac0ck.net/pyconus2022/cover.png"
+  },
+  {
+    "slug": "pycontw2023",
+    "url": "https://slides.p3ac0ck.net/pycontw2023/",
+    "date": "2023-09-01",
+    "cover": "https://slides.p3ac0ck.net/pycontw2023/cover.png"
+  },
+  {
+    "slug": "pyconapac2023",
+    "url": "https://slides.p3ac0ck.net/pyconapac2023/",
+    "date": "2023-10-28",
+    "cover": "https://slides.p3ac0ck.net/pyconapac2023/cover.png"
+  },
+  {
+    "slug": "seb_yearend2023",
+    "url": "https://slides.p3ac0ck.net/seb_yearend2023/",
+    "date": "2023-12-26",
+    "cover": "https://slides.p3ac0ck.net/seb_yearend2023/cover.png"
+  },
+  {
+    "slug": "phpcondo2024-lt",
+    "url": "https://slides.p3ac0ck.net/phpcondo2024-lt/",
+    "date": "2024-01-13",
+    "cover": "https://slides.p3ac0ck.net/phpcondo2024-lt/cover.png"
+  },
+  {
+    "slug": "nix-intro-202408",
+    "url": "https://slides.p3ac0ck.net/nix-intro-202408/",
+    "date": "2024-08-16",
+    "cover": "https://slides.p3ac0ck.net/nix-intro-202408/cover.png"
+  },
+  {
+    "slug": "odc2024",
+    "url": "https://slides.p3ac0ck.net/odc2024/",
+    "date": "2024-09-07",
+    "cover": "https://slides.p3ac0ck.net/odc2024/cover.png"
+  },
+  {
+    "slug": "nix-intro-202502",
+    "url": "https://slides.p3ac0ck.net/nix-intro-202502/",
+    "date": "2025-02-08",
+    "cover": "https://slides.p3ac0ck.net/nix-intro-202502/cover.png"
+  },
+  {
+    "slug": "nix-meetup2",
+    "url": "https://slides.p3ac0ck.net/nix-meetup2/",
+    "date": "2025-03-09",
+    "cover": "https://slides.p3ac0ck.net/nix-meetup2/cover.png"
+  },
+  {
+    "slug": "osunc25kg",
+    "url": "https://slides.p3ac0ck.net/osunc25kg/",
+    "date": "2025-04-26",
+    "cover": "https://slides.p3ac0ck.net/osunc25kg/cover.png"
+  },
+  {
+    "slug": "python-asia-2025h1",
+    "url": "https://slides.p3ac0ck.net/python-asia-2025h1/",
+    "date": "2025-07-26",
+    "cover": "https://slides.p3ac0ck.net/python-asia-2025h1/cover.png"
+  },
+  {
+    "slug": "ll2025",
+    "url": "https://slides.p3ac0ck.net/ll2025/",
+    "date": "2025-09-06",
+    "cover": "https://slides.p3ac0ck.net/ll2025/cover.png"
+  }
+]

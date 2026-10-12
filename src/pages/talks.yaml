@@ -1,0 +1,64 @@
+# Talks listed on /talks. Slugs come from src/slugs.json (synced weekly from
+# slides.p3ac0ck.net); talks not here are left out. A slug missing from
+# src/slugs.json fails the build.
+#
+# - slug: odc2024
+#   title: スライドのタイトル
+#   event: イベント名
+#   video: https://youtu.be/... # optional
+#   date: 2024-09-07 # optional; overrides the date in src/slugs.json
+- slug: ll2025
+  title: Pythonパッケージマネージャの過去と現在と未来
+  event: Learn Languages 2025
+
+- slug: osunc25kg
+  title: 入門Nix ❄
+  event: Open Source Un-Conference 2025 Kawagoe
+
+- slug: nix-intro-202502
+  title: 入門Nix ❄
+  event: PyCon mini Shizuoka 2024 continue (LT)
+
+- slug: odc2024
+  title: Pythonパッケージ管理ツールの最新情報 (Version 2024.09)
+  event: Open Developers Conference 2024
+
+- slug: nix-intro-202408
+  title: 入門Nix
+  event: 株式会社G-gen 社内LT
+
+- slug: phpcondo2024-lt
+  title: 海外登壇に挑戦しませんか?
+  event: PHP Conference Hokkaido 2024 (LT)
+
+- slug: seb_yearend2023
+  title: イベント運営の喜びを伝えたい!
+  event: SEB Year-end MEETUP
+
+- slug: pyconapac2023
+  title: Comparison of Packaging Tools in 2023
+  event: PyCon APAC 2023
+  video: https://www.youtube.com/watch?v=909hErbppUo
+  date: 2023-10-20
+
+- slug: pycontw2023
+  title: Comparison of Packaging Tools in 2023
+  event: PyCon TW 2023
+  video: https://youtu.be/h694YaqhP8Y?si=IIrl6krEwMK7HPst
+  date: 2023-09-02
+
+- slug: pyconus2022
+  title: Getting Started with Statically Typed Programming in Python 3.10
+  event: PyCon US 2022
+  video: https://youtu.be/ZUIK9hxyi7Y
+
+- slug: europython2021
+  title: Getting Started with Statically Typed Programming in Python 3.10
+  event: EuroPython 2022
+  video: https://www.youtube.com/watch?v=8HEYko-o63I
+
+- slug: osc21do
+  title: Pythonで始める静的型付けプログラミング
+  event: Open Source Conference 2021 Hokkaido
+  video: https://youtu.be/2sZ9U1iIscQ
+  date: 2021-06-21

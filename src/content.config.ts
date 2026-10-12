@@ -26,4 +26,16 @@ const externalPosts = defineCollection({
   }),
 });
 
-export const collections = { posts, externalPosts };
+// Metadata of the talks in src/slugs.json, joined by src/utils/talks.ts.
+const talks = defineCollection({
+  loader: file("./src/pages/talks.yaml"),
+  schema: z.object({
+    slug: z.string(),
+    title: z.string(),
+    event: z.string(),
+    video: z.url().optional(),
+    date: z.date().optional(),
+  }),
+});
+
+export const collections = { posts, externalPosts, talks };
