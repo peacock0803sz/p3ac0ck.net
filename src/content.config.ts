@@ -16,7 +16,7 @@ const posts = defineCollection({
 
 // Articles published on other sites, listed on /posts alongside our own.
 const externalPosts = defineCollection({
-  loader: file("./src/external-posts.yaml"),
+  loader: file("./src/posts/_externals.yaml"),
   schema: z.object({
     // The article URL. The file loader uses `slug` as the entry id.
     slug: z.url(),
