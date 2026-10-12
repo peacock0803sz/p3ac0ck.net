@@ -16,7 +16,7 @@ const posts = defineCollection({
 
 // Articles published on other sites, listed on /posts alongside our own.
 const externalPosts = defineCollection({
-  loader: file("./src/external-posts.yaml"),
+  loader: file("./src/posts/_externals.yaml"),
   schema: z.object({
     // The article URL. The file loader uses `slug` as the entry id.
     slug: z.url(),
@@ -26,4 +26,16 @@ const externalPosts = defineCollection({
   }),
 });
 
-export const collections = { posts, externalPosts };
+// Metadata of the talks in src/slugs.json, joined by src/utils/talks.ts.
+const talks = defineCollection({
+  loader: file("./src/pages/talks.yaml"),
+  schema: z.object({
+    slug: z.string(),
+    title: z.string(),
+    event: z.string(),
+    video: z.url().optional(),
+    date: z.date().optional(),
+  }),
+});
+
+export const collections = { posts, externalPosts, talks };

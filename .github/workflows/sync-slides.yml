@@ -1,0 +1,60 @@
+# Syncs src/slugs.json with slides.p3ac0ck.net weekly and opens a PR when it
+# changes. The PR is opened with GITHUB_TOKEN, so check and vrt do not run on
+# it: close and reopen it (or push to it) before merging.
+on:
+  schedule:
+    - cron: "0 0 * * 1" # Mondays 09:00 JST
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      pull-requests: write
+    env:
+      BRANCH: sync-slides
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      # Runs the TypeScript script directly (type stripping).
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+
+      - name: Sync src/slugs.json
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/sync-slides.ts
+
+      - name: Open a PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet -- src/slugs.json; then
+            echo "src/slugs.json is up to date"
+            exit 0
+          fi
+          # Leave an open PR alone; it may have talks.yaml edits pushed to it.
+          if [[ -n $(gh pr list --head "$BRANCH" --state open --json number --jq '.[]') ]]; then
+            echo "A sync PR is already open"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$BRANCH"
+          git commit -m ":alien: Sync slugs from slides.p3ac0ck.net" -- src/slugs.json
+          git push --force origin "$BRANCH"
+          gh pr create --head "$BRANCH" \
+            --title ":alien: Sync slugs from slides.p3ac0ck.net" \
+            --body "Add new talks to src/pages/talks.yaml to list them on /talks. Close and reopen this PR to run the checks."
