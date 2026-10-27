@@ -43,7 +43,7 @@
     "@unocss/preset-wind4": "^66.10.5",
     "eslint": "^10.12.0",
     "eslint-plugin-astro": "^3.2.1",
-    "prettier": "^3.9.9",
+    "prettier": "^3.9.10",
     "prettier-plugin-astro": "^0.14.1",
     "tailwindcss": "^4.3.3",
     "typescript-eslint": "^8.71.1",
